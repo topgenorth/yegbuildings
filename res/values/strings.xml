@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YEG City Sites</string>
+    <string name="main_menu_settings">Settings</string>
+    <string name="main_menu_refreshdata">Refresh</string>
+</resources>
