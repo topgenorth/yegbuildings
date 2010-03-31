@@ -15,6 +15,7 @@ import android.widget.Toast;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 import net.opgenorth.yeg.util.RestClient;
+import net.opgenorth.yeg.widget.HistoricalBuildingListAdapter;
 
 import java.util.List;
 
@@ -49,12 +50,9 @@ public class CitySites extends ListActivity {
     }
 
     private void displayYegData(List<HistoricalBuilding> buildings) {
-        String[] names = new String[buildings.size() ];
-        for (int i = 0; i < buildings.size(); i++) {
-            HistoricalBuilding historicalBuilding = buildings.get(i);
-            names[i] = historicalBuilding.getName() ;
-        }
-        setListAdapter(new ArrayAdapter<String> (this, android.R.layout.simple_list_item_1, names));
+        // TODO maybe sort the data?
+        HistoricalBuildingListAdapter adapter = new HistoricalBuildingListAdapter(this, buildings);
+        setListAdapter(adapter);        
     }
 
 	private void loadYegOpenData() {
