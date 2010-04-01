@@ -40,6 +40,13 @@ public class HistoricalBuildingListAdapter extends ArrayAdapter {
             rowWrapper.display(building);
         }
 
+        if (position %2 ==0) {
+            row.setBackgroundResource(R.color.roweven);
+        }
+        else {
+            row.setBackgroundResource(R.color.rowodd);
+        }
+                
         return (row);
     }
 }
