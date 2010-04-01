@@ -1,15 +1,14 @@
 package net.opgenorth.yeg.views;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.R;
@@ -22,6 +21,7 @@ import java.util.List;
 public class CitySites extends ListActivity {
 	private ProgressDialog _progressDialog;
 	private TextView _helloWorldText;
+    private ListView _listView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,12 @@ public class CitySites extends ListActivity {
 		new HistoricalBuildingFetcher().execute();
 	}
 
+    private View.OnClickListener onShowBuilding = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(CitySites.this, "Hello", Toast.LENGTH_SHORT); 
+        };
+    }     ;
 	class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
 		public static final String YEG_HISTORIC_DATA_URL = "http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings?format=json";
 
