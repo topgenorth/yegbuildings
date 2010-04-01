@@ -2,6 +2,7 @@ package net.opgenorth.yeg.views;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,7 +30,6 @@ public class CitySites extends ListActivity {
 		setContentView(R.layout.main);
 
 		_helloWorldText = (TextView) findViewById(R.id.info);
-
 		loadYegOpenData();
 	}
 	@Override
@@ -55,17 +55,20 @@ public class CitySites extends ListActivity {
         setListAdapter(adapter);        
     }
 
-	private void loadYegOpenData() {
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        HistoricalBuilding building = (HistoricalBuilding) l.getItemAtPosition(position);
+        Intent i = new Intent(CitySites.this, BuildingMap.class );
+        building.getLocation().addTo(i);
+        i.putExtra("net.opgenorth.yeg.buildingtext", building.getName() );
+        startActivity(i);
+    }
+
+    private void loadYegOpenData() {
 		_progressDialog = ProgressDialog.show(CitySites.this, "Please wait...", "Retrieving data...", true);
 		new HistoricalBuildingFetcher().execute();
 	}
 
-    private View.OnClickListener onShowBuilding = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(CitySites.this, "Hello", Toast.LENGTH_SHORT); 
-        };
-    }     ;
 	class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
 		public static final String YEG_HISTORIC_DATA_URL = "http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings?format=json";
 

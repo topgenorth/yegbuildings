@@ -90,8 +90,6 @@ public class RestClient {
 					double lon = obj.getDouble("longitude");
 
 					building.setLocation(lat, lon);
-					// latitude
-					// longitude
 					buildings.add(building);
 				}
 				inputStream.close();
