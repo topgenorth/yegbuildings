@@ -2,29 +2,26 @@ package net.opgenorth.yeg.model;
 
 import android.content.Intent;
 import com.google.android.maps.GeoPoint;
+import net.opgenorth.yeg.widget.GoogleMapPin;
 
 public class LatLongLocation {
     private double _latitude;
     private double _longitude;
-    public static final String LATITUDE = "net.opgenorth.yeg.latitude";
-    public static final String LONGITUDE = "net.opgenorth.yet.longitude";
 
-    public LatLongLocation(double latitude, double longitude) {
+	public LatLongLocation(double latitude, double longitude) {
         _latitude = latitude;
         _longitude = longitude;
     }
 
     public LatLongLocation(Intent intent) {
-        _latitude = intent.getDoubleExtra(LATITUDE, 0);
-        _longitude = intent.getDoubleExtra(LONGITUDE, 0);
+        _latitude = intent.getDoubleExtra(GoogleMapPin.LATITUDE, 0);
+        _longitude = intent.getDoubleExtra(GoogleMapPin.LONGITUDE, 0);
     }
+
 
     @Override
     public String toString() {
-        return "LatLongLocation{" +
-                "lat=" + _latitude +
-                ", long=" + _longitude +
-                '}';
+		return "location : " + _latitude + "," + _longitude ;		
     }
 
     @Override
@@ -59,9 +56,9 @@ public class LatLongLocation {
         return result;
     }
 
-    public void addTo(Intent intent) {
-        intent.putExtra(LATITUDE, _latitude);
-        intent.putExtra(LONGITUDE, _longitude);
+    public void putExtra(Intent intent) {
+        intent.putExtra(GoogleMapPin.LATITUDE, _latitude);
+        intent.putExtra(GoogleMapPin.LONGITUDE, _longitude);
     }
 
     public GeoPoint createGeoPoint() {

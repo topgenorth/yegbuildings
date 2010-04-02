@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.maps.MapView
+<!-- Desktop, Win7 -->
+<!-- com.google.android.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:apiKey="05L09-1gDs7dsoxwFHGUWkeF6qFy0RvlyTPwvhg"
+        android:clickable="true"/ -->
+
+<!-- laptop, Ubuntu 9.10 -->
+<com.google.android.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:apiKey="05L09-1gDs7feukUyOHliLcxHWGzRPguD-fsiQA"
         android:clickable="true"/>

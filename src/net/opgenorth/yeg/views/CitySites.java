@@ -15,6 +15,7 @@ import android.widget.Toast;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 import net.opgenorth.yeg.util.RestClient;
+import net.opgenorth.yeg.widget.GoogleMapPin;
 import net.opgenorth.yeg.widget.HistoricalBuildingListAdapter;
 
 import java.util.List;
@@ -58,10 +59,13 @@ public class CitySites extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         HistoricalBuilding building = (HistoricalBuilding) l.getItemAtPosition(position);
-        Intent i = new Intent(CitySites.this, BuildingMap.class );
-        building.getLocation().addTo(i);
-        i.putExtra("net.opgenorth.yeg.buildingtext", building.getName() );
-        startActivity(i);
+
+		Intent intent = new Intent(CitySites.this, BuildingMap.class );
+
+		GoogleMapPin mapPin = new GoogleMapPin(building);
+		mapPin.putExtra(intent);
+
+        startActivity(intent);
     }
 
     private void loadYegOpenData() {
