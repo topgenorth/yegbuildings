@@ -61,7 +61,7 @@ public class LatLongLocation {
         intent.putExtra(GoogleMapPin.LONGITUDE, _longitude);
     }
 
-    public GeoPoint createGeoPoint() {
+    public GeoPoint getGeoPoint() {
         GeoPoint geopoint = new GeoPoint((int) (_latitude * 1000000.0), (int) (_longitude * 1000000.0));
         return geopoint;
     }

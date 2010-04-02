@@ -6,7 +6,7 @@
 >
     <TableRow>
         <TextView
-                android:id="@+id/buildingName"
+                android:id="@+id/building_row_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -17,10 +17,20 @@
     </TableRow>
     <TableRow>
         <TextView
-                android:id="@+id/buildingAddress"
+                android:id="@+id/building_row_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:gravity="left"
+                />
+    </TableRow>
+    <TableRow>
+        <TextView
+                android:id="@+id/building_row_year_built"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textStyle="italic"
                 android:gravity="left"
                 />
     </TableRow>

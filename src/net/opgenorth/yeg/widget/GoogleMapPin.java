@@ -1,39 +1,43 @@
 package net.opgenorth.yeg.widget;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import com.google.android.maps.GeoPoint;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 import net.opgenorth.yeg.model.LatLongLocation;
+import net.opgenorth.yeg.views.IBuildingMapView;
+
 
 public class GoogleMapPin {
-
+	public static final String LATITUDE = "net.opgenorth.yeg.latitude";
+	public static final String LONGITUDE = "net.opgenorth.yeg.longitude";
+	public static final String BUILDING_ADDRESS = "net.opgenorth.yeg.building_address";
 	public static final String BUILDING_NAME = "net.opgenorth.yeg.building_name";
+	public static final String BUILDING_CONSTRUCTION_DATE = "net.opgenorth.yeg.building_construction_date";
+
 	private LatLongLocation _location;
 	private String _name;
-	private Drawable _marker;
+	private String _address;
+	private String _constructionDate;
 
-	public static final String LATITUDE = "net.opgenorth.yeg.latitude";
-	public static final String LONGITUDE = "net.opgenorth.yet.longitude";
-
-	public GoogleMapPin(HistoricalBuilding building) {
-		this(building, null);
-	}
-
-	public GoogleMapPin(Intent intent, Drawable marker) {
+	public GoogleMapPin(Intent intent) {
 		_location = new LatLongLocation(intent);
 		_name = intent.getStringExtra(BUILDING_NAME);
-		_marker = marker;
+		_address = intent.getStringExtra(BUILDING_ADDRESS);
+		_constructionDate = intent.getStringExtra(BUILDING_CONSTRUCTION_DATE);
 	}
 
-	public GoogleMapPin(HistoricalBuilding building, Drawable marker) {
+	public GoogleMapPin(HistoricalBuilding building) {
 		_location = building.getLocation();
 		_name = building.getName();
-		_marker = marker;
+		_address = building.getAddress();
+		_constructionDate = building.getConstructionDate();
 	}
+
 
 	public void putExtra(Intent intent) {
 		intent.putExtra(BUILDING_NAME, _name);
+		intent.putExtra(BUILDING_ADDRESS, _address);
+		intent.putExtra(BUILDING_CONSTRUCTION_DATE, _constructionDate);
 		_location.putExtra(intent);
 	}
 
@@ -45,15 +49,22 @@ public class GoogleMapPin {
 			   '}';
 	}
 
-	public Drawable getMarker() {
-		return _marker;
+
+	public void putOnMap(IBuildingMapView buildingMapView) {
+		buildingMapView.setName(_name);
+		buildingMapView.setAddress(_address);
+		buildingMapView.setConstructionDate("Construction Date: " + _constructionDate);
+		buildingMapView.setCenter(_location.getGeoPoint());
+		buildingMapView.showBuildingOnMap(this); 
+	}
+
+	public GeoPoint getGeoPoint() {
+		return _location.getGeoPoint(); 
 	}
 
 	public String getBuildingName() {
 		return _name;
 	}
-
-	public GeoPoint getGeoPoint() {
-		return _location.createGeoPoint();
-	}
 }
+
+
