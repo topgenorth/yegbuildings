@@ -1,52 +1,97 @@
 package net.opgenorth.yeg.views;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.maps.*;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.widget.GoogleMapPin;
 
-
 public class BuildingMap extends MapActivity implements IBuildingMapView {
-	private MyLocationOverlay _myLocation;
-	private MapView _map;
+	private MapView _edmontonMap;
 	private TextView _buildingNameLabel;
 	private TextView _buildingAddressLabel;
 	private TextView _buildingConstructionDateLabel;
+	private LocationManager _locationManager;
+	private MyLocationOverlay _myLocationOverlay;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		_locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		_locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10000.0f, _onLocationChange);
 
 		setContentView(R.layout.building_map);
 
 		initializeMap();
+		initializeMyLocation();
 
 		GoogleMapPin pin = new GoogleMapPin(getIntent());
 		pin.putOnMap(this);
 	}
 
+	private void initializeMyLocation() {
+		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMap);
+		_myLocationOverlay.enableMyLocation();
+		_myLocationOverlay.enableCompass();
+		_edmontonMap.getOverlays().add(_myLocationOverlay);
+	}
+
 	private void initializeMap() {
-		_map = (MapView) findViewById(R.id.map);
-		_map.getController().setZoom(17);
-		_map.setBuiltInZoomControls(true);
-		_myLocation = new MyLocationOverlay(this, _map);
-		_map.getOverlays().add(_myLocation);
+		_edmontonMap = (MapView) findViewById(R.id.map);
+		_edmontonMap.getController().setZoom(17);
+		_edmontonMap.setBuiltInZoomControls(true);
+		_edmontonMap.setSatellite(true);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(getApplication()).inflate(R.menu.buildingmap_menu, menu);
+		return (super.onCreateOptionsMenu(menu));
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (R.id.buildingmap_showMyLocation == itemId) {
+			GeoPoint me = _myLocationOverlay.getMyLocation();
+
+			if (me == null)
+				Toast.makeText(this, "Can't figure out your location.", Toast.LENGTH_SHORT).show();
+			else
+				Toast.makeText(this, "you're at " + me.getLatitudeE6() + "," + me.getLongitudeE6(), Toast.LENGTH_SHORT).show();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_locationManager.removeUpdates(_onLocationChange);
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		_myLocation.enableCompass();
+		_myLocationOverlay.enableMyLocation();
+		_myLocationOverlay.enableCompass();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		_myLocation.disableCompass();
+		_myLocationOverlay.disableMyLocation();
+		_myLocationOverlay.disableCompass();;
 	}
 
 	@Override
@@ -95,7 +140,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	@Override
 	public void setCenter(GeoPoint geoPoint) {
-		_map.getController().setCenter(geoPoint);
+		_edmontonMap.getController().setCenter(geoPoint);
 	}
 
 	@Override
@@ -104,8 +149,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		buildingMarker.setBounds(0, 0, buildingMarker.getIntrinsicWidth(), buildingMarker.getIntrinsicHeight());
 
 		ItemizedOverlay<OverlayItem> buildingOverlay = new BuildingLocationOverlay(buildingMarker, pin);
-		_map.getOverlays().add(buildingOverlay);
-
+		_edmontonMap.getOverlays().add(buildingOverlay);
 	}
 
 	private class BuildingLocationOverlay extends ItemizedOverlay<OverlayItem> {
@@ -136,13 +180,30 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 			return (true);
 		}
 
-
 		@Override
 		public int size() {
 			return (1);
 		}
 
 	}
+
+	LocationListener _onLocationChange = new LocationListener() {
+		public void onLocationChanged(Location location) {
+			// required for interface, not used
+		}
+
+		public void onProviderDisabled(String provider) {
+			// required for interface, not used
+		}
+
+		public void onProviderEnabled(String provider) {
+			// required for interface, not used
+		}
+
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+			// required for interface, not used
+		}
+	};
 }
 
 
