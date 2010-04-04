@@ -41,9 +41,13 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	private void initializeMyLocation() {
 		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMap);
+
 		_myLocationOverlay.enableMyLocation();
 		_myLocationOverlay.enableCompass();
 		_edmontonMap.getOverlays().add(_myLocationOverlay);
+
+		updateMyLocationOnMap();
+
 	}
 
 	private void initializeMap() {
@@ -63,14 +67,15 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (R.id.buildingmap_showMyLocation == itemId) {
-			GeoPoint me = _myLocationOverlay.getMyLocation();
-
-			if (me == null)
-				Toast.makeText(this, "Can't figure out your location.", Toast.LENGTH_SHORT).show();
-			else
-				Toast.makeText(this, "you're at " + me.getLatitudeE6() + "," + me.getLongitudeE6(), Toast.LENGTH_SHORT).show();
+			updateMyLocationOnMap();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void updateMyLocationOnMap() {
+		GeoPoint me = _myLocationOverlay.getMyLocation();
+		_myLocationOverlay.enableMyLocation();
+
 	}
 
 
@@ -91,7 +96,8 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	protected void onPause() {
 		super.onPause();
 		_myLocationOverlay.disableMyLocation();
-		_myLocationOverlay.disableCompass();;
+		_myLocationOverlay.disableCompass();
+		;
 	}
 
 	@Override
