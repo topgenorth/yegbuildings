@@ -74,10 +74,11 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private void updateMyLocationOnMap() {
 		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
         if (myLocation == null) {
-            Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
         }
         else {
 		    _myLocationOverlay.enableMyLocation();
+			_edmontonMap.getController().animateTo(myLocation); 
         }
 	}
 
@@ -195,7 +196,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	}
 
-	LocationListener _onLocationChange = new LocationListener() {
+	private LocationListener _onLocationChange = new LocationListener() {
 		public void onLocationChanged(Location location) {
 			// required for interface, not used
 		}
