@@ -1,3 +1,3 @@
-Intersection of 100 Ave & 105 Street: 53.538860 -113.501118
+Intersection of 100 Ave & 105 Street: -113.501118 53.538860
 
--113.501118 53.538860
+

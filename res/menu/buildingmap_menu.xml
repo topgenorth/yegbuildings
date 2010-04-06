@@ -4,6 +4,5 @@
     <item android:id="@+id/buildingmap_showMyLocation"
           android:orderInCategory="1"
           android:title="@string/buildingmap_menu_goto_my_location"
-          android:icon="@drawable/gear"
-            />
+          android:icon="@android:drawable/ic_menu_mylocation" />
 </menu>

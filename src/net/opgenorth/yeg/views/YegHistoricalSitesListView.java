@@ -48,11 +48,14 @@ public class YegHistoricalSitesListView extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (R.id.configureSettings == itemId) {
-			Toast.makeText(this, "TODO: configuration ", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Configuration: Coming in a future version.", Toast.LENGTH_SHORT).show();
 		}
 		else if (R.id.refreshData == itemId) {
 			loadYegOpenData();
 		}
+        else if (R.id.showAllOnMap == itemId) {
+            Toast.makeText(this, "Map All: Coming in a future version.", Toast.LENGTH_SHORT).show();
+        }
 		return super.onOptionsItemSelected(item);
 	}
 

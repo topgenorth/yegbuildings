@@ -16,6 +16,8 @@ import com.google.android.maps.*;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.widget.GoogleMapPin;
 
+import java.util.logging.Logger;
+
 public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private MapView _edmontonMap;
 	private TextView _buildingNameLabel;
@@ -41,13 +43,10 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	private void initializeMyLocation() {
 		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMap);
-
 		_myLocationOverlay.enableMyLocation();
 		_myLocationOverlay.enableCompass();
 		_edmontonMap.getOverlays().add(_myLocationOverlay);
-
 		updateMyLocationOnMap();
-
 	}
 
 	private void initializeMap() {
@@ -73,9 +72,13 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	}
 
 	private void updateMyLocationOnMap() {
-		GeoPoint me = _myLocationOverlay.getMyLocation();
-		_myLocationOverlay.enableMyLocation();
-
+		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
+        if (myLocation == null) {
+            Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_LONG);
+        }
+        else {
+		    _myLocationOverlay.enableMyLocation();
+        }
 	}
 
 
@@ -97,7 +100,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		super.onPause();
 		_myLocationOverlay.disableMyLocation();
 		_myLocationOverlay.disableCompass();
-		;
 	}
 
 	@Override
