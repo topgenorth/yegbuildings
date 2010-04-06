@@ -1,41 +1,65 @@
 =head1 YEG Historical Buildings
+
 This is just a little Android application that show some historical buildings in Edmonton.  
 
 =head2 Some locations around Edmonton:
+
 Intersection of 100 Ave & 105 Street: -113.501118 53.538860
 
-The City of Edmonton's Open Data Catalogue: 
-http://data.edmonton.ca/
+The City of Edmonton's Open Data Catalogue: http://data.edmonton.ca/
 
-Website for the Historical Buildings catalogue:
-http://data.edmonton.ca/DataBrowser.aspx?Container=coe&EntitySet=HistoricalBuildings
+Website for the Historical Buildings catalogue: http://data.edmonton.ca/DataBrowser.aspx?Container=coe&EntitySet=HistoricalBuildings
 
 Tom Opgenorth
 http://www.opgenorth.net
 Twitter:  topgenorth
 
 =head1 TODO
+
 =over 4
+
 =item * Deploy to Google Market.
+
 =item * Unit testing story in Android.
+
 =over 4
+
 =item - Setup a build script.
+
 =item - Build server.
+
 =back
+
 =item * Don’t always fetch the data – store it locally
+
 =item * More efficient JSON parsing?
+
 =item * Notify the user when they are within a certain distance of a historical building.
+
 =item * Better information about the historical building:
+
 =over 4
+
 =item - Create Wikipedia entries and link to that.
+
 =item - Petition the City of Edmonton to convert their PDF’s to a more neutral format?
+
 =back
+
 =item * Incorporate other data sources:
+
 =over 4
-=item - The Edmonton Public Library has some information about the “Lost Building of Edmonton”.
+
+=item - The Edmonton Public Library has some information about the “Lost Building of 
+Edmonton”.
+
 =back
+
 =item * Allow the user to update their coordinates for YEG’s historical buildings.
+
 =item * Include buildings that aren’t necessarily designated as historical, but are interesting architecturally or otherwise.
+
 =item * Instead of using YEG OpenData, perhaps an independent cloud based data store (Azure maybe?)
+
 =back
 
