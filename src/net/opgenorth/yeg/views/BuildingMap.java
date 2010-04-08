@@ -86,6 +86,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+        _myLocationOverlay.disableMyLocation();
 		_locationManager.removeUpdates(_onLocationChange);
 	}
 
@@ -93,14 +94,12 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	protected void onResume() {
 		super.onResume();
 		_myLocationOverlay.enableMyLocation();
-		_myLocationOverlay.enableCompass();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
 		_myLocationOverlay.disableMyLocation();
-		_myLocationOverlay.disableCompass();
 	}
 
 	@Override
