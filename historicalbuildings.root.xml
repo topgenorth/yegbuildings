@@ -37,7 +37,8 @@
     <exclude name="**/.git/**"/>
     <exclude name="**/*.hprof/**"/>
     <exclude name="**/_svn/**"/>
-    <exclude name="**/.hg/**"/>
+    <exclude name="**/.sbas/**"/>
+    <exclude name="**/.IJI.*/**"/>
     <exclude name="**/vssver.scc/**"/>
     <exclude name="**/vssver2.scc/**"/>
   </patternset>
@@ -67,21 +68,20 @@
   <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
   <path id="jdk.classpath.1.6">
     <fileset dir="${jdk.home.1.6}">
-      <include name="jre/lib/alt-rt.jar"/>
       <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
       <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/alt-rt.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
       <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
     </fileset>
   </path>
   
@@ -93,12 +93,12 @@
   <!-- Global Libraries -->
   
   <path id="library.android_1.6_google_apis.classpath">
-    <pathelement location="C:/android-sdk-windows/add-ons/google_apis-4-r01/libs/maps.jar"/>
-    <pathelement location="C:/android-sdk-windows/platforms/android-1.6/android.jar"/>
+    <pathelement location="/home/tom/opt/android-sdk-linux/add-ons/google_apis-4-r01/libs/maps.jar"/>
+    <pathelement location="/home/tom/opt/android-sdk-linux/platforms/android-1.6/android.jar"/>
   </path>
   
   <path id="library.android_1.6_platform.classpath">
-    <pathelement location="C:/android-sdk-windows/platforms/android-1.6/android.jar"/>
+    <pathelement location="/home/tom/opt/android-sdk-linux/platforms/android-1.6/android.jar"/>
   </path>
   
   <!-- Modules -->
@@ -124,15 +124,15 @@
   
   <path id="historicalbuildings.module.classpath">
     <path refid="${module.jdk.classpath.historicalbuildings}"/>
-    <path refid="library.android_1.6_platform.classpath"/>
     <path refid="library.android_1.6_google_apis.classpath"/>
+    <path refid="library.android_1.6_platform.classpath"/>
   </path>
   
   <path id="historicalbuildings.runtime.module.classpath">
     <pathelement location="${historicalbuildings.output.dir}"/>
     <pathelement location="${historicalbuildings.testoutput.dir}"/>
-    <path refid="library.android_1.6_platform.classpath"/>
     <path refid="library.android_1.6_google_apis.classpath"/>
+    <path refid="library.android_1.6_platform.classpath"/>
   </path>
   
   

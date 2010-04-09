@@ -33,7 +33,6 @@
                 />
     </LinearLayout>
 
-    <!-- not to sure how to manage the api key for the different environments -->
 
     <!-- Desktop, Win7 -->
     <!--
@@ -45,21 +44,24 @@
             android:apiKey="05L09-1gDs7dsoxwFHGUWkeF6qFy0RvlyTPwvhg"
             android:clickable="true" />
     -->
-    <!-- laptop, Ubuntu 9.10
+
+    <!--Ubuntu 9.10 Desktop -->
+    <!--<com.google.android.maps.MapView-->
+            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--android:id="@+id/map"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:apiKey="05L09-1gDs7cXvTtxJIbkynwwa6c_JbSdti8ifQ"-->
+            <!--android:clickable="true"/>-->
+
+    <!-- release API key based  -->
     <com.google.android.maps.MapView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/map"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:apiKey="05L09-1gDs7feukUyOHliLcxHWGzRPguD-fsiQA"
+            android:apiKey="05L09-1gDs7f-7MgAupHR-H2sixSWg6n0CKV2zw"
             android:clickable="true"/>
--->
-    <!-- API key based on the MD5 Certificate fingerprint for the signed app -->
-    <com.google.android.maps.MapView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:apiKey="05L09-1gDs7d_8B3yY3pz_HBYoWrHjc2tucfIVQ"
-            android:clickable="true"/>
+
+
 </LinearLayout>

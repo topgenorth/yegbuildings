@@ -44,7 +44,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private void initializeMyLocation() {
 		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMap);
 		_myLocationOverlay.enableMyLocation();
-		_myLocationOverlay.enableCompass();
 		_edmontonMap.getOverlays().add(_myLocationOverlay);
 		updateMyLocationOnMap();
 	}
@@ -53,7 +52,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		_edmontonMap = (MapView) findViewById(R.id.map);
 		_edmontonMap.getController().setZoom(17);
 		_edmontonMap.setBuiltInZoomControls(true);
-		_edmontonMap.setSatellite(true);
 	}
 
 	@Override
@@ -78,7 +76,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
         }
         else {
 		    _myLocationOverlay.enableMyLocation();
-			_edmontonMap.getController().animateTo(myLocation); 
+			_edmontonMap.getController().animateTo(myLocation);
         }
 	}
 
