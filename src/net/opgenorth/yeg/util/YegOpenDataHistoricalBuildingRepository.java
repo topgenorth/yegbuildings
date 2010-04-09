@@ -5,7 +5,7 @@ import net.opgenorth.yeg.model.HistoricalBuilding;
 import java.util.List;
 
 /**
- * 
+ * Retrieves Historical Buildings from the City of Edmonton's Open Data Catalogue.
  */
 public class YegOpenDataHistoricalBuildingRepository implements IHistoricalBuildingsRepository {
 	@Override

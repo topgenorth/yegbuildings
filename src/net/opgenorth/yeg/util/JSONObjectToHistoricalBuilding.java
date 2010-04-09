@@ -1,0 +1,36 @@
+package net.opgenorth.yeg.util;
+
+import net.opgenorth.yeg.model.HistoricalBuilding;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.UUID;
+
+public class JSONObjectToHistoricalBuilding implements ITransmorgifier<Object, HistoricalBuilding> {
+	public HistoricalBuilding transmorgify(Object object) {
+		JSONObject jsonObject = (JSONObject) object;
+		HistoricalBuilding building = new HistoricalBuilding();
+
+		try {
+			building.setPartitionKey(jsonObject.getString("PartitionKey"));
+			building.setRowKey(UUID.fromString(jsonObject.getString("RowKey")));
+			// TODO: Timestamp
+			building.setRowKey(UUID.fromString(jsonObject.getString("entityid")));
+			building.setName(jsonObject.getString("name"));
+			building.setAddress(jsonObject.getString("address"));
+			building.setNeighbourHood(jsonObject.getString("neighbourhood"));
+			building.setUrl(jsonObject.optString("url", ""));
+			building.setConstructionDate(jsonObject.optString("construction_date", ""));
+
+			double lat = jsonObject.getDouble("latitude");
+			double lon = jsonObject.getDouble("longitude");
+
+			building.setLocation(lat, lon);
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+			building = null;
+		}
+		return building;
+	}
+}
