@@ -1,4 +1,5 @@
 .idea
+deploy.sh
 HistoricalBuildings.apk
 out
 out/*
