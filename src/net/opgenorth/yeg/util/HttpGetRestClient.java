@@ -10,7 +10,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class RestClient implements IRestClient {
+public class HttpGetRestClient implements IRestClient {
 	private static ITransmorgifier<InputStream, String> inputStreamToString = new InputStreamToString();
 
 	@Override

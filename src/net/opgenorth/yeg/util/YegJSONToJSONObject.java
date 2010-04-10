@@ -7,7 +7,7 @@ import org.json.JSONObject;
 /**
  * Converts the string to a JSONArray that we can parse elsewhere.
  */
-public class YegJSONResultToJSONObject implements ITransmorgifier<String, JSONArray> {
+public class YegJSONToJSONObject implements ITransmorgifier<String, JSONArray> {
 	@Override
 	public JSONArray transmorgify(String source) {
 		JSONObject root;

@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class YegOpenDataHistoricalBuildingRepository implements IHistoricalBuildingsRepository {
 	public static final String YEG_HISTORIC_DATA_URL = "http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings?format=json";
-	private ITransmorgifier<String, JSONArray> _convertToJSONArray = new YegJSONResultToJSONObject();
+	private ITransmorgifier<String, JSONArray> _convertToJSONArray = new YegJSONToJSONObject();
 	private ITransmorgifier<Object, HistoricalBuilding> _convertToHistoricalBuilding = new YegJsonToHistoricalBuilding();
-	private IRestClient _restClient = new RestClient();
+	private IRestClient _restClient = new HttpGetRestClient();
 
 	@Override
 	public List<HistoricalBuilding> get() {

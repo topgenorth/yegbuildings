@@ -15,7 +15,6 @@ import android.widget.Toast;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 import net.opgenorth.yeg.util.IHistoricalBuildingsRepository;
-import net.opgenorth.yeg.util.RestClient;
 import net.opgenorth.yeg.util.YegOpenDataHistoricalBuildingRepository;
 import net.opgenorth.yeg.widget.GoogleMapPin;
 import net.opgenorth.yeg.widget.HistoricalBuildingListAdapter;
