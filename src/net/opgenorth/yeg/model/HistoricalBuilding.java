@@ -1,5 +1,6 @@
 package net.opgenorth.yeg.model;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class HistoricalBuilding {
@@ -12,7 +13,7 @@ public class HistoricalBuilding {
 	private String _url;
 	private String _constructionDate;
 	private LatLongLocation _location;
-
+	private Date _timestamp;
 
 	@Override
 	public String toString() {
@@ -92,5 +93,13 @@ public class HistoricalBuilding {
 
 	public void setLocation(double latitude, double longitude) {
 		_location = new LatLongLocation(latitude, longitude);
+	}
+
+	public Date getTimestamp() {
+		return _timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		_timestamp = timestamp;
 	}
 }

@@ -1,20 +1,30 @@
 package net.opgenorth.yeg.util;
 
+import android.util.Log;
+import net.opgenorth.yeg.Constants;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.UUID;
 
-public class JSONObjectToHistoricalBuilding implements ITransmorgifier<Object, HistoricalBuilding> {
+public class YegJsonToHistoricalBuilding implements ITransmorgifier<Object, HistoricalBuilding> {
+	private ITransmorgifier<String, Date> stringToDate = new YegOpenDataStringToDateTime();
+
 	public HistoricalBuilding transmorgify(Object object) {
 		JSONObject jsonObject = (JSONObject) object;
+
 		HistoricalBuilding building = new HistoricalBuilding();
 
 		try {
 			building.setPartitionKey(jsonObject.getString("PartitionKey"));
 			building.setRowKey(UUID.fromString(jsonObject.getString("RowKey")));
-			// TODO: Timestamp
+            			
+			String dateTimeString = jsonObject.getString("Timestamp");
+			Log.d(Constants.LOG_TAG, dateTimeString);
+			building.setTimestamp(stringToDate.transmorgify(dateTimeString));
+
 			building.setRowKey(UUID.fromString(jsonObject.getString("entityid")));
 			building.setName(jsonObject.getString("name"));
 			building.setAddress(jsonObject.getString("address"));
@@ -33,4 +43,5 @@ public class JSONObjectToHistoricalBuilding implements ITransmorgifier<Object, H
 		}
 		return building;
 	}
+
 }

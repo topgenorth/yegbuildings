@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestClient {
-	private static ITransmorgifier<InputStream, String> inputStreamToString = new InputStreamToStringTransmorgifier();
+	private static ITransmorgifier<InputStream, String> inputStreamToString = new InputStreamToString();
 	private static ITransmorgifier<String, JSONArray> convertToJSONArray = new StringToJSONObject();
-	private static ITransmorgifier<Object, HistoricalBuilding> convertToHistoricalBuilding = new JSONObjectToHistoricalBuilding();
+	private static ITransmorgifier<Object, HistoricalBuilding> convertToHistoricalBuilding = new YegJsonToHistoricalBuilding();
 
 	public static List<HistoricalBuilding> connect(String url) {
 		List<HistoricalBuilding> buildings = new ArrayList<HistoricalBuilding>();
@@ -32,7 +32,6 @@ public class RestClient {
 			HttpEntity entity = response.getEntity();
 
 			if (entity != null) {
-				// A Simple JSON Response Read
 				InputStream inputStream = entity.getContent();
 				String result = inputStreamToString.transmorgify(inputStream);
 				JSONArray jsonBuildings = convertToJSONArray.transmorgify(result);

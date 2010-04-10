@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class InputStreamToStringTransmorgifier implements ITransmorgifier<InputStream, String> {
+public class InputStreamToString implements ITransmorgifier<InputStream, String> {
 	@Override
 	public String transmorgify(InputStream source) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(source));
