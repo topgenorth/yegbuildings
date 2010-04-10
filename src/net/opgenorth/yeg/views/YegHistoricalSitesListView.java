@@ -2,7 +2,11 @@ package net.opgenorth.yeg.views;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.model.HistoricalBuilding;
+import net.opgenorth.yeg.model.SortByDistanceFromLocation;
 import net.opgenorth.yeg.util.IHistoricalBuildingsRepository;
 import net.opgenorth.yeg.util.YegOpenDataHistoricalBuildingRepository;
 import net.opgenorth.yeg.widget.GoogleMapPin;
@@ -24,11 +29,14 @@ import java.util.List;
 public class YegHistoricalSitesListView extends ListActivity {
 	private ProgressDialog _progressDialog;
 	private TextView _foundHistoricalBuildingsTextView;
+	private LocationManager _locationManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		_locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+		_locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10000.0f, _onLocationChange);
 
 		_foundHistoricalBuildingsTextView = (TextView) findViewById(R.id.info);
 		loadYegOpenData();
@@ -37,6 +45,7 @@ public class YegHistoricalSitesListView extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		_locationManager.removeUpdates(_onLocationChange);
 	}
 
 	@Override
@@ -54,9 +63,9 @@ public class YegHistoricalSitesListView extends ListActivity {
 		else if (R.id.refreshData == itemId) {
 			loadYegOpenData();
 		}
-        else if (R.id.showAllOnMap == itemId) {
-            Toast.makeText(this, "Map All: Coming in a future version.", Toast.LENGTH_SHORT).show();
-        }
+		else if (R.id.showAllOnMap == itemId) {
+			Toast.makeText(this, "Map All: Coming in a future version.", Toast.LENGTH_SHORT).show();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -78,15 +87,34 @@ public class YegHistoricalSitesListView extends ListActivity {
 	}
 
 	private void loadYegOpenData() {
-		_progressDialog = ProgressDialog.show(YegHistoricalSitesListView.this, "Please wait...", "Retrieving data...", true);
-		new HistoricalBuildingFetcher().execute();
+		_progressDialog = ProgressDialog
+				.show(YegHistoricalSitesListView.this, "Please wait...", "Retrieving data...", true);
+		Location myLocation = _locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER );
+		new HistoricalBuildingFetcher(myLocation).execute();
 	}
 
-	class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
+
+	private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
 		private IHistoricalBuildingsRepository _repository = new YegOpenDataHistoricalBuildingRepository();
+		private Location _myLocation;
+
+		HistoricalBuildingFetcher() {
+			this(null);
+		}
+
+		HistoricalBuildingFetcher(Location myLocation) {
+			_myLocation = myLocation;
+		}
+
 		@Override
 		protected List<HistoricalBuilding> doInBackground(Void... voids) {
-			return _repository.get();
+			List<HistoricalBuilding> buildings = _repository.get();
+
+			if ((_myLocation != null)) {
+				SortByDistanceFromLocation sorter = new SortByDistanceFromLocation(_myLocation);
+				return sorter.sortList(buildings);
+			}
+			return buildings;
 		}
 
 		@Override
@@ -96,5 +124,24 @@ public class YegHistoricalSitesListView extends ListActivity {
 			displayYegData(historicalBuildings);
 		}
 	}
+
+	LocationListener _onLocationChange=new LocationListener() {
+		public void onLocationChanged(Location location) {
+			// required for interface, not used
+		}
+
+		public void onProviderDisabled(String provider) {
+			// required for interface, not used
+		}
+
+		public void onProviderEnabled(String provider) {
+			// required for interface, not used
+		}
+
+		public void onStatusChanged(String provider, int status,
+																	Bundle extras) {
+			// required for interface, not used
+		}
+	};
 
 }

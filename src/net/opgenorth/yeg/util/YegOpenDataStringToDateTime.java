@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class YegOpenDataStringToDateTime implements ITransmorgifier<String, Date> {
-	// Format of the timestamp string: 2010-01-12T02:21:58.2675623Z
+	// Format of the YEG timestamp string: 2010-01-12T02:21:58.2675623Z
+	// Right now, we don't really care about the time, just the actual date.
 	public static final String YEG_DATE_FORMAT = "yyyy-MM-dd";
 	private static SimpleDateFormat _formatter = new SimpleDateFormat(YEG_DATE_FORMAT);
 	@Override

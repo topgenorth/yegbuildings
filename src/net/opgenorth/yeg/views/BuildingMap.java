@@ -31,7 +31,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		super.onCreate(savedInstanceState);
 		_locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		_locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10000.0f, _onLocationChange);
-
 		setContentView(R.layout.building_map);
 
 		initializeMap();

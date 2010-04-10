@@ -1,5 +1,7 @@
 package net.opgenorth.yeg.model;
 
+import android.location.Location;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -101,5 +103,9 @@ public class HistoricalBuilding {
 
 	public void setTimestamp(Date timestamp) {
 		_timestamp = timestamp;
+	}
+
+	public double setDistanceTo(Location location) {
+		return this.getLocation().getDistanceTo(location);
 	}
 }

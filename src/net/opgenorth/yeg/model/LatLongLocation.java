@@ -1,6 +1,7 @@
 package net.opgenorth.yeg.model;
 
 import android.content.Intent;
+import android.location.Location;
 import com.google.android.maps.GeoPoint;
 import net.opgenorth.yeg.widget.GoogleMapPin;
 
@@ -18,10 +19,15 @@ public class LatLongLocation {
         _longitude = intent.getDoubleExtra(GoogleMapPin.LONGITUDE, 0);
     }
 
+	public double getDistanceTo(Location location) {
+		float[] result = new float[3];
+		Location.distanceBetween(_latitude, _longitude, location.getLatitude(), location.getLongitude(), result);
+		return result[0];
+	}
 
     @Override
     public String toString() {
-		return "location : " + _latitude + "," + _longitude ;		
+		return "location : " + _latitude + "," + _longitude ;
     }
 
     @Override
