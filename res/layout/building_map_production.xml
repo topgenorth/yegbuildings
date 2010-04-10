@@ -4,6 +4,7 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+    <!-- This layout file has the release/production Google Maps apiKey -->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"
                   android:layout_width="fill_parent"
@@ -33,21 +34,11 @@
                 />
     </LinearLayout>
 
-    <!-- Look in the templates directory to find the debug.store that holds the keystore that corresponds to this apiKey -->
     <com.google.android.maps.MapView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/map"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:apiKey="05L09-1gDs7cXvTtxJIbkynwwa6c_JbSdti8ifQ"
+            android:apiKey="05L09-1gDs7f-7MgAupHR-H2sixSWg6n0CKV2zw"
             android:clickable="true"/>
-
-    <!-- release API key based  -->
-    <!--<com.google.android.maps.MapView-->
-            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--android:id="@+id/map"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:apiKey="05L09-1gDs7f-7MgAupHR-H2sixSWg6n0CKV2zw"-->
-            <!--android:clickable="true"/>-->
 </LinearLayout>

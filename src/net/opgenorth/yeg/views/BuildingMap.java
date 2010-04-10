@@ -1,22 +1,25 @@
 package net.opgenorth.yeg.views;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.maps.*;
+import net.opgenorth.yeg.Constants;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.widget.GoogleMapPin;
-
-import java.util.logging.Logger;
 
 public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private MapView _edmontonMap;
@@ -31,13 +34,34 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		super.onCreate(savedInstanceState);
 		_locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		_locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10000.0f, _onLocationChange);
-		setContentView(R.layout.building_map);
+
+		initializeContentView();
 
 		initializeMap();
 		initializeMyLocation();
 
 		GoogleMapPin pin = new GoogleMapPin(getIntent());
 		pin.putOnMap(this);
+	}
+
+	private boolean isDebug() {
+		try {
+			PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			return (packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) == ApplicationInfo.FLAG_DEBUGGABLE;
+		}
+		catch (PackageManager.NameNotFoundException e) {
+			Log.e(Constants.LOG_TAG, "package name not found", e);
+		}
+		return false;
+	}
+
+	private void initializeContentView() {
+		if (isDebug()) {
+			setContentView(R.layout.building_map_debug);
+		}
+		else {
+			setContentView(R.layout.building_map_production);
+		}
 	}
 
 	private void initializeMyLocation() {
@@ -70,20 +94,20 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	private void updateMyLocationOnMap() {
 		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
-        if (myLocation == null) {
-            Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
-        }
-        else {
-		    _myLocationOverlay.enableMyLocation();
+		if (myLocation == null) {
+			Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
+		}
+		else {
+			_myLocationOverlay.enableMyLocation();
 			_edmontonMap.getController().animateTo(myLocation);
-        }
+		}
 	}
 
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-        _myLocationOverlay.disableMyLocation();
+		_myLocationOverlay.disableMyLocation();
 		_locationManager.removeUpdates(_onLocationChange);
 	}
 
