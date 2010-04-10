@@ -14,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.model.HistoricalBuilding;
+import net.opgenorth.yeg.util.IHistoricalBuildingsRepository;
 import net.opgenorth.yeg.util.RestClient;
+import net.opgenorth.yeg.util.YegOpenDataHistoricalBuildingRepository;
 import net.opgenorth.yeg.widget.GoogleMapPin;
 import net.opgenorth.yeg.widget.HistoricalBuildingListAdapter;
 
@@ -82,12 +84,10 @@ public class YegHistoricalSitesListView extends ListActivity {
 	}
 
 	class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
-		public static final String YEG_HISTORIC_DATA_URL = "http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings?format=json";
-
+		private IHistoricalBuildingsRepository _repository = new YegOpenDataHistoricalBuildingRepository();
 		@Override
 		protected List<HistoricalBuilding> doInBackground(Void... voids) {
-			List<HistoricalBuilding> buildings = RestClient.connect(YEG_HISTORIC_DATA_URL);
-			return buildings;
+			return _repository.get();
 		}
 
 		@Override
