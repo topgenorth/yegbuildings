@@ -57,6 +57,7 @@ public class HistoricalBuilding {
 	public String getName() {
 		return _name;
 	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -107,5 +108,33 @@ public class HistoricalBuilding {
 
 	public double setDistanceTo(Location location) {
 		return this.getLocation().getDistanceTo(location);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		HistoricalBuilding that = (HistoricalBuilding) o;
+
+		if (_location != null ? !_location.equals(that._location) : that._location != null) {
+			return false;
+		}
+		if (_rowKey != null ? !_rowKey.equals(that._rowKey) : that._rowKey != null) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = _rowKey != null ? _rowKey.hashCode() : 0;
+		result = 31 * result + (_location != null ? _location.hashCode() : 0);
+		return result;
 	}
 }
