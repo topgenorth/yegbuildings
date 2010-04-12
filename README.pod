@@ -15,6 +15,7 @@ Twitter:  topgenorth
 =over 4 
 
 =item * Intersection of 100 Ave & 105 Street: -113.501118 53.538860
+=item * 109 Street & Jasper Ave -113.508838 53.541111
 
 =back
 

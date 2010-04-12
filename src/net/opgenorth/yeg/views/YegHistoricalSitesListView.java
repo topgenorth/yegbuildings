@@ -19,6 +19,7 @@ import android.widget.Toast;
 import net.opgenorth.yeg.Constants;
 import net.opgenorth.yeg.R;
 import net.opgenorth.yeg.model.HistoricalBuilding;
+import net.opgenorth.yeg.model.IHistoricalBuildingSorter;
 import net.opgenorth.yeg.model.SortByDistanceFromLocation;
 import net.opgenorth.yeg.util.IHistoricalBuildingsRepository;
 import net.opgenorth.yeg.util.LocationManagerBuilder;
@@ -29,24 +30,24 @@ import net.opgenorth.yeg.widget.HistoricalBuildingListAdapter;
 import java.util.List;
 
 public class YegHistoricalSitesListView extends ListActivity {
-	public static final int TIME_BETWEEN_GPS_UPDATES = 60000;
-	public static final int DISTANCE_BETWEEN_GPS_UPDATES = 100;
-
 	private ProgressDialog _progressDialog;
 	private TextView _foundHistoricalBuildingsTextView;
 	private LocationManager _locationManager;
+	private List<HistoricalBuilding> _buildings;
+	
 	LocationListener _onLocationChange = new LocationListener() {
 		public void onLocationChanged(Location location) {
 			Log.d(Constants.LOG_TAG, "new location " + location.getLongitude() + " " + location.getLatitude());
+			IHistoricalBuildingSorter sorter = new SortByDistanceFromLocation(location);
+			List<HistoricalBuilding> resortedListOfHistoricalBuildings = sorter.sortList(_buildings);
+			displayYegData(resortedListOfHistoricalBuildings);
 		}
 
 		public void onProviderDisabled(String provider) {
-			// Update application if provider disabled.
 			Log.i(Constants.LOG_TAG, "GPS Provider is disabled");
 		}
 
 		public void onProviderEnabled(String provider) {
-			// Update application if provider enabled.
 			Log.i(Constants.LOG_TAG, "GPS Provider is enabled");
 		}
 
@@ -145,6 +146,7 @@ public class YegHistoricalSitesListView extends ListActivity {
 		protected void onPostExecute(List<HistoricalBuilding> historicalBuildings) {
 			_progressDialog.dismiss();
 			_foundHistoricalBuildingsTextView.setText("Found " + historicalBuildings.size() + " buildings.");
+			_buildings = historicalBuildings;
 			displayYegData(historicalBuildings);
 		}
 	}
