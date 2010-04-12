@@ -1,7 +1,5 @@
 package net.opgenorth.yeg.util;
 
-import android.util.Log;
-import net.opgenorth.yeg.Constants;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +18,7 @@ public class YegJsonToHistoricalBuilding implements ITransmorgifier<Object, Hist
 		try {
 			building.setPartitionKey(jsonObject.getString("PartitionKey"));
 			building.setRowKey(UUID.fromString(jsonObject.getString("RowKey")));
-            			
+
 			String dateTimeString = jsonObject.getString("Timestamp");
 			building.setTimestamp(stringToDate.transmorgify(dateTimeString));
 

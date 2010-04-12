@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.google.android.maps.*;
 import net.opgenorth.yeg.Constants;
 import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.util.LocationManagerBuilder;
 import net.opgenorth.yeg.widget.GoogleMapPin;
 
 public class BuildingMap extends MapActivity implements IBuildingMapView {
@@ -32,10 +33,13 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		_locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		_locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10000.0f, _onLocationChange);
-
 		initializeContentView();
+
+		_locationManager = LocationManagerBuilder.createLocationManager()
+				.with(this)
+				.listeningWith(_onLocationChange)
+				.build() ;
+
 
 		initializeMap();
 		initializeMyLocation();

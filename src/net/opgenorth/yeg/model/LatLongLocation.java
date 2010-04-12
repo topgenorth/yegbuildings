@@ -27,7 +27,7 @@ public class LatLongLocation {
 
 	@Override
 	public String toString() {
-		return "location : " + _latitude + "," + _longitude;
+		return "location : " + _longitude  + "," + _latitude;
 	}
 
 	@Override
