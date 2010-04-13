@@ -7,20 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.model.BuildingAndLocationWrapper;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 
 import java.util.List;
 
 public class HistoricalBuildingListAdapter extends ArrayAdapter {
 	private Activity _context;
-	private List<HistoricalBuilding> _buildings;
-	private Location _location;
+	private List<BuildingAndLocationWrapper> _buildings;
 
-	public HistoricalBuildingListAdapter(Activity context, List<HistoricalBuilding> buildings, Location location) {
+	public HistoricalBuildingListAdapter(Activity context, List<BuildingAndLocationWrapper> buildings) {
 		super(context, R.layout.historicalbuildingrow, buildings);
 		_context = context;
 		_buildings = buildings;
-		_location = location;
 	}
 
 	@Override
@@ -39,7 +38,7 @@ public class HistoricalBuildingListAdapter extends ArrayAdapter {
 		}
 
 		if (!_buildings.isEmpty()) {
-			HistoricalBuilding building = _buildings.get(position);
+			BuildingAndLocationWrapper building = _buildings.get(position);
 			rowWrapper.display(building);
 		}
 

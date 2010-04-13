@@ -106,10 +106,6 @@ public class HistoricalBuilding {
 		_timestamp = timestamp;
 	}
 
-	public double setDistanceTo(Location location) {
-		return this.getLocation().getDistanceTo(location);
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

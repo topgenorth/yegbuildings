@@ -3,6 +3,7 @@ package net.opgenorth.yeg.widget;
 import android.view.View;
 import android.widget.TextView;
 import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.model.BuildingAndLocationWrapper;
 import net.opgenorth.yeg.model.HistoricalBuilding;
 
 public class HistoricalBuildingRowWrapper {
@@ -44,10 +45,10 @@ public class HistoricalBuildingRowWrapper {
 		return _distanceToMeLabel;
 	}
 
-	public void display(HistoricalBuilding building) {
-		getNameLabel().setText(building.getName());
-		getAddressLabel().setText(building.getAddress());
-		getYearBuiltLabel().setText("Construction date: " + building.getConstructionDate());
-		getDistanceToMeLabel().setText("Distance: ");		
+	public void display(BuildingAndLocationWrapper building) {
+		getNameLabel().setText(building.getHistoricalBuilding().getName());
+		getAddressLabel().setText(building.getHistoricalBuilding().getAddress());
+		getYearBuiltLabel().setText("Construction date: " + building.getHistoricalBuilding().getConstructionDate());
+		getDistanceToMeLabel().setText("Distance: " + building.getDistance() + " metres.");		
 	}
 }
