@@ -26,6 +26,14 @@
     </TableRow>
     <TableRow>
         <TextView
+            android:id="@+id/building_distance_to_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:gravity="left" />
+    </TableRow>
+    <TableRow>
+        <TextView
                 android:id="@+id/building_row_year_built"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

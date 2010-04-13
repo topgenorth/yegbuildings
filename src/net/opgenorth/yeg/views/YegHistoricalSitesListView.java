@@ -96,7 +96,7 @@ public class YegHistoricalSitesListView extends ListActivity {
 	}
 
 	private void displayYegData(List<HistoricalBuilding> buildings) {
-		HistoricalBuildingListAdapter adapter = new HistoricalBuildingListAdapter(this, buildings);
+		HistoricalBuildingListAdapter adapter = new HistoricalBuildingListAdapter(this, buildings,null);
 		setListAdapter(adapter);
 	}
 
@@ -122,10 +122,6 @@ public class YegHistoricalSitesListView extends ListActivity {
 	private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
 		private IHistoricalBuildingsRepository _repository = new YegOpenDataHistoricalBuildingRepository();
 		private Location _myLocation;
-
-		HistoricalBuildingFetcher() {
-			this(null);
-		}
 
 		HistoricalBuildingFetcher(Location myLocation) {
 			_myLocation = myLocation;

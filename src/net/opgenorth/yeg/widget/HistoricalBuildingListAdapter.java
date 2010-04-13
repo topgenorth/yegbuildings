@@ -1,6 +1,7 @@
 package net.opgenorth.yeg.widget;
 
 import android.app.Activity;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,42 +12,44 @@ import net.opgenorth.yeg.model.HistoricalBuilding;
 import java.util.List;
 
 public class HistoricalBuildingListAdapter extends ArrayAdapter {
-    private Activity _context;
-    private List<HistoricalBuilding> _buildings;
+	private Activity _context;
+	private List<HistoricalBuilding> _buildings;
+	private Location _location;
 
-    public HistoricalBuildingListAdapter(Activity context, List<HistoricalBuilding> buildings) {
-        super(context, R.layout.historicalbuildingrow, buildings);
-        _context = context;
-        _buildings = buildings;
-    }
+	public HistoricalBuildingListAdapter(Activity context, List<HistoricalBuilding> buildings, Location location) {
+		super(context, R.layout.historicalbuildingrow, buildings);
+		_context = context;
+		_buildings = buildings;
+		_location = location;
+	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        HistoricalBuildingRowWrapper rowWrapper;
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View row = convertView;
+		HistoricalBuildingRowWrapper rowWrapper;
 
-        if (row == null) {
-            LayoutInflater inflater = _context.getLayoutInflater() ;
-            row = inflater.inflate(R.layout.historicalbuildingrow, null);
-            rowWrapper = new HistoricalBuildingRowWrapper(row);
-            row.setTag(rowWrapper);
-        }
-        else {
-            rowWrapper = (HistoricalBuildingRowWrapper) row.getTag();
-        }
+		if (row == null) {
+			LayoutInflater inflater = _context.getLayoutInflater();
+			row = inflater.inflate(R.layout.historicalbuildingrow, null);
+			rowWrapper = new HistoricalBuildingRowWrapper(row);
+			row.setTag(rowWrapper);
+		}
+		else {
+			rowWrapper = (HistoricalBuildingRowWrapper) row.getTag();
+		}
 
-        if (!_buildings.isEmpty() ) {
-            HistoricalBuilding building = _buildings.get(position);
-            rowWrapper.display(building);
-        }
+		if (!_buildings.isEmpty()) {
+			HistoricalBuilding building = _buildings.get(position);
+			rowWrapper.display(building);
+		}
 
-        if (position %2 ==0) {
-            row.setBackgroundResource(R.color.roweven);
-        }
-        else {
-            row.setBackgroundResource(R.color.rowodd);
-        }
-                
-        return (row);
-    }
+		if (position % 2 == 0) {
+			row.setBackgroundResource(R.color.roweven);
+		}
+		else {
+			row.setBackgroundResource(R.color.rowodd);
+		}
+
+		return (row);
+	}
 }
