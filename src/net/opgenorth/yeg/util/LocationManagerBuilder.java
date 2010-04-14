@@ -12,16 +12,16 @@ public class LocationManagerBuilder {
 	public static final int TIME_BETWEEN_GPS_UPDATES = 60000;
 	public static final int DISTANCE_BETWEEN_GPS_UPDATES = 100;
 
-	private static LocationManager _locationManager;
-	private static LocationListener _locationListener;
+	private LocationManager _locationManager;
+	private LocationListener _locationListener;
 
 	private LocationManagerBuilder() {
+		_locationManager = null;
+		_locationListener = null;
 
 	}
 
 	public static LocationManagerBuilder createLocationManager() {
-		_locationManager = null;
-		_locationListener = null;
 		return new LocationManagerBuilder();
 	}
 

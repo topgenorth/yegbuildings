@@ -92,6 +92,12 @@ public class YegHistoricalSitesListView extends ListActivity {
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		_locationManager.removeUpdates(_onLocationChange);
+	}
+
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		_locationManager.removeUpdates(_onLocationChange);

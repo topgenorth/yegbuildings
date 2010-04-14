@@ -40,7 +40,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 				.listeningWith(_onLocationChange)
 				.build() ;
 
-
 		initializeMap();
 		initializeMyLocation();
 
@@ -100,6 +99,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
 		if (myLocation == null) {
 			Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
+			Log.i(Constants.LOG_TAG, "Can't figure out the user's location.");
 		}
 		else {
 			_myLocationOverlay.enableMyLocation();
@@ -124,6 +124,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		_myLocationOverlay.disableMyLocation();
 		_myLocationOverlay.disableMyLocation();
 	}
 
