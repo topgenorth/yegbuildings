@@ -49,17 +49,16 @@ public class GoogleMapPin {
 			   '}';
 	}
 
-
 	public void putOnMap(IBuildingMapView buildingMapView) {
 		buildingMapView.setName(_name);
 		buildingMapView.setAddress(_address);
 		buildingMapView.setConstructionDate("Construction Date: " + _constructionDate);
 		buildingMapView.setCenter(_location.getGeoPoint());
-		buildingMapView.showBuildingOnMap(this); 
+		buildingMapView.showBuildingOnMap(this);
 	}
 
 	public GeoPoint getGeoPoint() {
-		return _location.getGeoPoint(); 
+		return _location.getGeoPoint();
 	}
 
 	public String getBuildingName() {

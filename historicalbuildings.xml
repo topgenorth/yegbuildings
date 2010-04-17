@@ -4,10 +4,7 @@
 
   <property file="historicalbuildings.properties"/>
   <!-- Uncomment the following property if no tests compilation is needed -->
-  <!--
   <property name="skip.tests" value="true"/>
-   -->
-
   <!-- Compiler options -->
 
   <property name="compiler.debug" value="on"/>
@@ -68,15 +65,9 @@
 
   <!-- Modules -->
 
-
   <!-- Module HistoricalBuildings -->
-
   <dirname property="module.historicalbuildings.basedir" file="${ant.file}"/>
-
-
-
   <property name="compiler.args.historicalbuildings" value="${compiler.args}"/>
-
   <property name="historicalbuildings.output.dir" value="${module.historicalbuildings.basedir}/out/production/HistoricalBuildings"/>
   <property name="historicalbuildings.testoutput.dir" value="${module.historicalbuildings.basedir}/out/test/HistoricalBuildings"/>
 
@@ -111,7 +102,6 @@
       <include name="gen"/>
     </dirset>
   </path>
-
 
   <target name="compile.module.historicalbuildings" depends="compile.module.historicalbuildings.production,compile.module.historicalbuildings.tests" description="Compile module HistoricalBuildings"/>
 
