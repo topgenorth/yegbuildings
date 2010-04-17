@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="historicalbuildings.root" default="all">
+
+
+  <property file="historicalbuildings.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!--
+  <property name="skip.tests" value="true"/>
+   -->
+
+  <!-- Compiler options -->
+
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.sbas/**"/>
+    <exclude name="**/.IJI.*/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.zip"/>
+    <include name="*.war"/>
+    <include name="*.egg"/>
+    <include name="*.ear"/>
+    <include name="*.swc"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+
+
+  <!-- Global Libraries -->
+
+  <path id="library.android_1.6_google_apis.classpath">
+    <pathelement location="/home/tom/opt/android-sdk-linux/add-ons/google_apis-4-r01/libs/maps.jar"/>
+    <pathelement location="/home/tom/opt/android-sdk-linux/platforms/android-1.6/android.jar"/>
+  </path>
+
+  <path id="library.android_1.6_platform.classpath">
+    <pathelement location="/home/tom/opt/android-sdk-linux/platforms/android-1.6/android.jar"/>
+  </path>
+
+  <!-- Modules -->
+
+
+  <!-- Module HistoricalBuildings -->
+
+  <dirname property="module.historicalbuildings.basedir" file="${ant.file}"/>
+
+
+
+  <property name="compiler.args.historicalbuildings" value="${compiler.args}"/>
+
+  <property name="historicalbuildings.output.dir" value="${module.historicalbuildings.basedir}/out/production/HistoricalBuildings"/>
+  <property name="historicalbuildings.testoutput.dir" value="${module.historicalbuildings.basedir}/out/test/HistoricalBuildings"/>
+
+  <path id="historicalbuildings.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+
+  <path id="historicalbuildings.module.classpath">
+    <path refid="library.android_1.6_google_apis.classpath"/>
+    <path refid="library.android_1.6_platform.classpath"/>
+  </path>
+
+  <path id="historicalbuildings.runtime.module.classpath">
+    <pathelement location="${historicalbuildings.output.dir}"/>
+    <pathelement location="${historicalbuildings.testoutput.dir}"/>
+    <path refid="library.android_1.6_google_apis.classpath"/>
+    <path refid="library.android_1.6_platform.classpath"/>
+  </path>
+
+
+  <patternset id="excluded.from.module.historicalbuildings">
+    <patternset refid="ignored.files"/>
+  </patternset>
+
+  <patternset id="excluded.from.compilation.historicalbuildings">
+    <patternset refid="excluded.from.module.historicalbuildings"/>
+  </patternset>
+
+  <path id="historicalbuildings.module.sourcepath">
+    <dirset dir="${module.historicalbuildings.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+
+
+  <target name="compile.module.historicalbuildings" depends="compile.module.historicalbuildings.production,compile.module.historicalbuildings.tests" description="Compile module HistoricalBuildings"/>
+
+  <target name="compile.module.historicalbuildings.production" description="Compile module HistoricalBuildings; production classes">
+    <mkdir dir="${historicalbuildings.output.dir}"/>
+    <javac destdir="${historicalbuildings.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.historicalbuildings}"/>
+      <bootclasspath refid="historicalbuildings.module.bootclasspath"/>
+      <classpath refid="historicalbuildings.module.classpath"/>
+      <src refid="historicalbuildings.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.historicalbuildings"/>
+    </javac>
+
+    <copy todir="${historicalbuildings.output.dir}">
+      <fileset dir="${module.historicalbuildings.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.historicalbuildings.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.module.historicalbuildings.tests" depends="compile.module.historicalbuildings.production" description="compile module HistoricalBuildings; test classes" unless="skip.tests"/>
+
+  <target name="clean.module.historicalbuildings" description="cleanup module">
+    <delete dir="${historicalbuildings.output.dir}"/>
+    <delete dir="${historicalbuildings.testoutput.dir}"/>
+  </target>
+
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+
+  <target name="clean" depends="clean.module.historicalbuildings" description="cleanup all"/>
+
+  <target name="build.modules" depends="init, clean, compile.module.historicalbuildings" description="build all modules"/>
+
+  <target name="all" depends="build.modules" description="build all"/>
+</project>
