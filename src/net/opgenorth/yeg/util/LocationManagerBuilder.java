@@ -18,7 +18,6 @@ public class LocationManagerBuilder {
 	private LocationManagerBuilder() {
 		_locationManager = null;
 		_locationListener = null;
-
 	}
 
 	public static LocationManagerBuilder createLocationManager() {
@@ -58,13 +57,14 @@ public class LocationManagerBuilder {
 		if (_locationListener == null) {
 			throw new NullPointerException("Must provide a LocationListener.");
 		}
-		
+
 		String provider = _locationManager.getBestProvider(createCriteria(), true);
 		Log.d(Constants.LOG_TAG, "Using provider " + provider + " for requesting location updates.");
 		_locationManager.requestLocationUpdates(provider,
 												TIME_BETWEEN_GPS_UPDATES,
 												DISTANCE_BETWEEN_GPS_UPDATES,
 												_locationListener);
+
 		return _locationManager;
 	}
 }

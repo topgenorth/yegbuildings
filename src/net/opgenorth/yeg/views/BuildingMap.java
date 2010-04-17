@@ -1,6 +1,5 @@
 package net.opgenorth.yeg.views;
 
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -38,7 +37,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		_locationManager = LocationManagerBuilder.createLocationManager()
 				.with(this)
 				.listeningWith(_onLocationChange)
-				.build() ;
+				.build();
 
 		initializeMap();
 		initializeMyLocation();
@@ -102,6 +101,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 			Log.i(Constants.LOG_TAG, "Can't figure out the user's location.");
 		}
 		else {
+			_edmontonMap.invalidate();
 			_myLocationOverlay.enableMyLocation();
 			_edmontonMap.getController().animateTo(myLocation);
 		}

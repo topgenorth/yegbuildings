@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="10px" 
+                android:paddingRight="10px"
         >
 
     <TextView
@@ -28,9 +28,16 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textStyle="italic"
-            android:layout_below="@id/building_row_name"
-            android:layout_alignRight="@id/building_row_name"
+            android:layout_below="@id/building_row_address"
+            android:layout_alignLeft="@id/building_row_address"
             android:gravity="left"
             />
-
+    <TextView
+            android:id="@+id/building_distance_to_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_below="@id/building_row_address"
+            android:layout_alignRight="@id/building_row_address"
+            android:gravity="right"/>
 </RelativeLayout>

@@ -49,6 +49,13 @@ public class HistoricalBuildingRowWrapper {
 		getNameLabel().setText(building.getHistoricalBuilding().getName());
 		getAddressLabel().setText(building.getHistoricalBuilding().getAddress());
 		getYearBuiltLabel().setText("Construction date: " + building.getHistoricalBuilding().getConstructionDate());
-		getDistanceToMeLabel().setText("Distance: " + building.getDistance() + " metres.");		
+
+		if (building.getDistance() < 1) {
+			getDistanceToMeLabel().setVisibility(View.GONE);
+		}
+		else {
+			getDistanceToMeLabel().setVisibility(View.VISIBLE); 
+			getDistanceToMeLabel().setText("Distance: " + building.getDistance() + " metres.");
+		}
 	}
 }
