@@ -5,3 +5,5 @@ out
 out/*
 gen
 gen/*
+bin
+bin/*
