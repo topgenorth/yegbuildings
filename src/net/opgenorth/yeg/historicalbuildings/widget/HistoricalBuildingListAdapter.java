@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.historicalbuildings.R;
 import net.opgenorth.yeg.historicalbuildings.model.BuildingAndLocationWrapper;
 
 import java.util.List;

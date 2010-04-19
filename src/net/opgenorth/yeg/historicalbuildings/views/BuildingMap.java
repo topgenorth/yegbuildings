@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.maps.*;
 import net.opgenorth.yeg.historicalbuildings.Constants;
-import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.historicalbuildings.R;
 import net.opgenorth.yeg.historicalbuildings.util.LocationManagerBuilder;
 import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
 

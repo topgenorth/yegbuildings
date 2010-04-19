@@ -2,7 +2,7 @@ package net.opgenorth.yeg.historicalbuildings.widget;
 
 import android.view.View;
 import android.widget.TextView;
-import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.historicalbuildings.R;
 import net.opgenorth.yeg.historicalbuildings.model.BuildingAndLocationWrapper;
 
 public class HistoricalBuildingRowWrapper {

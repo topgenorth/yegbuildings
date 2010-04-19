@@ -20,7 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.historicalbuildings.Constants;
-import net.opgenorth.yeg.R;
+import net.opgenorth.yeg.historicalbuildings.R;
 import net.opgenorth.yeg.historicalbuildings.model.BuildingAndLocationWrapper;
 import net.opgenorth.yeg.historicalbuildings.model.HistoricalBuilding;
 import net.opgenorth.yeg.historicalbuildings.model.SortByDistanceFromLocation;

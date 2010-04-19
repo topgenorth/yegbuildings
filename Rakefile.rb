@@ -14,7 +14,7 @@ end
 
 app_pkg = manifest[:package]
 package_keystore = "../KeyStores/historicalbuildings-release-key.keystore"
-package_keystore_alias = "release"
+package_keystore_alias = "historicalbuildings-release"
 project = app_pkg.gsub(/\./, '_')
 
 sdk_location = ENV['ANDROID_SDK'] || '/home/tom/opt/android-sdk-linux'
@@ -33,7 +33,7 @@ apk = "#{bin}/#{project}.apk"
 
 
 # android stuff
-google_maps_api_location = "#{sdk_location}/add-ons/google_apis-4-r01/libs/maps.jar"
+google_maps_api_location = "#{sdk_location}/add-ons/google_apis-4_r02/libs/maps.jar"
 android_platform_location = "#{sdk_location}/platforms/#{android_platform}"
 android_jar = "#{android_platform_location}/android.jar"
 android_aidl = "#{android_platform_location}/framework.aidl"
@@ -61,6 +61,11 @@ module Rake
   end
 end
 
+def adb(*args)
+  args.unshift '-s', ENV['DEVICE'] if ENV['DEVICE']
+  sh "adb", *args
+end
+
 def compile(dest, *srcdirs)
   files = FileList.new
   srcdirs.each do |d|
@@ -77,14 +82,17 @@ task :resource_src => dirs do
   sh "#{android_aapt} package -m -J #{gen} -M AndroidManifest.xml -S #{res} -I #{android_jar}"
 end
 
-
 task :aidl => dirs do
   FileList["#{src}/**/*.aidl"].each do |f|
     sh "aidl -p #{android_aidl} -I #{src} -o #{gen} #{f}"
  end
 end
 
-task :compile => [:resource_src, :aidl] do
+task :update_debuggable_flag => dirs do
+	puts "WE SHOULD SET android:debuggable TO FALSE"
+end
+
+task :compile => [:update_debuggable_flag, :resource_src, :aidl] do
   compile(classes, src, gen)
 end
 
@@ -106,21 +114,12 @@ apkbuilder = Proc.new do |signed|
   sh "#{android_apkbuilder}", *args
 end
 
-desc "Builds the application and sign it with a debug key."
-task :debug => [:dex, :package_resources] do
-  apkbuilder.call(true)
-end
-
 desc "Builds the application and sign it with a release key."
 task :release => [:dex, :package_resources] do
   apkbuilder.call(false)
   Rake::Task['package:sign'].invoke
 end
 
-def adb(*args)
-  args.unshift '-s', ENV['DEVICE'] if ENV['DEVICE']
-  sh "adb", *args
-end
 
 desc "Installs the debug package onto a running emulator or device (DEVICE=<serialno>)."
 task :install => :debug do
