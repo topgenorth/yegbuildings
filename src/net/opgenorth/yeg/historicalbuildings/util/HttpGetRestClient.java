@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.util;
+package net.opgenorth.yeg.historicalbuildings.util;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

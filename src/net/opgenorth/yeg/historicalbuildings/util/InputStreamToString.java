@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.util;
+package net.opgenorth.yeg.historicalbuildings.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

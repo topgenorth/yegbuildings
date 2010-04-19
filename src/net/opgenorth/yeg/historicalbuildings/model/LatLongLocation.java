@@ -1,9 +1,9 @@
-package net.opgenorth.yeg.model;
+package net.opgenorth.yeg.historicalbuildings.model;
 
 import android.content.Intent;
 import android.location.Location;
 import com.google.android.maps.GeoPoint;
-import net.opgenorth.yeg.widget.GoogleMapPin;
+import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
 
 public class LatLongLocation {
 	private double _latitude;

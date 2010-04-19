@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.util;
+package net.opgenorth.yeg.historicalbuildings.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

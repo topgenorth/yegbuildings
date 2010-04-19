@@ -13,6 +13,8 @@ def manifest
 end
 
 app_pkg = manifest[:package]
+package_keystore = "../KeyStores/historicalbuildings-release-key.keystore"
+package_keystore_alias = "release"
 project = app_pkg.gsub(/\./, '_')
 
 sdk_location = ENV['ANDROID_SDK'] || '/home/tom/opt/android-sdk-linux'
@@ -69,7 +71,7 @@ def compile(dest, *srcdirs)
      "-sourcepath", srcdirs.join(File::PATH_SEPARATOR), "-d", dest ,"-classpath", CLASSPATH.to_cp, *files
 end
 
-task :default => :debug
+task :default => :release
 
 task :resource_src => dirs do
   sh "#{android_aapt} package -m -J #{gen} -M AndroidManifest.xml -S #{res} -I #{android_jar}"
@@ -143,8 +145,6 @@ namespace :package do
 
   desc "sign the package."
   task :sign do
-    alias_name = "alias"
-    keystore   = "keystore"
-    sh "jarsigner",  "-verbose",  "-keystore", keystore, apk, alias_name
+    sh "jarsigner",  "-verbose",  "-keystore", package_keystore, apk, package_keystore_alias
   end
 end

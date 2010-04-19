@@ -1,6 +1,4 @@
-package net.opgenorth.yeg.model;
-
-import android.location.Location;
+package net.opgenorth.yeg.historicalbuildings.model;
 
 import java.util.Date;
 import java.util.UUID;

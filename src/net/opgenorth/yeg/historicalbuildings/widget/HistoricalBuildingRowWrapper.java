@@ -1,10 +1,9 @@
-package net.opgenorth.yeg.widget;
+package net.opgenorth.yeg.historicalbuildings.widget;
 
 import android.view.View;
 import android.widget.TextView;
 import net.opgenorth.yeg.R;
-import net.opgenorth.yeg.model.BuildingAndLocationWrapper;
-import net.opgenorth.yeg.model.HistoricalBuilding;
+import net.opgenorth.yeg.historicalbuildings.model.BuildingAndLocationWrapper;
 
 public class HistoricalBuildingRowWrapper {
 	private View _base = null;
@@ -54,7 +53,7 @@ public class HistoricalBuildingRowWrapper {
 			getDistanceToMeLabel().setVisibility(View.GONE);
 		}
 		else {
-			getDistanceToMeLabel().setVisibility(View.VISIBLE); 
+			getDistanceToMeLabel().setVisibility(View.VISIBLE);
 			getDistanceToMeLabel().setText("Distance: " + building.getDistance() + " metres.");
 		}
 	}

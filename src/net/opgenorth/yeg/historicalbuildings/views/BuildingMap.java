@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.views;
+package net.opgenorth.yeg.historicalbuildings.views;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -16,10 +16,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.maps.*;
-import net.opgenorth.yeg.Constants;
+import net.opgenorth.yeg.historicalbuildings.Constants;
 import net.opgenorth.yeg.R;
-import net.opgenorth.yeg.util.LocationManagerBuilder;
-import net.opgenorth.yeg.widget.GoogleMapPin;
+import net.opgenorth.yeg.historicalbuildings.util.LocationManagerBuilder;
+import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
 
 public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private MapView _edmontonMap;

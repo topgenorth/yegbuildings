@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.model;
+package net.opgenorth.yeg.historicalbuildings.model;
 
 import java.util.List;
 
