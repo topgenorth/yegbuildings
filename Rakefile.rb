@@ -41,6 +41,7 @@ android_aapt = "#{android_platform_location}/tools/aapt"
 android_dex = "#{android_platform_location}/tools/dx"
 android_apkbuilder = "#{sdk_location}/tools/apkbuilder"
 
+
 intermediate_dex_location = "#{bin}/classes.dex"
 
 directory gen
@@ -122,12 +123,12 @@ end
 
 
 desc "Installs the debug package onto a running emulator or device (DEVICE=<serialno>)."
-task :install => :debug do
+task :install => :release do
   adb 'install', apk
 end
 
 desc "Installs the debug package on a running emulator or device that already has the application (DEVICE=<serialno>)."
-task :reinstall => :debug do
+task :reinstall => :release do
   adb 'install', '-r', apk
 end
 
