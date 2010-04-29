@@ -42,13 +42,18 @@ public class YegHistoricalSitesListView extends ListActivity {
 
 	LocationListener _onLocationChange = new LocationListener() {
 		public void onLocationChanged(Location location) {
-			Log.d(Constants.LOG_TAG, "new location " + location.getLongitude() + " " + location.getLatitude());
-			for (BuildingAndLocationWrapper building : _buildings) {
-				building.setRelativeLocation(location);
+			if (location == null) {
+				Log.w(Constants.LOG_TAG, "We have a NULL location for some reason.");
+				return;
 			}
-
-			Collections.sort(_buildings);
-			displayYegData(_buildings);
+			Log.d(Constants.LOG_TAG, "new location " + location.getLongitude() + " " + location.getLatitude());
+			if (_buildings != null) {
+				for (BuildingAndLocationWrapper building : _buildings) {
+					building.setRelativeLocation(location);
+				}
+				Collections.sort(_buildings);
+				displayYegData(_buildings);
+			}
 		}
 
 		public void onProviderDisabled(String provider) {
