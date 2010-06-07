@@ -2,6 +2,10 @@ package net.opgenorth.yeg.historicalbuildings.model;
 
 import android.location.Location;
 
+/**
+ * This class is a decorator around a building to help with calculating the distance from a
+ * given point and to help with sorting a list of buildings.
+ */
 public class RelativeBuildingLocation implements Comparable<RelativeBuildingLocation> {
 	private Building _building;
 	private Location _relativeLocation;

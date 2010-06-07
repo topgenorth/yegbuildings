@@ -2,6 +2,6 @@ package net.opgenorth.yeg.historicalbuildings.model;
 
 import java.util.List;
 
-public interface IHistoricalBuildingSorter {
+public interface IBuildingSorter {
 	List<Building> sortList(List<Building> buildings);
 }
