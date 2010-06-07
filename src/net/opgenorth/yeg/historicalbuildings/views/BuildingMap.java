@@ -1,8 +1,5 @@
 package net.opgenorth.yeg.historicalbuildings.views;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -46,19 +43,10 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		pin.putOnMap(this);
 	}
 
-	private boolean isDebug() {
-		try {
-			PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			return (packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) == ApplicationInfo.FLAG_DEBUGGABLE;
-		}
-		catch (PackageManager.NameNotFoundException e) {
-			Log.e(Constants.LOG_TAG, "package name not found", e);
-		}
-		return false;
-	}
-
 	private void initializeContentView() {
-		if (isDebug()) {
+		ActivityHelper helper = new ActivityHelper(this);
+
+		if (helper.isDebug()) {
 			setContentView(R.layout.building_map_debug);
 		}
 		else {

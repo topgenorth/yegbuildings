@@ -3,9 +3,6 @@ package net.opgenorth.yeg.historicalbuildings.views;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -68,26 +65,13 @@ public class YegHistoricalSitesListView extends ListActivity {
 		}
 	};
 
-	private boolean isDebug() {
-		try {
-			PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-			return (packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) == ApplicationInfo.FLAG_DEBUGGABLE;
-		}
-		catch (PackageManager.NameNotFoundException e) {
-			Log.e(Constants.LOG_TAG, "package name not found", e);
-		}
-		return false;
-	}
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		_foundHistoricalBuildingsTextView = (TextView) findViewById(R.id.info);
-
-		if (isDebug()) {
-
-		}
 
 		_locationManager = LocationManagerBuilder.createLocationManager()
 				.with(this)
