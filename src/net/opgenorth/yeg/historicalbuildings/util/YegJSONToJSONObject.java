@@ -12,6 +12,11 @@ public class YegJSONToJSONObject implements ITransmorgifier<String, JSONArray> {
 	public JSONArray transmorgify(String source) {
 		JSONObject root;
 		JSONArray jsonBuildings = null;
+
+        if (source == null) {
+            return null;
+            
+        }
 		try {
 			root = new JSONObject(source);
 			JSONArray nameArray = root.names();

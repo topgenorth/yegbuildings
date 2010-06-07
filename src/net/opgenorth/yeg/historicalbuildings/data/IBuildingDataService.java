@@ -4,6 +4,6 @@ import net.opgenorth.yeg.historicalbuildings.model.Building;
 
 import java.util.List;
 
-public interface IReadOnlyBuildingRepository {
-	List<Building> fetch();
+public interface IBuildingDataService {
+    List<Building> fetchAll();
 }

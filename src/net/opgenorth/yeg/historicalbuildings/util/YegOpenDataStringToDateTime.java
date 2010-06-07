@@ -15,8 +15,7 @@ public class YegOpenDataStringToDateTime implements ITransmorgifier<String, Date
 			return null;
 		}
 		try {
-			Date date =  _formatter.parse(dateString);
-			return date;
+            return _formatter.parse(dateString);
 		}
 		catch (ParseException e) {
 			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

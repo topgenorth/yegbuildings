@@ -18,8 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.historicalbuildings.Constants;
 import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.data.IReadOnlyBuildingRepository;
-import net.opgenorth.yeg.historicalbuildings.data.YegOpenDataHistoricalBuildingRepository;
+import net.opgenorth.yeg.historicalbuildings.data.IBuildingDataService;
+import net.opgenorth.yeg.historicalbuildings.data.SlowBuildingDataService;
 import net.opgenorth.yeg.historicalbuildings.model.Building;
 import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
 import net.opgenorth.yeg.historicalbuildings.model.SortByDistanceFromLocation;
@@ -134,7 +134,6 @@ public class YegHistoricalSitesListView extends ListActivity {
 	}
 
 	private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<Building>> {
-		private IReadOnlyBuildingRepository _repository = new YegOpenDataHistoricalBuildingRepository();
 		private Location _myLocation;
 
 		HistoricalBuildingFetcher(Location myLocation) {
@@ -143,7 +142,9 @@ public class YegHistoricalSitesListView extends ListActivity {
 
 		@Override
 		protected List<Building> doInBackground(Void... voids) {
-			List<Building> buildings = _repository.get();
+            IBuildingDataService dataService = new SlowBuildingDataService();
+
+			List<Building> buildings = dataService.fetchAll() ;
 
 			if ((_myLocation != null)) {
 				SortByDistanceFromLocation sorter = new SortByDistanceFromLocation(_myLocation);
@@ -164,5 +165,4 @@ public class YegHistoricalSitesListView extends ListActivity {
 			displayYegData(_relativeBuildings);
 		}
 	}
-
 }
