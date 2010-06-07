@@ -18,12 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.historicalbuildings.Constants;
 import net.opgenorth.yeg.historicalbuildings.R;
+import net.opgenorth.yeg.historicalbuildings.data.IReadOnlyBuildingRepository;
+import net.opgenorth.yeg.historicalbuildings.data.YegOpenDataHistoricalBuildingRepository;
 import net.opgenorth.yeg.historicalbuildings.model.Building;
 import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
 import net.opgenorth.yeg.historicalbuildings.model.SortByDistanceFromLocation;
-import net.opgenorth.yeg.historicalbuildings.util.IHistoricalBuildingsRepository;
 import net.opgenorth.yeg.historicalbuildings.util.LocationManagerBuilder;
-import net.opgenorth.yeg.historicalbuildings.util.YegOpenDataHistoricalBuildingRepository;
 import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
 import net.opgenorth.yeg.historicalbuildings.widget.HistoricalBuildingListAdapter;
 
@@ -64,8 +64,6 @@ public class YegHistoricalSitesListView extends ListActivity {
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	};
-
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -136,7 +134,7 @@ public class YegHistoricalSitesListView extends ListActivity {
 	}
 
 	private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<Building>> {
-		private IHistoricalBuildingsRepository _repository = new YegOpenDataHistoricalBuildingRepository();
+		private IReadOnlyBuildingRepository _repository = new YegOpenDataHistoricalBuildingRepository();
 		private Location _myLocation;
 
 		HistoricalBuildingFetcher(Location myLocation) {

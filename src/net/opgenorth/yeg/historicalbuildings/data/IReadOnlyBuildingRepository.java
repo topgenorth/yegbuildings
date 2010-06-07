@@ -1,9 +1,9 @@
-package net.opgenorth.yeg.historicalbuildings.util;
+package net.opgenorth.yeg.historicalbuildings.data;
 
 import net.opgenorth.yeg.historicalbuildings.model.Building;
 
 import java.util.List;
 
-public interface IHistoricalBuildingsRepository {
+public interface IReadOnlyBuildingRepository {
 	List<Building> get();
 }
