@@ -21,8 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.historicalbuildings.Constants;
 import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.model.BuildingAndLocationWrapper;
-import net.opgenorth.yeg.historicalbuildings.model.HistoricalBuilding;
+import net.opgenorth.yeg.historicalbuildings.model.Building;
+import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
 import net.opgenorth.yeg.historicalbuildings.model.SortByDistanceFromLocation;
 import net.opgenorth.yeg.historicalbuildings.util.IHistoricalBuildingsRepository;
 import net.opgenorth.yeg.historicalbuildings.util.LocationManagerBuilder;
@@ -38,7 +38,7 @@ public class YegHistoricalSitesListView extends ListActivity {
 	private ProgressDialog _progressDialog;
 	private TextView _foundHistoricalBuildingsTextView;
 	private LocationManager _locationManager;
-	private List<BuildingAndLocationWrapper> _buildings;
+	private List<RelativeBuildingLocation> _relativeBuildings;
 
 	LocationListener _onLocationChange = new LocationListener() {
 		public void onLocationChanged(Location location) {
@@ -47,12 +47,12 @@ public class YegHistoricalSitesListView extends ListActivity {
 				return;
 			}
 			Log.d(Constants.LOG_TAG, "new location " + location.getLongitude() + " " + location.getLatitude());
-			if (_buildings != null) {
-				for (BuildingAndLocationWrapper building : _buildings) {
-					building.setRelativeLocation(location);
+			if (_relativeBuildings != null) {
+				for (RelativeBuildingLocation relativeBuilding : _relativeBuildings) {
+					relativeBuilding.setRelativeLocation(location);
 				}
-				Collections.sort(_buildings);
-				displayYegData(_buildings);
+				Collections.sort(_relativeBuildings);
+				displayYegData(_relativeBuildings);
 			}
 		}
 
@@ -129,16 +129,16 @@ public class YegHistoricalSitesListView extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void displayYegData(List<BuildingAndLocationWrapper> buildings) {
-		HistoricalBuildingListAdapter adapter = new HistoricalBuildingListAdapter(this, buildings);
+	private void displayYegData(List<RelativeBuildingLocation> relativeBuildings) {
+		HistoricalBuildingListAdapter adapter = new HistoricalBuildingListAdapter(this, relativeBuildings);
 		setListAdapter(adapter);
 	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		BuildingAndLocationWrapper building = (BuildingAndLocationWrapper) l.getItemAtPosition(position);
+		RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
 		Intent intent = new Intent(YegHistoricalSitesListView.this, BuildingMap.class);
-		GoogleMapPin mapPin = new GoogleMapPin(building.getHistoricalBuilding());
+		GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getHistoricalBuilding());
 		mapPin.putExtra(intent);
 
 		startActivity(intent);
@@ -151,7 +151,7 @@ public class YegHistoricalSitesListView extends ListActivity {
 		new HistoricalBuildingFetcher(myLocation).execute();
 	}
 
-	private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<HistoricalBuilding>> {
+	private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<Building>> {
 		private IHistoricalBuildingsRepository _repository = new YegOpenDataHistoricalBuildingRepository();
 		private Location _myLocation;
 
@@ -160,8 +160,8 @@ public class YegHistoricalSitesListView extends ListActivity {
 		}
 
 		@Override
-		protected List<HistoricalBuilding> doInBackground(Void... voids) {
-			List<HistoricalBuilding> buildings = _repository.get();
+		protected List<Building> doInBackground(Void... voids) {
+			List<Building> buildings = _repository.get();
 
 			if ((_myLocation != null)) {
 				SortByDistanceFromLocation sorter = new SortByDistanceFromLocation(_myLocation);
@@ -171,15 +171,15 @@ public class YegHistoricalSitesListView extends ListActivity {
 		}
 
 		@Override
-		protected void onPostExecute(List<HistoricalBuilding> historicalBuildings) {
+		protected void onPostExecute(List<Building> buildings) {
 			_progressDialog.dismiss();
-			_foundHistoricalBuildingsTextView.setText("Found " + historicalBuildings.size() + " buildings.");
-			_buildings = new ArrayList<BuildingAndLocationWrapper>(historicalBuildings.size());
+			_foundHistoricalBuildingsTextView.setText("Found " + buildings.size() + " buildings.");
+			_relativeBuildings = new ArrayList<RelativeBuildingLocation>(buildings.size());
 
-			for (HistoricalBuilding building : historicalBuildings) {
-				_buildings.add(new BuildingAndLocationWrapper(building));
+			for (Building building : buildings) {
+				_relativeBuildings.add(new RelativeBuildingLocation(building));
 			}
-			displayYegData(_buildings);
+			displayYegData(_relativeBuildings);
 		}
 	}
 

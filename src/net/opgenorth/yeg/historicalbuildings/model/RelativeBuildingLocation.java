@@ -2,15 +2,15 @@ package net.opgenorth.yeg.historicalbuildings.model;
 
 import android.location.Location;
 
-public class BuildingAndLocationWrapper implements Comparable<BuildingAndLocationWrapper> {
-	private HistoricalBuilding _building;
+public class RelativeBuildingLocation implements Comparable<RelativeBuildingLocation> {
+	private Building _building;
 	private Location _relativeLocation;
 
-	public BuildingAndLocationWrapper(HistoricalBuilding building) {
+	public RelativeBuildingLocation(Building building) {
 		_building = building;
 		_relativeLocation = null;
 	}
-	public BuildingAndLocationWrapper(HistoricalBuilding building, Location location) {
+	public RelativeBuildingLocation(Building building, Location location) {
 		_building = building;
 		_relativeLocation = location;
 	}
@@ -28,7 +28,7 @@ public class BuildingAndLocationWrapper implements Comparable<BuildingAndLocatio
 	}
 
 	@Override
-	public int compareTo(BuildingAndLocationWrapper o) {
+	public int compareTo(RelativeBuildingLocation o) {
 		if (getDistance() == o.getDistance()) {
 			return 0;
 		}
@@ -40,7 +40,7 @@ public class BuildingAndLocationWrapper implements Comparable<BuildingAndLocatio
 		}
 	}
 
-	public HistoricalBuilding getHistoricalBuilding() {
+	public Building getHistoricalBuilding() {
 		return _building;
 	}
 }

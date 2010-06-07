@@ -1,6 +1,6 @@
 package net.opgenorth.yeg.historicalbuildings.util;
 
-import net.opgenorth.yeg.historicalbuildings.model.HistoricalBuilding;
+import net.opgenorth.yeg.historicalbuildings.model.Building;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,12 +14,12 @@ import java.util.List;
 public class YegOpenDataHistoricalBuildingRepository implements IHistoricalBuildingsRepository {
 	public static final String YEG_HISTORIC_DATA_URL = "http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings?format=json";
 	private ITransmorgifier<String, JSONArray> _convertToJSONArray = new YegJSONToJSONObject();
-	private ITransmorgifier<Object, HistoricalBuilding> _convertToHistoricalBuilding = new YegJsonToHistoricalBuilding();
+	private ITransmorgifier<Object, Building> _convertToHistoricalBuilding = new YegJsonToHistoricalBuilding();
 	private IRestClient _restClient = new HttpGetRestClient();
 
 	@Override
-	public List<HistoricalBuilding> get() {
-		ArrayList<HistoricalBuilding> buildings = new ArrayList<HistoricalBuilding>();
+	public List<Building> get() {
+		ArrayList<Building> buildings = new ArrayList<Building>();
 		String jsonResponse = _restClient.getContents(YEG_HISTORIC_DATA_URL);
 		if (jsonResponse != null) {
 			JSONArray jsonBuildings = _convertToJSONArray.transmorgify(jsonResponse);
@@ -27,7 +27,7 @@ public class YegOpenDataHistoricalBuildingRepository implements IHistoricalBuild
 				JSONObject obj;
 				try {
 					obj = (JSONObject) jsonBuildings.get(i);
-					HistoricalBuilding building = _convertToHistoricalBuilding.transmorgify(obj);
+					Building building = _convertToHistoricalBuilding.transmorgify(obj);
 					if (building != null) {
 						buildings.add(building);
 					}

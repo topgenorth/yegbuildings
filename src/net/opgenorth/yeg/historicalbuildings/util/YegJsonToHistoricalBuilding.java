@@ -1,19 +1,19 @@
 package net.opgenorth.yeg.historicalbuildings.util;
 
-import net.opgenorth.yeg.historicalbuildings.model.HistoricalBuilding;
+import net.opgenorth.yeg.historicalbuildings.model.Building;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class YegJsonToHistoricalBuilding implements ITransmorgifier<Object, HistoricalBuilding> {
+public class YegJsonToHistoricalBuilding implements ITransmorgifier<Object, Building> {
 	private ITransmorgifier<String, Date> stringToDate = new YegOpenDataStringToDateTime();
 
-	public HistoricalBuilding transmorgify(Object object) {
+	public Building transmorgify(Object object) {
 		JSONObject jsonObject = (JSONObject) object;
 
-		HistoricalBuilding building = new HistoricalBuilding();
+		Building building = new Building();
 
 		try {
 			building.setPartitionKey(jsonObject.getString("PartitionKey"));

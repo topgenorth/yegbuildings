@@ -14,17 +14,17 @@ public class SortByDistanceFromLocation implements IHistoricalBuildingSorter {
 	}
 
 	@Override
-	public List<HistoricalBuilding> sortList(List<HistoricalBuilding> buildings) {
-		ArrayList<BuildingAndLocationWrapper> list = new ArrayList<BuildingAndLocationWrapper>(buildings.size());
-		for (HistoricalBuilding building : buildings) {
-			list.add(new BuildingAndLocationWrapper(building, _location));
+	public List<Building> sortList(List<Building> buildings) {
+		ArrayList<RelativeBuildingLocation> list = new ArrayList<RelativeBuildingLocation>(buildings.size());
+		for (Building building : buildings) {
+			list.add(new RelativeBuildingLocation(building, _location));
 		}
 
 		Collections.sort(list);
 
-		ArrayList<HistoricalBuilding> sortedList = new ArrayList<HistoricalBuilding>(buildings.size());
-		for (BuildingAndLocationWrapper building : list) {
-			sortedList.add(building.getHistoricalBuilding());
+		ArrayList<Building> sortedList = new ArrayList<Building>(buildings.size());
+		for (RelativeBuildingLocation relativeBuilding : list) {
+			sortedList.add(relativeBuilding.getHistoricalBuilding());
 		}
 		return sortedList;
 	}

@@ -3,7 +3,7 @@ package net.opgenorth.yeg.historicalbuildings.widget;
 import android.view.View;
 import android.widget.TextView;
 import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.model.BuildingAndLocationWrapper;
+import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
 
 public class HistoricalBuildingRowWrapper {
 	private View _base = null;
@@ -44,17 +44,17 @@ public class HistoricalBuildingRowWrapper {
 		return _distanceToMeLabel;
 	}
 
-	public void display(BuildingAndLocationWrapper building) {
-		getNameLabel().setText(building.getHistoricalBuilding().getName());
-		getAddressLabel().setText(building.getHistoricalBuilding().getAddress());
-		getYearBuiltLabel().setText("Construction date: " + building.getHistoricalBuilding().getConstructionDate());
+	public void display(RelativeBuildingLocation relativeBuilding) {
+		getNameLabel().setText(relativeBuilding.getHistoricalBuilding().getName());
+		getAddressLabel().setText(relativeBuilding.getHistoricalBuilding().getAddress());
+		getYearBuiltLabel().setText("Construction date: " + relativeBuilding.getHistoricalBuilding().getConstructionDate());
 
-		if (building.getDistance() < 1) {
+		if (relativeBuilding.getDistance() < 1) {
 			getDistanceToMeLabel().setVisibility(View.GONE);
 		}
 		else {
 			getDistanceToMeLabel().setVisibility(View.VISIBLE);
-			getDistanceToMeLabel().setText("Distance: " + building.getDistance() + " metres.");
+			getDistanceToMeLabel().setText("Distance: " + relativeBuilding.getDistance() + " metres.");
 		}
 	}
 }

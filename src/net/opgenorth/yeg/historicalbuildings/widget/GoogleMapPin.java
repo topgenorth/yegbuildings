@@ -2,7 +2,7 @@ package net.opgenorth.yeg.historicalbuildings.widget;
 
 import android.content.Intent;
 import com.google.android.maps.GeoPoint;
-import net.opgenorth.yeg.historicalbuildings.model.HistoricalBuilding;
+import net.opgenorth.yeg.historicalbuildings.model.Building;
 import net.opgenorth.yeg.historicalbuildings.model.LatLongLocation;
 import net.opgenorth.yeg.historicalbuildings.views.IBuildingMapView;
 
@@ -26,7 +26,7 @@ public class GoogleMapPin {
 		_constructionDate = intent.getStringExtra(BUILDING_CONSTRUCTION_DATE);
 	}
 
-	public GoogleMapPin(HistoricalBuilding building) {
+	public GoogleMapPin(Building building) {
 		_location = building.getLocation();
 		_name = building.getName();
 		_address = building.getAddress();

@@ -1,6 +1,6 @@
 =head1 YEG Historical Buildings
 
-This is just a little Android application that show some historical buildings in Edmonton.  
+This is just a little Android application that show some historical relativeBuildings in Edmonton.
 
 The City of Edmonton's Open Data Catalogue: http://data.edmonton.ca/
 
@@ -12,7 +12,7 @@ Twitter:  topgenorth
 
 =head2 Some locations around Edmonton for testing:
 
-=over 4 
+=over 4
 
 =item * Intersection of 100 Ave & 105 Street: -113.501118 53.538860
 =item * 109 Street & Jasper Ave -113.508838 53.541111
@@ -39,9 +39,9 @@ Twitter:  topgenorth
 
 =item * More efficient JSON parsing?
 
-=item * Notify the user when they are within a certain distance of a historical building.
+=item * Notify the user when they are within a certain distance of a historical relativeBuilding.
 
-=item * Better information about the historical building:
+=item * Better information about the historical relativeBuilding:
 
 =over 4
 
@@ -55,14 +55,14 @@ Twitter:  topgenorth
 
 =over 4
 
-=item * The Edmonton Public Library has some information about the Lost Building of 
+=item * The Edmonton Public Library has some information about the Lost Building of
 Edmonton.
 
 =back
 
-=item * Allow the user to update their coordinates for YEG’s historical buildings.
+=item * Allow the user to update their coordinates for YEG’s historical relativeBuildings.
 
-=item * Include buildings that aren’t necessarily designated as historical, but are interesting architecturally or otherwise.
+=item * Include relativeBuildings that aren’t necessarily designated as historical, but are interesting architecturally or otherwise.
 
 =item * Instead of using YEG OpenData, perhaps an independent cloud based data store (Azure maybe?)
 

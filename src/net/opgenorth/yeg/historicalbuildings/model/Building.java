@@ -3,7 +3,7 @@ package net.opgenorth.yeg.historicalbuildings.model;
 import java.util.Date;
 import java.util.UUID;
 
-public class HistoricalBuilding {
+public class Building {
 	private UUID _rowKey;
 	private UUID _entityId;
 	private String _partitionKey;
@@ -113,7 +113,7 @@ public class HistoricalBuilding {
 			return false;
 		}
 
-		HistoricalBuilding that = (HistoricalBuilding) o;
+		Building that = (Building) o;
 
 		if (_location != null ? !_location.equals(that._location) : that._location != null) {
 			return false;
