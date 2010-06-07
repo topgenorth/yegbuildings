@@ -31,7 +31,7 @@ public class SortByDistanceFromLocation implements IBuildingSorter {
 
         ArrayList<Building> sortedList = new ArrayList<Building>(buildings.size());
         for (RelativeBuildingLocation relativeBuilding : list) {
-            sortedList.add(relativeBuilding.getHistoricalBuilding());
+            sortedList.add(relativeBuilding.getBuilding());
         }
         return sortedList;
     }

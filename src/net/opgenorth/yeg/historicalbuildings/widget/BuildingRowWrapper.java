@@ -5,14 +5,14 @@ import android.widget.TextView;
 import net.opgenorth.yeg.historicalbuildings.R;
 import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
 
-public class HistoricalBuildingRowWrapper {
+public class BuildingRowWrapper {
 	private View _base = null;
 	private TextView _nameLabel;
 	private TextView _addressLabel;
 	private TextView _yearBuiltLabel;
 	private TextView _distanceToMeLabel;
 
-	public HistoricalBuildingRowWrapper(View base) {
+	public BuildingRowWrapper(View base) {
 		_base = base;
 	}
 
@@ -45,9 +45,9 @@ public class HistoricalBuildingRowWrapper {
 	}
 
 	public void display(RelativeBuildingLocation relativeBuilding) {
-		getNameLabel().setText(relativeBuilding.getHistoricalBuilding().getName());
-		getAddressLabel().setText(relativeBuilding.getHistoricalBuilding().getAddress());
-		getYearBuiltLabel().setText("Construction date: " + relativeBuilding.getHistoricalBuilding().getConstructionDate());
+		getNameLabel().setText(relativeBuilding.getBuilding().getName());
+		getAddressLabel().setText(relativeBuilding.getBuilding().getAddress());
+		getYearBuiltLabel().setText("Construction date: " + relativeBuilding.getBuilding().getConstructionDate());
 
 		if (relativeBuilding.getDistance() < 1) {
 			getDistanceToMeLabel().setVisibility(View.GONE);
