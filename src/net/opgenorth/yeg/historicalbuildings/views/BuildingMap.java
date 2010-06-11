@@ -64,6 +64,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private void initializeMap() {
 		_edmontonMap = (MapView) findViewById(R.id.map);
 		_edmontonMap.getController().setZoom(17);
+        _edmontonMap.setSatellite(true); 
 		_edmontonMap.setBuiltInZoomControls(true);
 	}
 
@@ -92,6 +93,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 			_edmontonMap.invalidate();
 			_myLocationOverlay.enableMyLocation();
 			_edmontonMap.getController().animateTo(myLocation);
+
 		}
 	}
 
@@ -169,7 +171,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	public void showBuildingOnMap(GoogleMapPin pin) {
 		Drawable buildingMarker = getResources().getDrawable(R.drawable.marker);
 		buildingMarker.setBounds(0, 0, buildingMarker.getIntrinsicWidth(), buildingMarker.getIntrinsicHeight());
-
 		ItemizedOverlay<OverlayItem> buildingOverlay = new BuildingLocationOverlay(buildingMarker, pin);
 		_edmontonMap.getOverlays().add(buildingOverlay);
 	}

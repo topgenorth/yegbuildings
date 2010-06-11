@@ -10,10 +10,10 @@ public class RelativeBuildingLocation implements Comparable<RelativeBuildingLoca
     private Building _building;
     private Location _relativeLocation;
 
-    public RelativeBuildingLocation(Building building) {
-        _building = building;
-        _relativeLocation = null;
-    }
+//    public RelativeBuildingLocation(Building building) {
+//        _building = building;
+//        _relativeLocation = null;
+//    }
 
     public RelativeBuildingLocation(Building building, Location location) {
         _building = building;

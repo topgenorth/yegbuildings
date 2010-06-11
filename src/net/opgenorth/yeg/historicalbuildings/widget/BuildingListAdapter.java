@@ -12,6 +12,9 @@ import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * And adapter for displaying a list of RelativeBuildingLocations
+ */
 public class BuildingListAdapter extends ArrayAdapter {
     private Activity _context;
     private List<RelativeBuildingLocation> _relativeBuildings;

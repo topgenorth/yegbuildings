@@ -8,6 +8,9 @@ import android.location.LocationManager;
 import android.util.Log;
 import net.opgenorth.yeg.historicalbuildings.Constants;
 
+/**
+ * Used to tell the LocationManager the requirements for this application.
+ */
 public class LocationManagerBuilder {
     public static final int TIME_BETWEEN_GPS_UPDATES = 60000;
     public static final int DISTANCE_BETWEEN_GPS_UPDATES = 100;
