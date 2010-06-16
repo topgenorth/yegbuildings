@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BuildingListView extends ListActivity {
+public class BuildingList extends ListActivity {
     private ProgressDialog _progressDialog;
     private TextView _foundHistoricalBuildingsTextView;
     private LocationManager _locationManager;
@@ -127,7 +127,7 @@ public class BuildingListView extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
-        Intent intent = new Intent(BuildingListView.this, BuildingMap.class);
+        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
         GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
         mapPin.putExtra(intent);
 
@@ -136,7 +136,7 @@ public class BuildingListView extends ListActivity {
 
     private void loadYegOpenData() {
         _progressDialog = ProgressDialog
-                .show(BuildingListView.this, "Please wait...", "Retrieving data...", true);
+                .show(BuildingList.this, "Please wait...", "Retrieving data...", true);
         new HistoricalBuildingFetcher(_currentLocation).execute();
     }
 
@@ -163,7 +163,7 @@ public class BuildingListView extends ListActivity {
             for (Building building : buildings) {
                 _buildingList.add(new RelativeBuildingLocation(building, _currentLocation));
             }
-            _buildingListAdapter = new BuildingListAdapter(BuildingListView.this, _buildingList);
+            _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
             setListAdapter(_buildingListAdapter);
 
             _progressDialog.dismiss();
