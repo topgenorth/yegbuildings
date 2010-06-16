@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.historicalbuildings.views;
+package net.opgenorth.yeg.buildings.views;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -16,16 +16,16 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.opgenorth.yeg.historicalbuildings.Constants;
-import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.data.IBuildingDataService;
-import net.opgenorth.yeg.historicalbuildings.data.SlowBuildingDataService;
-import net.opgenorth.yeg.historicalbuildings.model.Building;
-import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
-import net.opgenorth.yeg.historicalbuildings.model.SortByDistanceFromLocation;
-import net.opgenorth.yeg.historicalbuildings.util.LocationManagerBuilder;
-import net.opgenorth.yeg.historicalbuildings.widget.BuildingListAdapter;
-import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
+import net.opgenorth.yeg.buildings.Constants;
+import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.data.IBuildingDataService;
+import net.opgenorth.yeg.buildings.data.SlowBuildingDataService;
+import net.opgenorth.yeg.buildings.model.Building;
+import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
+import net.opgenorth.yeg.buildings.model.SortByDistanceFromLocation;
+import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
+import net.opgenorth.yeg.buildings.widget.BuildingListAdapter;
+import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,6 +1,6 @@
-package net.opgenorth.yeg.historicalbuildings.util;
+package net.opgenorth.yeg.buildings.util;
 
-import net.opgenorth.yeg.historicalbuildings.model.Building;
+import net.opgenorth.yeg.buildings.model.Building;
 import org.json.JSONException;
 import org.json.JSONObject;
 

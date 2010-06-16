@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.historicalbuildings.model;
+package net.opgenorth.yeg.buildings.model;
 
 import android.location.Location;
 

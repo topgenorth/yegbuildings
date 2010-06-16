@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.historicalbuildings.util;
+package net.opgenorth.yeg.buildings.util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,7 +15,7 @@ public class YegJSONToJSONObject implements ITransmorgifier<String, JSONArray> {
 
         if (source == null) {
             return null;
-            
+
         }
 		try {
 			root = new JSONObject(source);

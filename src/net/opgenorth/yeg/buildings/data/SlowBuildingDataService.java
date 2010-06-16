@@ -1,7 +1,7 @@
-package net.opgenorth.yeg.historicalbuildings.data;
+package net.opgenorth.yeg.buildings.data;
 
-import net.opgenorth.yeg.historicalbuildings.model.Building;
-import net.opgenorth.yeg.historicalbuildings.model.IBuildingSorter;
+import net.opgenorth.yeg.buildings.model.Building;
+import net.opgenorth.yeg.buildings.model.IBuildingSorter;
 
 import java.util.List;
 

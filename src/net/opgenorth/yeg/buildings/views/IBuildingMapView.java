@@ -1,8 +1,8 @@
-package net.opgenorth.yeg.historicalbuildings.views;
+package net.opgenorth.yeg.buildings.views;
 
 import android.widget.TextView;
 import com.google.android.maps.GeoPoint;
-import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
+import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 public interface IBuildingMapView {
 	TextView getNameLabel();

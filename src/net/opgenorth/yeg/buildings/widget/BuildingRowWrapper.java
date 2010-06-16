@@ -1,9 +1,9 @@
-package net.opgenorth.yeg.historicalbuildings.widget;
+package net.opgenorth.yeg.buildings.widget;
 
 import android.view.View;
 import android.widget.TextView;
-import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
+import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 
 public class BuildingRowWrapper {
 	private View _base = null;

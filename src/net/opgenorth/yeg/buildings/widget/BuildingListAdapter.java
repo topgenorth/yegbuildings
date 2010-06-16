@@ -1,13 +1,13 @@
-package net.opgenorth.yeg.historicalbuildings.widget;
+package net.opgenorth.yeg.buildings.widget;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.model.Building;
-import net.opgenorth.yeg.historicalbuildings.model.RelativeBuildingLocation;
+import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.model.Building;
+import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 
 import java.util.ArrayList;
 import java.util.List;

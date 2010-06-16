@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.historicalbuildings.util;
+package net.opgenorth.yeg.buildings.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.location.Criteria;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.util.Log;
-import net.opgenorth.yeg.historicalbuildings.Constants;
+import net.opgenorth.yeg.buildings.Constants;
 
 /**
  * Used to tell the LocationManager the requirements for this application.

@@ -1,7 +1,7 @@
-package net.opgenorth.yeg.historicalbuildings.data;
+package net.opgenorth.yeg.buildings.data;
 
-import net.opgenorth.yeg.historicalbuildings.model.Building;
-import net.opgenorth.yeg.historicalbuildings.util.*;
+import net.opgenorth.yeg.buildings.model.Building;
+import net.opgenorth.yeg.buildings.util.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

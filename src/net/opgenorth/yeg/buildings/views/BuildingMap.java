@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.historicalbuildings.views;
+package net.opgenorth.yeg.buildings.views;
 
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -13,10 +13,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.maps.*;
-import net.opgenorth.yeg.historicalbuildings.Constants;
-import net.opgenorth.yeg.historicalbuildings.R;
-import net.opgenorth.yeg.historicalbuildings.util.LocationManagerBuilder;
-import net.opgenorth.yeg.historicalbuildings.widget.GoogleMapPin;
+import net.opgenorth.yeg.buildings.Constants;
+import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
+import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private MapView _edmontonMap;
@@ -64,7 +64,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private void initializeMap() {
 		_edmontonMap = (MapView) findViewById(R.id.map);
 		_edmontonMap.getController().setZoom(17);
-        _edmontonMap.setSatellite(true); 
+        _edmontonMap.setSatellite(true);
 		_edmontonMap.setBuiltInZoomControls(true);
 	}
 

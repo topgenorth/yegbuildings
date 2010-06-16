@@ -1,10 +1,10 @@
-package net.opgenorth.yeg.historicalbuildings.widget;
+package net.opgenorth.yeg.buildings.widget;
 
 import android.content.Intent;
 import com.google.android.maps.GeoPoint;
-import net.opgenorth.yeg.historicalbuildings.model.Building;
-import net.opgenorth.yeg.historicalbuildings.model.LatLongLocation;
-import net.opgenorth.yeg.historicalbuildings.views.IBuildingMapView;
+import net.opgenorth.yeg.buildings.model.Building;
+import net.opgenorth.yeg.buildings.model.LatLongLocation;
+import net.opgenorth.yeg.buildings.views.IBuildingMapView;
 
 public class GoogleMapPin {
     public static final String LATITUDE = "net.opgenorth.yeg.latitude";

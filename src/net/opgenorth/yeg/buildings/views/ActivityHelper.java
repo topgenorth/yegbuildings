@@ -1,11 +1,11 @@
-package net.opgenorth.yeg.historicalbuildings.views;
+package net.opgenorth.yeg.buildings.views;
 
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import net.opgenorth.yeg.historicalbuildings.Constants;
+import net.opgenorth.yeg.buildings.Constants;
 
 public class ActivityHelper {
 	private Activity _activity;
