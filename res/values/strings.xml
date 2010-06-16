@@ -8,4 +8,6 @@
     <string name="main_menu_showall">Map All</string>
 
     <string name="buildingmap_menu_goto_my_location">My Location</string>
+
+    <string name="locate_building">Locate Building</string>
 </resources>
