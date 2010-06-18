@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Historical Buildings</string>
+    <string name="app_name">YEG Buildings</string>
     <string name="app_description">Historical Buildings around Edmonton, AB</string>
 
     <string name="main_menu_settings">Settings</string>
