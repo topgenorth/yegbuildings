@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import net.opgenorth.yeg.buildings.Building;
 import net.opgenorth.yeg.buildings.Constants;
@@ -94,25 +95,24 @@ public class SqliteContentProvider extends ContentProvider {
         if (_uriMatcher.match(uri) != BUILDINGS)
             throw new IllegalArgumentException("Unknown URI " + uri);
         ContentValues values;
-        if (initialValues != null)      {
+        if (initialValues != null) {
             values = new ContentValues(initialValues);
-        }
-        else {
+        } else {
             values = new ContentValues();
         }
 
-        Long now = Long.valueOf(System.currentTimeMillis() );
-        if (values.containsKey(Building.Buildings.CREATED_DATE ) == false ) {
+        Long now = Long.valueOf(System.currentTimeMillis());
+        if (values.containsKey(Building.Buildings.CREATED_DATE) == false) {
             values.put(Building.Buildings.CREATED_DATE, now);
         }
-        if (values.containsKey(Building.Buildings.MODIFIED_DATE) == false ) {
+        if (values.containsKey(Building.Buildings.MODIFIED_DATE) == false) {
             values.put(Building.Buildings.MODIFIED_DATE, now);
         }
         if (values.containsKey(Building.Buildings.NAME) == false) {
             values.put(Building.Buildings.NAME, "");
         }
 
-        SQLiteDatabase db = _openHelper.getWritableDatabase() ;
+        SQLiteDatabase db = _openHelper.getWritableDatabase();
         long rowId = db.insert(BUILDINGS_TABLE_NAME, Building.Buildings.NAME, values);
         if (rowId > 0) {
             Uri buildingUri = ContentUris.withAppendedId(Constants.CONTENT_URI, rowId);
@@ -123,8 +123,23 @@ public class SqliteContentProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public int delete(Uri uri, String where, String[] whereArgs) {
+        SQLiteDatabase db = _openHelper.getWritableDatabase();
+        int count;
+        switch (_uriMatcher.match(uri)) {
+            case BUILDINGS:
+                count = db.delete(BUILDINGS_TABLE_NAME, where, whereArgs);
+                break;
+            case BUILDING_ID:
+                String buildingId = uri.getPathSegments().get(1);
+                count = db.delete(BUILDINGS_TABLE_NAME, Building.Buildings._ID + "=" + buildingId +
+                        (!TextUtils.isEmpty(where) ? "AND (" + where + ')' : ""), whereArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown uri: " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return count;
     }
 
     @Override
