@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Retrieves Historical Buildings from the City of Edmonton's Open Data Catalogue.
+ * Retrieves Historical Building from the City of Edmonton's Open Data Catalogue.
  */
 public class YegOpenDataHistoricalBuildingRepository implements IReadOnlyBuildingRepository {
     public static final String YEG_HISTORIC_DATA_URL = "http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings?format=json";

@@ -2,7 +2,7 @@ package net.opgenorth.yeg.buildings;
 
 import android.net.Uri;
 
-public class Constants {
+public final class Constants {
     private Constants() {}
     public static final String AUTHORITY = "net.opgenorth.yeg.buildings";
 	public static final String LOG_TAG = "net.opgenorth.yeg.buildings";
