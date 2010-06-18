@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,6 +83,12 @@ public class BuildingList extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        Intent intent = getIntent();
+        if (intent.getData() == null) {
+            intent.setData(Constants.CONTENT_URI);
+        }
+
         _foundHistoricalBuildingsTextView = (TextView) findViewById(R.id.info);
 
         _locationManager = LocationManagerBuilder.createLocationManager()
@@ -127,10 +134,16 @@ public class BuildingList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
-        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
+        Intent intent;
+        Uri uri = getIntent().getData();
+        if (uri == null) {
+            intent = new Intent(BuildingList.this, BuildingMap.class);
+        }
+        else {
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+        }
         GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
         mapPin.putExtra(intent);
-
         startActivity(intent);
     }
 
