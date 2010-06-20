@@ -8,22 +8,14 @@ import java.util.Date;
 import java.util.UUID;
 
 public class YegJsonToHistoricalBuilding implements ITransmorgifier<Object, Building> {
-	private ITransmorgifier<String, Date> stringToDate = new YegOpenDataStringToDateTime();
-
 	public Building transmorgify(Object object) {
 		JSONObject jsonObject = (JSONObject) object;
 
 		Building building = new Building();
 
 		try {
-			building.setPartitionKey(jsonObject.getString("PartitionKey"));
 			building.setRowKey(UUID.fromString(jsonObject.getString("RowKey")));
-
-			String dateTimeString = jsonObject.getString("Timestamp");
-			building.setTimestamp(stringToDate.transmorgify(dateTimeString));
-
 			building.setRowKey(UUID.fromString(jsonObject.getString("entityid")));
-            building.setEntityId(building.getRowKey() ); 
 			building.setName(jsonObject.getString("name"));
 			building.setAddress(jsonObject.getString("address"));
 			building.setNeighbourHood(jsonObject.getString("neighbourhood"));

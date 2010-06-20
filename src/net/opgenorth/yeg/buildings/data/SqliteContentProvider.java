@@ -16,14 +16,16 @@ import java.util.HashMap;
 public class SqliteContentProvider extends ContentProvider {
     public static final String TAG = "SqliteContentProvider";
     public static final String DATABASE_NAME = "buildings.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String BUILDINGS_TABLE_NAME = "buildings";
 
     private static HashMap<String, String> _buildingsProjectionMap;
+
+
 //    private static HashMap<String, String> _liveFolderProjectionMap;
 
     private static final int BUILDINGS = 1;
-    private static final int BUILDING_ID = 2;
+    private static final int BUILDING_ID = 3;
 //    private static final int LIVE_FOLDER_BUILDINGS = 3;
 
     private static final UriMatcher _uriMatcher;
@@ -49,20 +51,36 @@ public class SqliteContentProvider extends ContentProvider {
         private Columns() {
         }
 
-        public static final String DEFAULT_SORT_ORDER = "modified DESC";
         public static final String NAME = "name";
-        public static final String PARTITION_KEY = "partition_key";
         public static final String ROW_KEY = "row_key";
-        public static final String ENTITY_ID = "entityid";
-        public static final String OPEN_DATA_TIMESTAMP = "open_data_timestamp";
         public static final String ADDRESS = "address";
         public static final String NEIGHBOURHOOD = "neighbourhood";
         public static final String URL = "url";
         public static final String CONSTRUCTION_DATE = "construction_date";
         public static final String LONGITUDE = "longitude";
         public static final String LATITUDE = "latitude";
-        public static final String CREATED_DATE = "created";
-        public static final String MODIFIED_DATE = "modified";
+
+        public static final String[] ALL_COLUMNS = new String[]{
+                Columns._ID,
+                Columns.NAME,
+                Columns.ROW_KEY,
+                Columns.ADDRESS,
+                Columns.NEIGHBOURHOOD,
+                Columns.URL,
+                Columns.CONSTRUCTION_DATE,
+                Columns.LONGITUDE,
+                Columns.LATITUDE
+        };
+
+        private static final String[] REQUIRED_COLUMNS = new String[]{
+                Columns.ROW_KEY,
+                Columns.NAME,
+                Columns.ADDRESS,
+                Columns.LONGITUDE,
+                Columns.LATITUDE
+        };
+
+        public static final String DEFAULT_SORT_ORDER = NAME;
     }
 
     static {
@@ -73,18 +91,14 @@ public class SqliteContentProvider extends ContentProvider {
 
         _buildingsProjectionMap = new HashMap<String, String>();
         _buildingsProjectionMap.put(Columns._ID, Columns._ID);
-        _buildingsProjectionMap.put(Columns.CREATED_DATE, Columns.CREATED_DATE);
-        _buildingsProjectionMap.put(Columns.MODIFIED_DATE, Columns.MODIFIED_DATE);
         _buildingsProjectionMap.put(Columns.NAME, Columns.NAME);
-        _buildingsProjectionMap.put(Columns.PARTITION_KEY, Columns.PARTITION_KEY);
         _buildingsProjectionMap.put(Columns.ROW_KEY, Columns.ROW_KEY);
-        _buildingsProjectionMap.put(Columns.ENTITY_ID, Columns.ENTITY_ID);
-        _buildingsProjectionMap.put(Columns.OPEN_DATA_TIMESTAMP, Columns.OPEN_DATA_TIMESTAMP);
         _buildingsProjectionMap.put(Columns.ADDRESS, Columns.ADDRESS);
         _buildingsProjectionMap.put(Columns.NEIGHBOURHOOD, Columns.NEIGHBOURHOOD);
         _buildingsProjectionMap.put(Columns.URL, Columns.URL);
         _buildingsProjectionMap.put(Columns.CONSTRUCTION_DATE, Columns.CONSTRUCTION_DATE);
         _buildingsProjectionMap.put(Columns.LONGITUDE, Columns.LONGITUDE);
+        _buildingsProjectionMap.put(Columns.LATITUDE, Columns.LATITUDE);
 
         // Support for Live Folders.
 //        _liveFolderProjectionMap = new HashMap<String, String>();
@@ -103,22 +117,16 @@ public class SqliteContentProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
             String sql = "CREATE TABLE " + BUILDINGS_TABLE_NAME + " (" +
                     Columns._ID + " INTEGER PRIMARY KEY," +
                     Columns.NAME + " TEXT," +
-                    Columns.PARTITION_KEY + " TEXT," +
                     Columns.ROW_KEY + " TEXT," +
-                    Columns.ENTITY_ID + " TEXT," +
-                    Columns.OPEN_DATA_TIMESTAMP + " TEXT," +
                     Columns.ADDRESS + " TEXT, " +
                     Columns.NEIGHBOURHOOD + " TEXT," +
                     Columns.URL + " TEXT," +
                     Columns.CONSTRUCTION_DATE + " TEXT," +
-                    Columns.LATITUDE + " TEXT," +
-                    Columns.LONGITUDE + " TEXT," +
-                    Columns.CREATED_DATE + " TEXT," +
-                    Columns.MODIFIED_DATE + " TEXT" +
+                    Columns.LATITUDE + " DOUBLE," +
+                    Columns.LONGITUDE + " DOUBLE" +
                     ");";
 
             sqLiteDatabase.execSQL(sql);
@@ -126,7 +134,7 @@ public class SqliteContentProvider extends ContentProvider {
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-            Log.w(TAG, "Upgrading database from " + oldVersion + " to " + newVersion + ", which will destory all data.");
+            Log.w(TAG, "Upgrading database from " + oldVersion + " to " + newVersion + ", which will destroy all data.");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + BUILDINGS_TABLE_NAME);
             onCreate(sqLiteDatabase);
         }
@@ -189,7 +197,6 @@ public class SqliteContentProvider extends ContentProvider {
                 throw new IllegalArgumentException("Missing Column: " + colName);
             }
         }
-        populateDefaultValues(values);
 
         SQLiteDatabase db = _openHelper.getWritableDatabase();
         long rowId = db.insert(BUILDINGS_TABLE_NAME, Columns.NAME, values);
@@ -202,18 +209,6 @@ public class SqliteContentProvider extends ContentProvider {
         throw new SQLException("failed to insert row into " + uri);
     }
 
-    private void populateDefaultValues(ContentValues values) {
-        Long now = System.currentTimeMillis();
-        if (!values.containsKey(Columns.CREATED_DATE)) {
-            values.put(Columns.CREATED_DATE, now);
-        }
-        if (!values.containsKey(Columns.MODIFIED_DATE)) {
-            values.put(Columns.MODIFIED_DATE, now);
-        }
-        if (!values.containsKey(Columns.NAME)) {
-            values.put(Columns.NAME, "");
-        }
-    }
 
     @Override
     public int delete(Uri uri, String where, String[] whereArgs) {
@@ -260,12 +255,6 @@ public class SqliteContentProvider extends ContentProvider {
     }
 
     private String[] getRequiredColumns() {
-        return new String[]{
-                Columns.ROW_KEY,
-                Columns.NAME,
-                Columns.ADDRESS,
-                Columns.LONGITUDE,
-                Columns.LATITUDE
-        };
+        return Columns.REQUIRED_COLUMNS;
     }
 }

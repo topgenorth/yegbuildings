@@ -1,36 +1,16 @@
 package net.opgenorth.yeg.buildings.model;
 
-import android.content.ContentValues;
-import net.opgenorth.yeg.buildings.data.SqliteContentProvider;
-
-import java.util.Date;
 import java.util.UUID;
 
 public class Building {
     private UUID _rowKey;
-    private UUID _entityId;
-    private String _partitionKey;
     private String _name;
     private String _address;
     private String _neighbourHood;
     private String _url;
     private String _constructionDate;
     private LatLongLocation _location;
-    private Date _timestamp;
-    private String _modifiedDate;
-    private String _createdDate;
-    public String getCreatedDate() {
-        return _createdDate;
-    }
-    public void setCreatedDate(String createdDate) {
-        _createdDate = createdDate;
-    }
-    public String getModifiedDate() {
-        return _modifiedDate;
-    }
-    public void setModifiedDate(String modifiedDate) {
-        _modifiedDate = modifiedDate;
-    }
+
     public Long getId() {
         return _id;
     }
@@ -45,14 +25,6 @@ public class Building {
     @Override
     public String toString() {
         return _name;
-    }
-
-    public String getPartitionKey() {
-        return _partitionKey;
-    }
-
-    public void setPartitionKey(String partitionKey) {
-        _partitionKey = partitionKey;
     }
 
     public String getUrl() {
@@ -103,32 +75,12 @@ public class Building {
         _rowKey = rowKey;
     }
 
-    public UUID getEntityId() {
-        return _entityId;
-    }
-
-    public void setEntityId(UUID entityId) {
-        _entityId = entityId;
-    }
-
     public LatLongLocation getLocation() {
         return _location;
     }
 
-    public void setLocation(LatLongLocation location) {
-        _location = location;
-    }
-
     public void setLocation(double latitude, double longitude) {
         _location = new LatLongLocation(latitude, longitude);
-    }
-
-    public Date getTimestamp() {
-        return _timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        _timestamp = timestamp;
     }
 
     @Override

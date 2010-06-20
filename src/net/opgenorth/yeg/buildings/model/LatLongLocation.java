@@ -74,4 +74,11 @@ public class LatLongLocation {
         GeoPoint geopoint = new GeoPoint((int) (_latitude * 1000000.0), (int) (_longitude * 1000000.0));
         return geopoint;
     }
+
+    public double getLatitude() {
+        return _latitude;
+    }
+    public double getLongitude() {
+        return _longitude ;
+    }
 }
