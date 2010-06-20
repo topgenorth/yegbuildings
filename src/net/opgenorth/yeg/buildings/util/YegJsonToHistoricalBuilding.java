@@ -23,6 +23,7 @@ public class YegJsonToHistoricalBuilding implements ITransmorgifier<Object, Buil
 			building.setTimestamp(stringToDate.transmorgify(dateTimeString));
 
 			building.setRowKey(UUID.fromString(jsonObject.getString("entityid")));
+            building.setEntityId(building.getRowKey() ); 
 			building.setName(jsonObject.getString("name"));
 			building.setAddress(jsonObject.getString("address"));
 			building.setNeighbourHood(jsonObject.getString("neighbourhood"));

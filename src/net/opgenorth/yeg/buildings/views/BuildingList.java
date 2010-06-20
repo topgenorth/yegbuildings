@@ -2,6 +2,7 @@ package net.opgenorth.yeg.buildings.views;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,9 +22,12 @@ import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
 import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.data.SlowBuildingDataService;
+import net.opgenorth.yeg.buildings.data.SqliteContentProvider;
 import net.opgenorth.yeg.buildings.model.Building;
 import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 import net.opgenorth.yeg.buildings.model.SortByDistanceFromLocation;
+import net.opgenorth.yeg.buildings.util.BuildingContentValuesTransmorgifier;
+import net.opgenorth.yeg.buildings.util.ITransmorgifier;
 import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 import net.opgenorth.yeg.buildings.widget.BuildingListAdapter;
 import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
@@ -86,7 +90,7 @@ public class BuildingList extends ListActivity {
 
         Intent intent = getIntent();
         if (intent.getData() == null) {
-            intent.setData(Constants.CONTENT_URI);
+            intent.setData(SqliteContentProvider.Columns.CONTENT_URI);
         }
 
         _foundHistoricalBuildingsTextView = (TextView) findViewById(R.id.info);
@@ -155,6 +159,8 @@ public class BuildingList extends ListActivity {
 
     private class HistoricalBuildingFetcher extends AsyncTask<Void, Void, List<Building>> {
         private Location _myLocation;
+        private ITransmorgifier<Building, ContentValues> _toContentValues = new BuildingContentValuesTransmorgifier();
+        
 
         HistoricalBuildingFetcher(Location myLocation) {
             _myLocation = myLocation;
@@ -173,14 +179,22 @@ public class BuildingList extends ListActivity {
         @Override
         protected void onPostExecute(List<Building> buildings) {
             _buildingList = new ArrayList<RelativeBuildingLocation>(buildings.size());
+
             for (Building building : buildings) {
                 _buildingList.add(new RelativeBuildingLocation(building, _currentLocation));
+                addBuilding(building);
             }
             _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
             setListAdapter(_buildingListAdapter);
 
             _progressDialog.dismiss();
             _foundHistoricalBuildingsTextView.setText("Found " + buildings.size() + " buildings.");
+        }
+
+        protected void addBuilding(Building building){
+            ContentValues v = _toContentValues.transmorgify(building);
+            getContentResolver().insert(SqliteContentProvider.Columns.CONTENT_URI, v); 
+
         }
     }
 }

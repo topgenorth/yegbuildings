@@ -1,5 +1,8 @@
 package net.opgenorth.yeg.buildings.model;
 
+import android.content.ContentValues;
+import net.opgenorth.yeg.buildings.data.SqliteContentProvider;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -14,6 +17,30 @@ public class Building {
     private String _constructionDate;
     private LatLongLocation _location;
     private Date _timestamp;
+    private String _modifiedDate;
+    private String _createdDate;
+    public String getCreatedDate() {
+        return _createdDate;
+    }
+    public void setCreatedDate(String createdDate) {
+        _createdDate = createdDate;
+    }
+    public String getModifiedDate() {
+        return _modifiedDate;
+    }
+    public void setModifiedDate(String modifiedDate) {
+        _modifiedDate = modifiedDate;
+    }
+    public Long getId() {
+        return _id;
+    }
+
+    public void setId(Long id) {
+        this._id = id;
+    }
+
+    private Long _id;
+
 
     @Override
     public String toString() {

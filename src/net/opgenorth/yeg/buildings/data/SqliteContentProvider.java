@@ -5,11 +5,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Log;
-import net.opgenorth.yeg.buildings.Building;
-import net.opgenorth.yeg.buildings.Constants;
 
 import java.util.HashMap;
 
@@ -20,13 +20,78 @@ public class SqliteContentProvider extends ContentProvider {
     public static final String BUILDINGS_TABLE_NAME = "buildings";
 
     private static HashMap<String, String> _buildingsProjectionMap;
-    private static HashMap<String, String> _liveFolderProjectionMap;
+//    private static HashMap<String, String> _liveFolderProjectionMap;
 
     private static final int BUILDINGS = 1;
     private static final int BUILDING_ID = 2;
-    private static final int LIVE_FOLDER_BUILDINGS = 3;
+//    private static final int LIVE_FOLDER_BUILDINGS = 3;
 
     private static final UriMatcher _uriMatcher;
+
+    public static final class Columns implements BaseColumns {
+        public static final String AUTHORITY = "net.opgenorth.yeg.buildings.Provider";
+
+        /**
+         * The content:// style URL for this table
+         */
+        public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/buildings");
+
+        /**
+         * The MIME type of {@link #CONTENT_URI} providing a directory of buildings.
+         */
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.google.building";
+
+        /**
+         * The MIME type of a {@link #CONTENT_URI} sub-directory of a single building.
+         */
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.google.building";
+
+        private Columns() {
+        }
+
+        public static final String DEFAULT_SORT_ORDER = "modified DESC";
+        public static final String NAME = "name";
+        public static final String PARTITION_KEY = "partition_key";
+        public static final String ROW_KEY = "row_key";
+        public static final String ENTITY_ID = "entityid";
+        public static final String OPEN_DATA_TIMESTAMP = "open_data_timestamp";
+        public static final String ADDRESS = "address";
+        public static final String NEIGHBOURHOOD = "neighbourhood";
+        public static final String URL = "url";
+        public static final String CONSTRUCTION_DATE = "construction_date";
+        public static final String LONGITUDE = "longitude";
+        public static final String LATITUDE = "latitude";
+        public static final String CREATED_DATE = "created";
+        public static final String MODIFIED_DATE = "modified";
+    }
+
+    static {
+        _uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        _uriMatcher.addURI(Columns.AUTHORITY, "buildings", BUILDINGS);
+        _uriMatcher.addURI(Columns.AUTHORITY, "buildings/#", BUILDING_ID);
+//        _uriMatcher.addURI(Columns.AUTHORITY, "live_folders/buildings", LIVE_FOLDER_BUILDINGS);
+
+        _buildingsProjectionMap = new HashMap<String, String>();
+        _buildingsProjectionMap.put(Columns._ID, Columns._ID);
+        _buildingsProjectionMap.put(Columns.CREATED_DATE, Columns.CREATED_DATE);
+        _buildingsProjectionMap.put(Columns.MODIFIED_DATE, Columns.MODIFIED_DATE);
+        _buildingsProjectionMap.put(Columns.NAME, Columns.NAME);
+        _buildingsProjectionMap.put(Columns.PARTITION_KEY, Columns.PARTITION_KEY);
+        _buildingsProjectionMap.put(Columns.ROW_KEY, Columns.ROW_KEY);
+        _buildingsProjectionMap.put(Columns.ENTITY_ID, Columns.ENTITY_ID);
+        _buildingsProjectionMap.put(Columns.OPEN_DATA_TIMESTAMP, Columns.OPEN_DATA_TIMESTAMP);
+        _buildingsProjectionMap.put(Columns.ADDRESS, Columns.ADDRESS);
+        _buildingsProjectionMap.put(Columns.NEIGHBOURHOOD, Columns.NEIGHBOURHOOD);
+        _buildingsProjectionMap.put(Columns.URL, Columns.URL);
+        _buildingsProjectionMap.put(Columns.CONSTRUCTION_DATE, Columns.CONSTRUCTION_DATE);
+        _buildingsProjectionMap.put(Columns.LONGITUDE, Columns.LONGITUDE);
+
+        // Support for Live Folders.
+//        _liveFolderProjectionMap = new HashMap<String, String>();
+//        _liveFolderProjectionMap.put(LiveFolders._ID, Building.Buildings._ID + " AS " + LiveFolders._ID);
+//        _liveFolderProjectionMap.put(LiveFolders.NAME, Notes.TITLE + " AS " + LiveFolders.NAME);
+        // Add more columns here for more robust Live Folders.
+    }
 
     private DatabaseHelper _openHelper;
 
@@ -40,20 +105,21 @@ public class SqliteContentProvider extends ContentProvider {
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
             String sql = "CREATE TABLE " + BUILDINGS_TABLE_NAME + " (" +
-                    Building.Buildings._ID + " INTEGER PRIMARY KEY," +
-                    Building.Buildings.NAME + " TEXT," +
-                    Building.Buildings.PARTITION_KEY + " TEXT," +
-                    Building.Buildings.ROW_KEY + " TEXT," +
-                    Building.Buildings.ENTITY_ID + " TEXT," +
-                    Building.Buildings.OPEN_DATA_TIMESTAMP + " TEXT," +
-                    Building.Buildings.ADDRESS + " TEXT" +
-                    Building.Buildings.NEIGHBOURHOOD + " TEXT," +
-                    Building.Buildings.URL + " TEXT," +
-                    Building.Buildings.CONSTRUCTION_DATE + " TEXT," +
-                    Building.Buildings.LATITUDE + " TEXT," +
-                    Building.Buildings.LONGITUDE + " TEXT," +
-                    Building.Buildings.CREATED_DATE + " TEXT," +
-                    Building.Buildings.MODIFIED_DATE + " TEXT,";
+                    Columns._ID + " INTEGER PRIMARY KEY," +
+                    Columns.NAME + " TEXT," +
+                    Columns.PARTITION_KEY + " TEXT," +
+                    Columns.ROW_KEY + " TEXT," +
+                    Columns.ENTITY_ID + " TEXT," +
+                    Columns.OPEN_DATA_TIMESTAMP + " TEXT," +
+                    Columns.ADDRESS + " TEXT, " +
+                    Columns.NEIGHBOURHOOD + " TEXT," +
+                    Columns.URL + " TEXT," +
+                    Columns.CONSTRUCTION_DATE + " TEXT," +
+                    Columns.LATITUDE + " TEXT," +
+                    Columns.LONGITUDE + " TEXT," +
+                    Columns.CREATED_DATE + " TEXT," +
+                    Columns.MODIFIED_DATE + " TEXT" +
+                    ");";
 
             sqLiteDatabase.execSQL(sql);
         }
@@ -73,18 +139,35 @@ public class SqliteContentProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sort) {
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        qb.setTables(BUILDINGS_TABLE_NAME);
+
+        if (isCollectionUri(uri)) {
+            qb.setProjectionMap(_buildingsProjectionMap);
+        } else {
+            qb.appendWhere(Columns._ID + "=" + uri.getPathSegments().get(1));
+        }
+        String orderBy;
+        if (TextUtils.isEmpty(sort)) {
+            orderBy = Columns.DEFAULT_SORT_ORDER;
+        } else {
+            orderBy = sort;
+        }
+        SQLiteDatabase db = _openHelper.getReadableDatabase();
+        Cursor c = qb.query(db, projection, selection, selectionArgs, null, null, orderBy);
+        c.setNotificationUri(getContext().getContentResolver(), uri);
+        return c;
     }
 
     @Override
     public String getType(Uri uri) {
         switch (_uriMatcher.match(uri)) {
             case BUILDINGS:
-            case LIVE_FOLDER_BUILDINGS:
-                return Constants.CONTENT_TYPE;
+//            case LIVE_FOLDER_BUILDINGS:
+//                return Columns.CONTENT_TYPE;
             case BUILDING_ID:
-                return Constants.CONTENT_ITEM_TYPE;
+                return Columns.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -101,25 +184,35 @@ public class SqliteContentProvider extends ContentProvider {
             values = new ContentValues();
         }
 
-        Long now = Long.valueOf(System.currentTimeMillis());
-        if (values.containsKey(Building.Buildings.CREATED_DATE) == false) {
-            values.put(Building.Buildings.CREATED_DATE, now);
+        for (String colName : getRequiredColumns()) {
+            if (!values.containsKey(colName)) {
+                throw new IllegalArgumentException("Missing Column: " + colName);
+            }
         }
-        if (values.containsKey(Building.Buildings.MODIFIED_DATE) == false) {
-            values.put(Building.Buildings.MODIFIED_DATE, now);
-        }
-        if (values.containsKey(Building.Buildings.NAME) == false) {
-            values.put(Building.Buildings.NAME, "");
-        }
+        populateDefaultValues(values);
 
         SQLiteDatabase db = _openHelper.getWritableDatabase();
-        long rowId = db.insert(BUILDINGS_TABLE_NAME, Building.Buildings.NAME, values);
+        long rowId = db.insert(BUILDINGS_TABLE_NAME, Columns.NAME, values);
         if (rowId > 0) {
-            Uri buildingUri = ContentUris.withAppendedId(Constants.CONTENT_URI, rowId);
+            Uri buildingUri = ContentUris.withAppendedId(Columns.CONTENT_URI, rowId);
+            getContext().getContentResolver().notifyChange(uri, null);
             return buildingUri;
         }
 
         throw new SQLException("failed to insert row into " + uri);
+    }
+
+    private void populateDefaultValues(ContentValues values) {
+        Long now = System.currentTimeMillis();
+        if (!values.containsKey(Columns.CREATED_DATE)) {
+            values.put(Columns.CREATED_DATE, now);
+        }
+        if (!values.containsKey(Columns.MODIFIED_DATE)) {
+            values.put(Columns.MODIFIED_DATE, now);
+        }
+        if (!values.containsKey(Columns.NAME)) {
+            values.put(Columns.NAME, "");
+        }
     }
 
     @Override
@@ -131,8 +224,8 @@ public class SqliteContentProvider extends ContentProvider {
                 count = db.delete(BUILDINGS_TABLE_NAME, where, whereArgs);
                 break;
             case BUILDING_ID:
-                String buildingId = uri.getPathSegments().get(1);
-                count = db.delete(BUILDINGS_TABLE_NAME, Building.Buildings._ID + "=" + buildingId +
+                String segement = uri.getPathSegments().get(1);
+                count = db.delete(BUILDINGS_TABLE_NAME, Columns._ID + "=" + segement +
                         (!TextUtils.isEmpty(where) ? "AND (" + where + ')' : ""), whereArgs);
                 break;
             default:
@@ -143,27 +236,36 @@ public class SqliteContentProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    public int update(Uri uri, ContentValues contentValues, String where, String[] whereArgs) {
+        int count;
+        SQLiteDatabase db = _openHelper.getWritableDatabase();
+        switch (_uriMatcher.match(uri)) {
+            case BUILDINGS:
+                count = db.update(BUILDINGS_TABLE_NAME, contentValues, where, whereArgs);
+                break;
+            case BUILDING_ID:
+                String buildingId = uri.getPathSegments().get(1);
+                count = db.update(BUILDINGS_TABLE_NAME, contentValues, Columns._ID + "=" + buildingId
+                        + (!TextUtils.isEmpty(where) ? " AND (" + where + ')' : ""), whereArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return count;
     }
 
-    static {
-        _uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        _uriMatcher.addURI(Constants.AUTHORITY, "notes", BUILDINGS);
-        _uriMatcher.addURI(Constants.AUTHORITY, "notes/#", BUILDING_ID);
-        _uriMatcher.addURI(Constants.AUTHORITY, "live_folders/notes", LIVE_FOLDER_BUILDINGS);
+    private boolean isCollectionUri(Uri url) {
+        return (_uriMatcher.match(url) == BUILDINGS);
+    }
 
-        _buildingsProjectionMap = new HashMap<String, String>();
-//        _buildingsProjectionMap.put(Building.Buildings._ID, Building.Buildings._ID);
-//        _buildingsProjectionMap.put(Building.Buildings.NAME, Building.Buildings.NAME);
-//        _buildingsProjectionMap.put(Building.Buildings.NOTE, Notes.NOTE);
-//        _buildingsProjectionMap.put(Notes.CREATED_DATE, Notes.CREATED_DATE);
-//        _buildingsProjectionMap.put(Notes.MODIFIED_DATE, Notes.MODIFIED_DATE);
-
-        // Support for Live Folders.
-        _liveFolderProjectionMap = new HashMap<String, String>();
-//        _liveFolderProjectionMap.put(LiveFolders._ID, Building.Buildings._ID + " AS " + LiveFolders._ID);
-//        _liveFolderProjectionMap.put(LiveFolders.NAME, Notes.TITLE + " AS " + LiveFolders.NAME);
-        // Add more columns here for more robust Live Folders.
+    private String[] getRequiredColumns() {
+        return new String[]{
+                Columns.ROW_KEY,
+                Columns.NAME,
+                Columns.ADDRESS,
+                Columns.LONGITUDE,
+                Columns.LATITUDE
+        };
     }
 }
