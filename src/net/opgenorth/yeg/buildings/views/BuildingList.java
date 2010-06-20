@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.data.ContentProviderDataService;
 import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.data.SlowBuildingDataService;
 import net.opgenorth.yeg.buildings.data.SqliteContentProvider;
@@ -36,7 +37,6 @@ import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class BuildingList extends ListActivity {
     private ProgressDialog _progressDialog;
@@ -127,29 +127,13 @@ public class BuildingList extends ListActivity {
         }
         else {
             _buildingList.clear();
-            Cursor c = getContentResolver().query(SqliteContentProvider.Columns.CONTENT_URI, SqliteContentProvider.Columns.ALL_COLUMNS, null, null, null);
-            c.moveToFirst();
-            do {
-                Building building = new Building();
-                building.setId(c.getLong(0));
-                building.setName(c.getString(1));
-                building.setRowKey(UUID.fromString(c.getString(2)));
-                building.setAddress(c.getString(3));
-                building.setNeighbourHood(c.getString(4));
-                building.setUrl(c.getString(5) );
-                building.setConstructionDate(c.getString(5));
+            IBuildingDataService svc = new ContentProviderDataService(this);
+            for(Building building : svc.fetchAll()) {
+                _buildingList.add(new RelativeBuildingLocation(building, _currentLocation ) ); 
+            }
 
-                double latitude = Double.parseDouble(c.getString(6));
-                double longitude = Double.parseDouble(c.getString(7));
-                building.setLocation(latitude, longitude);
-
-                RelativeBuildingLocation  buildingLocation= new RelativeBuildingLocation(building, _currentLocation );
-                _buildingList.add(buildingLocation);
-            } while (c.moveToNext());
-
-            c.close();
             _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
-            setListAdapter(_buildingListAdapter); 
+            setListAdapter(_buildingListAdapter);
         }
     }
 

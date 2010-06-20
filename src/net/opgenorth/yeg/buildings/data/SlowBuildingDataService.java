@@ -24,6 +24,4 @@ public class SlowBuildingDataService implements IBuildingDataService {
         else
             return buildings;
     }
-
-
 }
