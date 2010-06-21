@@ -110,11 +110,11 @@ public class BuildingList extends ListActivity {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
         Intent intent;
         Uri uri = getIntent().getData();
-        if (uri == null) {
+//        if (uri == null) {
             intent = new Intent(BuildingList.this, BuildingMap.class);
-        } else {
-            intent = new Intent(Intent.ACTION_VIEW, uri);
-        }
+//        } else {
+//            intent = new Intent(Intent.ACTION_VIEW, uri);
+//        }
         GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
         mapPin.putExtra(intent);
         startActivity(intent);
