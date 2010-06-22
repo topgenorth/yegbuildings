@@ -41,19 +41,12 @@ import java.util.List;
 public class BuildingList extends ListActivity {
     private ProgressDialog _progressDialog;
     private TextView _foundHistoricalBuildingsTextView;
+    private TextView _myGpsLocation;
     private LocationManager _locationManager;
     private LocationListener _onLocationChange = new MyLocationListener();
     private Location _currentLocation = null;
     private List<RelativeBuildingLocation> _buildingList = new ArrayList<RelativeBuildingLocation>(76);
     BuildingListAdapter _buildingListAdapter;
-
-    private void updateWithNewLocation() {
-        for (RelativeBuildingLocation relativeBuildingLocation : _buildingList) {
-            relativeBuildingLocation.setRelativeLocation(_currentLocation);
-        }
-        Collections.sort(_buildingList);
-        _buildingListAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,12 +59,14 @@ public class BuildingList extends ListActivity {
         }
 
         _foundHistoricalBuildingsTextView = (TextView) findViewById(R.id.info);
+        _myGpsLocation = (TextView) findViewById(R.id.building_map_my_gps);
 
         _locationManager = LocationManagerBuilder.createLocationManager()
                 .with(this)
                 .listeningWith(_onLocationChange)
                 .build();
         loadYegOpenData();
+        showMyGpsLocation();
     }
 
     @Override
@@ -120,6 +115,25 @@ public class BuildingList extends ListActivity {
         startActivity(intent);
     }
 
+    private void showMyGpsLocation() {
+        if (_myGpsLocation == null)
+            return;
+        String myLocation = "Indeterminate location.";
+        if (_currentLocation != null) {
+            myLocation = "My location: " + _currentLocation.getLatitude() + ", " + _currentLocation.getLongitude();
+        }
+        _myGpsLocation.setText(myLocation);
+    }
+    private void updateWithNewLocation() {
+        for (RelativeBuildingLocation relativeBuildingLocation : _buildingList) {
+            relativeBuildingLocation.setRelativeLocation(_currentLocation);
+        }
+        Collections.sort(_buildingList);
+        _buildingListAdapter.notifyDataSetChanged();
+        _foundHistoricalBuildingsTextView.setText("Found " + _buildingList.size() + " buildings.");
+        showMyGpsLocation();
+    }
+
     private void loadYegOpenData() {
         if (!hasRecords()) {
             _progressDialog = ProgressDialog.show(BuildingList.this, "Please wait...", "Retrieving data...", true);
@@ -134,6 +148,8 @@ public class BuildingList extends ListActivity {
 
             _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
             setListAdapter(_buildingListAdapter);
+            _foundHistoricalBuildingsTextView.setText("Found " + _buildingList.size() + " buildings.");
+
         }
     }
 
@@ -208,7 +224,6 @@ public class BuildingList extends ListActivity {
             setListAdapter(_buildingListAdapter);
 
             _progressDialog.dismiss();
-            _foundHistoricalBuildingsTextView.setText("Found " + buildings.size() + " buildings.");
         }
 
         protected void addBuilding(Building building) {
