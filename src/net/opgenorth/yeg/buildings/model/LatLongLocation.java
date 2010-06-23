@@ -23,9 +23,15 @@ public class LatLongLocation {
     }
 
     public double getDistanceTo(Location location) {
-        float[] result = new float[3];
-        Location.distanceBetween(_latitude, _longitude, location.getLatitude(), location.getLongitude(), result);
-        return result[0];
+
+        Location thisLocation = new Location("me");
+        thisLocation.setLatitude(_latitude);
+        thisLocation.setLongitude(_longitude);
+
+        int distance = (int) thisLocation.distanceTo(location);
+
+        return distance;
+
     }
 
     @Override

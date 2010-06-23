@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,12 +103,7 @@ public class BuildingList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
         Intent intent;
-        Uri uri = getIntent().getData();
-//        if (uri == null) {
-            intent = new Intent(BuildingList.this, BuildingMap.class);
-//        } else {
-//            intent = new Intent(Intent.ACTION_VIEW, uri);
-//        }
+        intent = new Intent(BuildingList.this, BuildingMap.class);
         GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
         mapPin.putExtra(intent);
         startActivity(intent);
@@ -124,6 +118,7 @@ public class BuildingList extends ListActivity {
         }
         _myGpsLocation.setText(myLocation);
     }
+
     private void updateWithNewLocation() {
         for (RelativeBuildingLocation relativeBuildingLocation : _buildingList) {
             relativeBuildingLocation.setRelativeLocation(_currentLocation);
@@ -143,7 +138,7 @@ public class BuildingList extends ListActivity {
             _buildingList.clear();
             IBuildingDataService svc = new ContentProviderDataService(this);
             for(Building building : svc.fetchAll()) {
-                _buildingList.add(new RelativeBuildingLocation(building, _currentLocation ) ); 
+                _buildingList.add(new RelativeBuildingLocation(building, _currentLocation ) );
             }
 
             _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);

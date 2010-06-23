@@ -95,10 +95,8 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 			_edmontonMap.invalidate();
 			_myLocationOverlay.enableMyLocation();
 			_edmontonMap.getController().animateTo(myLocation);
-
 		}
 	}
-
 
 	@Override
 	protected void onDestroy() {

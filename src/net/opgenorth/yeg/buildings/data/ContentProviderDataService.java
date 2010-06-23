@@ -42,8 +42,8 @@ public class ContentProviderDataService implements IBuildingDataService {
         building.setUrl(c.getString(5));
         building.setConstructionDate(c.getString(6));
 
-        String latitude = c.getString(7);
-        String longitude = c.getString(8);
+        String latitude = c.getString(8);
+        String longitude = c.getString(7);
 
         building.setLocation(Double.parseDouble(latitude), Double.parseDouble(longitude));
         return building;
