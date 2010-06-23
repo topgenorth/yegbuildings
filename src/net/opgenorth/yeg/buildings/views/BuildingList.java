@@ -33,6 +33,7 @@ import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 import net.opgenorth.yeg.buildings.widget.BuildingListAdapter;
 import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -113,8 +114,11 @@ public class BuildingList extends ListActivity {
         if (_myGpsLocation == null)
             return;
         String myLocation = "Indeterminate location.";
+        DecimalFormat formatter = new DecimalFormat("###.######");
         if (_currentLocation != null) {
-            myLocation = "My location: " + _currentLocation.getLatitude() + ", " + _currentLocation.getLongitude();
+            String lat = formatter.format(_currentLocation.getLatitude());
+            String lon = formatter.format(_currentLocation.getLongitude());
+            myLocation = "My location: " + lat + ", " + lon;
         }
         _myGpsLocation.setText(myLocation);
     }
@@ -191,7 +195,6 @@ public class BuildingList extends ListActivity {
 
     private class FetchBuildingsFromYegOpenData extends AsyncTask<Void, Void, List<Building>> {
         private Location _myLocation;
-        private boolean _hadDataBeenLoaded = false;
         private ITransmorgifier<Building, ContentValues> _toContentValues = new BuildingContentValuesTransmorgifier();
 
         FetchBuildingsFromYegOpenData(Location myLocation) {

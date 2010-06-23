@@ -5,6 +5,8 @@ import android.widget.TextView;
 import net.opgenorth.yeg.buildings.R;
 import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 
+import java.text.DecimalFormat;
+
 public class BuildingRowWrapper {
 	private View _base = null;
 	private TextView _nameLabel;
@@ -53,8 +55,25 @@ public class BuildingRowWrapper {
 			getDistanceToMeLabel().setVisibility(View.GONE);
 		}
 		else {
+            // TODO  refactor out the number formatting.
+            DecimalFormat formatter;
+            String units;
+            double distance = relativeBuilding.getDistance();
+            if (distance < 1000) {
+                units = " m.";
+                formatter = new DecimalFormat("####");
+            }
+            else {
+                units = " km.";
+                distance = distance/1000;
+                if (distance < 100)
+                    formatter = new DecimalFormat("####.#");
+                else
+                    formatter = new DecimalFormat("#####");
+            }
+
 			getDistanceToMeLabel().setVisibility(View.VISIBLE);
-			getDistanceToMeLabel().setText("Distance: " + relativeBuilding.getDistance() + " metres.");
+			getDistanceToMeLabel().setText("Distance: " +  formatter.format(distance) + units);
 		}
 	}
 }
