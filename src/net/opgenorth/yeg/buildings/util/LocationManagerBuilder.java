@@ -12,7 +12,7 @@ import net.opgenorth.yeg.buildings.Constants;
  * Used to tell the LocationManager the requirements for this application.
  */
 public class LocationManagerBuilder {
-    public static final int TIME_BETWEEN_GPS_UPDATES = 60000;
+    public static final int TIME_BETWEEN_GPS_UPDATES = 20000;
     public static final int DISTANCE_BETWEEN_GPS_UPDATES = 100;
 
     private LocationManager _locationManager;
@@ -33,7 +33,7 @@ public class LocationManagerBuilder {
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setAltitudeRequired(false);
         criteria.setSpeedRequired(false);
-        criteria.setBearingRequired(false);
+        criteria.setBearingRequired(true);
         criteria.setCostAllowed(true);
         return criteria;
     }

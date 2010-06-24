@@ -70,6 +70,15 @@ public class BuildingList extends ListActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        _locationManager = LocationManagerBuilder.createLocationManager()
+                .with(this)
+                .listeningWith(_onLocationChange)
+                .build();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         _locationManager.removeUpdates(_onLocationChange);
@@ -137,12 +146,11 @@ public class BuildingList extends ListActivity {
         if (!hasRecords()) {
             _progressDialog = ProgressDialog.show(BuildingList.this, "Please wait...", "Retrieving data...", true);
             new FetchBuildingsFromYegOpenData(_currentLocation).execute();
-        }
-        else {
+        } else {
             _buildingList.clear();
             IBuildingDataService svc = new ContentProviderDataService(this);
-            for(Building building : svc.fetchAll()) {
-                _buildingList.add(new RelativeBuildingLocation(building, _currentLocation ) );
+            for (Building building : svc.fetchAll()) {
+                _buildingList.add(new RelativeBuildingLocation(building, _currentLocation));
             }
 
             _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
