@@ -112,8 +112,7 @@ public class BuildingList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
-        Intent intent;
-        intent = new Intent(BuildingList.this, BuildingMap.class);
+        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
         GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
         mapPin.putExtra(intent);
         startActivity(intent);
@@ -137,7 +136,10 @@ public class BuildingList extends ListActivity {
             relativeBuildingLocation.setRelativeLocation(_currentLocation);
         }
         Collections.sort(_buildingList);
-        _buildingListAdapter.notifyDataSetChanged();
+        if (_buildingListAdapter == null) {
+            Log.e(Constants.LOG_TAG, "Why isn't there a _buildingListAdapter?");
+        } else
+            _buildingListAdapter.notifyDataSetChanged();
         _foundHistoricalBuildingsTextView.setText("Found " + _buildingList.size() + " buildings.");
         showMyGpsLocation();
     }

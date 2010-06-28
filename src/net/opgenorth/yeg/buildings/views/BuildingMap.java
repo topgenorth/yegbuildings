@@ -44,16 +44,16 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	}
 
 	private void initializeContentView() {
-		ActivityHelper helper = new ActivityHelper(this);
+//		ActivityHelper helper = new ActivityHelper(this);
 
-		if (helper.isDebug()) {
-            Log.d(Constants.LOG_TAG, "Debuggable == TRUE, using building_map_debug.");
-			setContentView(R.layout.building_map_debug);
-		}
-		else {
-            Log.d(Constants.LOG_TAG, "Debuggable == FALSE, using building_map_production.");
+//		if (helper.isDebug()) {
+//            Log.d(Constants.LOG_TAG, "Debuggable == TRUE, using building_map_debug.");
+//			setContentView(R.layout.building_map_debug);
+//		}
+//		else {
+//            Log.d(Constants.LOG_TAG, "Debuggable == FALSE, using building_map_production.");
 			setContentView(R.layout.building_map_production);
-		}
+//		}
 	}
 
 	private void initializeMyLocation() {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.opgenorth.yeg.buildings"
-          android:versionCode="6"
-          android:versionName="1.0.0.6" >
+          android:versionCode="7"
+          android:versionName="1.0.0.7 - " >
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -10,7 +10,7 @@
 
     <!-- Remember to set debuggable to "false" for release -->
     <application android:icon="@drawable/icon"
-                 android:debuggable="false"
+                 android:debuggable="true"
                  android:description="@string/app_description"
                  android:label="@string/app_name">
         <provider android:name="net.opgenorth.yeg.buildings.data.SqliteContentProvider"
