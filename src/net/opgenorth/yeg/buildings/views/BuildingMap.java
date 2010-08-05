@@ -30,31 +30,34 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initializeContentView();
-
 		_locationManager = LocationManagerBuilder.createLocationManager()
 				.with(this)
 				.listeningWith(_onLocationChange)
 				.build();
-
-		initializeMap();
-		initializeMyLocation();
-
-		GoogleMapPin pin = new GoogleMapPin(getIntent());
-		pin.putOnMap(this);
+//
+//		initializeMap();
+//		initializeMyLocation();
+//
+//		GoogleMapPin pin = new GoogleMapPin(getIntent());
+//		pin.putOnMap(this);
 	}
 
-	private void initializeContentView() {
-//		ActivityHelper helper = new ActivityHelper(this);
 
-//		if (helper.isDebug()) {
-//            Log.d(Constants.LOG_TAG, "Debuggable == TRUE, using building_map_debug.");
-//			setContentView(R.layout.building_map_debug);
-//		}
-//		else {
-//            Log.d(Constants.LOG_TAG, "Debuggable == FALSE, using building_map_production.");
-			setContentView(R.layout.building_map_production);
-//		}
-	}
+    private void initializeContentView() {
+        ActivityHelper helper = new ActivityHelper(this);
+
+        if (helper.isDebug()) {
+            Log.d(Constants.LOG_TAG, "Debuggable == TRUE, using building_map_debug.");
+            setContentView(R.layout.building_map_debug);
+        }
+        else {
+            Log.d(Constants.LOG_TAG, "Debuggable == FALSE, using building_map_production.");
+            setContentView(R.layout.building_map_production);
+        }
+    }
+
+/*
+
 
 	private void initializeMyLocation() {
 		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMap);
@@ -70,6 +73,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		_edmontonMap.setBuiltInZoomControls(true);
 	}
 
+*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		new MenuInflater(getApplication()).inflate(R.menu.buildingmap_menu, menu);
@@ -78,12 +82,15 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+/*
 		int itemId = item.getItemId();
 		if (R.id.buildingmap_showMyLocation == itemId) {
 			updateMyLocationOnMap();
 		}
-		return super.onOptionsItemSelected(item);
+*/
+        return super.onOptionsItemSelected(item);
 	}
+/*
 
 	private void updateMyLocationOnMap() {
 		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
@@ -98,24 +105,29 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		}
 	}
 
+*/
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+/*
 		_myLocationOverlay.disableMyLocation();
 		_locationManager.removeUpdates(_onLocationChange);
+*/
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		_myLocationOverlay.enableMyLocation();
+//		_myLocationOverlay.enableMyLocation();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+/*
 		_myLocationOverlay.disableMyLocation();
 		_myLocationOverlay.disableMyLocation();
+*/
 	}
 
 	@Override

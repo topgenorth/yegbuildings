@@ -111,17 +111,17 @@ public class BuildingList extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
+//        RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
         Intent intent = new Intent(BuildingList.this, BuildingMap.class);
-        GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
-        mapPin.putExtra(intent);
+//        GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
+//        mapPin.putExtra(intent);
         startActivity(intent);
     }
 
     private void showMyGpsLocation() {
         if (_myGpsLocation == null)
             return;
-        String myLocation = "Indeterminate location.";
+        String myLocation = "I'm not to sure where you are.";
         DecimalFormat formatter = new DecimalFormat("###.######");
         if (_currentLocation != null) {
             String lat = formatter.format(_currentLocation.getLatitude());
