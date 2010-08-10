@@ -1,6 +1,8 @@
 package net.opgenorth.yeg.buildings.model;
 
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 
 /**
  * This class is a decorator around a building to help with calculating the distance from a
@@ -40,5 +42,18 @@ public class RelativeBuildingLocation implements Comparable<RelativeBuildingLoca
 
     public Building getBuilding() {
         return _building;
+    }
+
+    public void addTo(Intent intent) {
+        if (_building == null) {
+            throw new NullPointerException("Don't have a building to set the location for.");
+        }
+
+        double lat = _building.getLocation().getLatitude();
+        double lon = _building.getLocation().getLongitude();
+
+        Uri uri = Uri.parse("geo:" + lat + "," + lon);
+        intent.setData(uri);
+        
     }
 }

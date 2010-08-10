@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -111,10 +112,12 @@ public class BuildingList extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-//        RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
-        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
+        RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
+//        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
 //        GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
 //        mapPin.putExtra(intent);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        relativeBuilding.addTo(intent);
         startActivity(intent);
     }
 

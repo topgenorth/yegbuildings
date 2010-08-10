@@ -19,7 +19,7 @@ import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 public class BuildingMap extends MapActivity implements IBuildingMapView {
-	private MapView _edmontonMap;
+	private MapView _edmontonMapView;
 	private TextView _buildingNameLabel;
 	private TextView _buildingAddressLabel;
 	private TextView _buildingConstructionDateLabel;
@@ -34,9 +34,9 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 				.with(this)
 				.listeningWith(_onLocationChange)
 				.build();
-//
-//		initializeMap();
-//		initializeMyLocation();
+
+		initializeMap();
+		initializeMyLocation();
 //
 //		GoogleMapPin pin = new GoogleMapPin(getIntent());
 //		pin.putOnMap(this);
@@ -56,24 +56,22 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
         }
     }
 
-/*
 
 
 	private void initializeMyLocation() {
-		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMap);
+		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMapView);
 		_myLocationOverlay.enableMyLocation();
-		_edmontonMap.getOverlays().add(_myLocationOverlay);
+		_edmontonMapView.getOverlays().add(_myLocationOverlay);
 		updateMyLocationOnMap();
 	}
 
 	private void initializeMap() {
-		_edmontonMap = (MapView) findViewById(R.id.map);
-		_edmontonMap.getController().setZoom(17);
-        _edmontonMap.setSatellite(true);
-		_edmontonMap.setBuiltInZoomControls(true);
+		_edmontonMapView = (MapView) findViewById(R.id.map);
+		_edmontonMapView.getController().setZoom(17);
+        _edmontonMapView.setSatellite(true);
+		_edmontonMapView.setBuiltInZoomControls(true);
 	}
 
-*/
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		new MenuInflater(getApplication()).inflate(R.menu.buildingmap_menu, menu);
@@ -90,7 +88,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 */
         return super.onOptionsItemSelected(item);
 	}
-/*
 
 	private void updateMyLocationOnMap() {
 		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
@@ -99,20 +96,17 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 			Log.i(Constants.LOG_TAG, "Can't figure out the user's location.");
 		}
 		else {
-			_edmontonMap.invalidate();
+			_edmontonMapView.invalidate();
 			_myLocationOverlay.enableMyLocation();
-			_edmontonMap.getController().animateTo(myLocation);
+			_edmontonMapView.getController().animateTo(myLocation);
 		}
 	}
 
-*/
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-/*
 		_myLocationOverlay.disableMyLocation();
 		_locationManager.removeUpdates(_onLocationChange);
-*/
 	}
 
 	@Override
@@ -176,7 +170,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	@Override
 	public void setCenter(GeoPoint geoPoint) {
-		_edmontonMap.getController().setCenter(geoPoint);
+		_edmontonMapView.getController().setCenter(geoPoint);
 	}
 
 	@Override
@@ -184,7 +178,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		Drawable buildingMarker = getResources().getDrawable(R.drawable.marker);
 		buildingMarker.setBounds(0, 0, buildingMarker.getIntrinsicWidth(), buildingMarker.getIntrinsicHeight());
 		ItemizedOverlay<OverlayItem> buildingOverlay = new BuildingLocationOverlay(buildingMarker, pin);
-		_edmontonMap.getOverlays().add(buildingOverlay);
+		_edmontonMapView.getOverlays().add(buildingOverlay);
 	}
 
 	private class BuildingLocationOverlay extends ItemizedOverlay<OverlayItem> {
