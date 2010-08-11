@@ -1,5 +1,6 @@
 package net.opgenorth.yeg.buildings.views;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -15,8 +16,9 @@ import android.widget.Toast;
 import com.google.android.maps.*;
 import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.model.LatLongLocation;
+import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
-import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 public class BuildingMap extends MapActivity implements IBuildingMapView {
 	private MapView _edmontonMapView;
@@ -37,11 +39,28 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 		initializeMap();
 		initializeMyLocation();
-//
-//		GoogleMapPin pin = new GoogleMapPin(getIntent());
-//		pin.putOnMap(this);
+        putPinOnMap();
 	}
 
+    private void putPinOnMap() {
+        Intent intent = getIntent();
+        LatLongLocation location = new LatLongLocation(intent);
+        String name = intent.getStringExtra(RelativeBuildingLocation.BUILDING_NAME);
+        String address = intent.getStringExtra(RelativeBuildingLocation.BUILDING_ADDRESS);
+        String constructionDate = "Construction Date: " +  intent.getStringExtra(RelativeBuildingLocation.BUILDING_CONSTRUCTION_DATE);
+        GeoPoint buildingLocation = location.getGeoPoint();
+
+        setName(name);
+        setAddress(address);
+        setConstructionDate(constructionDate);
+        setCenter(buildingLocation);
+
+        // This will draw the pin on the map.
+		Drawable buildingMarker = getResources().getDrawable(R.drawable.marker);
+		buildingMarker.setBounds(0, 0, buildingMarker.getIntrinsicWidth(), buildingMarker.getIntrinsicHeight());
+		ItemizedOverlay<OverlayItem> buildingOverlay = new BuildingLocationOverlay(buildingMarker, buildingLocation, name);
+		_edmontonMapView.getOverlays().add(buildingOverlay);
+    }
 
     private void initializeContentView() {
         ActivityHelper helper = new ActivityHelper(this);
@@ -80,12 +99,10 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-/*
 		int itemId = item.getItemId();
 		if (R.id.buildingmap_showMyLocation == itemId) {
 			updateMyLocationOnMap();
 		}
-*/
         return super.onOptionsItemSelected(item);
 	}
 
@@ -112,16 +129,13 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		_myLocationOverlay.enableMyLocation();
+		_myLocationOverlay.enableMyLocation();
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-/*
 		_myLocationOverlay.disableMyLocation();
-		_myLocationOverlay.disableMyLocation();
-*/
 	}
 
 	@Override
@@ -173,22 +187,16 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 		_edmontonMapView.getController().setCenter(geoPoint);
 	}
 
-	@Override
-	public void showBuildingOnMap(GoogleMapPin pin) {
-		Drawable buildingMarker = getResources().getDrawable(R.drawable.marker);
-		buildingMarker.setBounds(0, 0, buildingMarker.getIntrinsicWidth(), buildingMarker.getIntrinsicHeight());
-		ItemizedOverlay<OverlayItem> buildingOverlay = new BuildingLocationOverlay(buildingMarker, pin);
-		_edmontonMapView.getOverlays().add(buildingOverlay);
-	}
+
 
 	private class BuildingLocationOverlay extends ItemizedOverlay<OverlayItem> {
 		private OverlayItem _overlayItem = null;
 		private Drawable _marker = null;
 
-		public BuildingLocationOverlay(Drawable marker, GoogleMapPin pin) {
+		public BuildingLocationOverlay(Drawable marker, GeoPoint buildingLocation, String buildingName) {
 			super(marker);
 			_marker = marker;
-			_overlayItem = new OverlayItem(pin.getGeoPoint(), "Building", pin.getBuildingName());
+			_overlayItem = new OverlayItem(buildingLocation, "Building", buildingName);
 			populate();
 		}
 

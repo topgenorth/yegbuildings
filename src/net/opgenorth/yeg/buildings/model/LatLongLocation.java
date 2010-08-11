@@ -3,7 +3,6 @@ package net.opgenorth.yeg.buildings.model;
 import android.content.Intent;
 import android.location.Location;
 import com.google.android.maps.GeoPoint;
-import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 /**
  * A wrapper that helps with moving the location around via Intents.
@@ -18,8 +17,8 @@ public class LatLongLocation {
     }
 
     public LatLongLocation(Intent intent) {
-        _latitude = intent.getDoubleExtra(GoogleMapPin.LATITUDE, 0);
-        _longitude = intent.getDoubleExtra(GoogleMapPin.LONGITUDE, 0);
+        _latitude = intent.getDoubleExtra(RelativeBuildingLocation.LATITUDE, 0);
+        _longitude = intent.getDoubleExtra(RelativeBuildingLocation.LONGITUDE, 0);
     }
 
     public double getDistanceTo(Location location) {
@@ -72,8 +71,8 @@ public class LatLongLocation {
     }
 
     public void putExtra(Intent intent) {
-        intent.putExtra(GoogleMapPin.LATITUDE, _latitude);
-        intent.putExtra(GoogleMapPin.LONGITUDE, _longitude);
+        intent.putExtra(RelativeBuildingLocation.LATITUDE, _latitude);
+        intent.putExtra(RelativeBuildingLocation.LONGITUDE, _longitude);
     }
 
     public GeoPoint getGeoPoint() {

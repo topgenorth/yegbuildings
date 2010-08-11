@@ -11,6 +11,11 @@ import android.net.Uri;
 public class RelativeBuildingLocation implements Comparable<RelativeBuildingLocation> {
     private Building _building;
     private Location _relativeLocation;
+    public static final String LATITUDE = "net.opgenorth.yeg.latitude";
+    public static final String LONGITUDE = "net.opgenorth.yeg.longitude";
+    public static final String BUILDING_ADDRESS = "net.opgenorth.yeg.building_address";
+    public static final String BUILDING_NAME = "net.opgenorth.yeg.building_name";
+    public static final String BUILDING_CONSTRUCTION_DATE = "net.opgenorth.yeg.building_construction_date";
 
     public RelativeBuildingLocation(Building building, Location location) {
         _building = building;
@@ -52,8 +57,17 @@ public class RelativeBuildingLocation implements Comparable<RelativeBuildingLoca
         double lat = _building.getLocation().getLatitude();
         double lon = _building.getLocation().getLongitude();
 
+        intent.putExtra(BUILDING_NAME, _building.getName());
+        intent.putExtra(BUILDING_ADDRESS, _building.getAddress());
+        intent.putExtra(BUILDING_CONSTRUCTION_DATE, _building.getConstructionDate());
+        intent.putExtra(LATITUDE, lat);
+        intent.putExtra(LONGITUDE, lon);
+/*
+        This is if we want to use the mapview
+
         Uri uri = Uri.parse("geo:" + lat + "," + lon);
         intent.setData(uri);
-        
+*/
+
     }
 }

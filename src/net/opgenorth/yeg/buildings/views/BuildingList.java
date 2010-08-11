@@ -32,7 +32,6 @@ import net.opgenorth.yeg.buildings.util.BuildingContentValuesTransmorgifier;
 import net.opgenorth.yeg.buildings.util.ITransmorgifier;
 import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 import net.opgenorth.yeg.buildings.widget.BuildingListAdapter;
-import net.opgenorth.yeg.buildings.widget.GoogleMapPin;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -113,11 +112,10 @@ public class BuildingList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
-//        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
-//        GoogleMapPin mapPin = new GoogleMapPin(relativeBuilding.getBuilding());
-//        mapPin.putExtra(intent);
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        relativeBuilding.addTo(intent);
+        Intent intent = new Intent(BuildingList.this, BuildingMap.class);
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        relativeBuilding.addTo(intent);
+        relativeBuilding.addTo(intent) ;
         startActivity(intent);
     }
 
