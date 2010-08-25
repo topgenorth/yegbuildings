@@ -5,7 +5,7 @@
 
     <string name="main_menu_settings">Settings</string>
     <string name="main_menu_refreshdata">Refresh</string>
-    <string name="main_menu_showall">Map All</string>
+    <string name="main_menu_showall">Show All</string>
 
     <string name="buildingmap_menu_goto_my_location">My Location</string>
     <string name="buildingmap_unknown_location">Location: unknown</string>

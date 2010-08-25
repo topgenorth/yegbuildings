@@ -3,14 +3,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/configureSettings"
           android:title="@string/main_menu_settings"
-          android:icon="@drawable/gear"
+          android:icon="@android:drawable/ic_menu_preferences"
           />
     <item android:id="@+id/refreshData"
           android:title="@string/main_menu_refreshdata"
-          android:icon="@drawable/refresh"
+          android:icon="@drawable/ic_menu_refresh"
           />
     <item android:id="@+id/showAllOnMap"
           android:title="@string/main_menu_showall"
-          android:icon="@drawable/map"
+          android:icon="@android:drawable/ic_menu_mapmode"
           />
 </menu>
