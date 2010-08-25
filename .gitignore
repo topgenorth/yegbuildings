@@ -1,5 +1,7 @@
 .idea
 deploy.sh
+helpers.ps1
+YegBuildings.apk
 HistoricalBuildings.apk
 out
 out/*
