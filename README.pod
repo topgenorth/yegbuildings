@@ -4,7 +4,7 @@ This is just a little Android application that show some historical relativeBuil
 
 The City of Edmonton's Open Data Catalogue: http://data.edmonton.ca/
 
-Website for the Historical Buildings catalogue: http://data.edmonton.ca/DataBrowser.aspx?Container=coe&EntitySet=HistoricalBuildings
+Website for the Historical Buildings catalogue: http://data.edmonton.ca/DataBrowser/coe/HistoricalBuildings#param=NOFILTER--DataView--Results
 
 Tom Opgenorth
 http://www.opgenorth.net
@@ -15,6 +15,7 @@ Twitter:  topgenorth
 =over 4
 
 =item * Intersection of 100 Ave & 105 Street: -113.501118 53.538860
+
 =item * 109 Street & Jasper Ave -113.508838 53.541111
 
 =back
