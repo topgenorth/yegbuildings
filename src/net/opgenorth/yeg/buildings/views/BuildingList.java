@@ -39,6 +39,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class BuildingList extends ListActivity {
+    public static final String ALL_BUILDINGS_GOOGLE_MAPS_URL = "http://maps.google.com/?q=http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings/?$filter=%26format=kml";
+    public static final String ALL_BUILDINGS_BING_MAPS_URL= "http://www.bing.com/maps/?mapurl=http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings/?$filter=&format=kml";
     private ProgressDialog _progressDialog;
     private TextView _foundHistoricalBuildingsTextView;
     private TextView _myGpsLocation;
@@ -104,7 +106,10 @@ public class BuildingList extends ListActivity {
         } else if (R.id.refreshData == itemId) {
             loadYegOpenData();
         } else if (R.id.showAllOnMap == itemId) {
-            Toast.makeText(this, "Map All: Coming in a future version.", Toast.LENGTH_SHORT).show();
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+            Uri uri1 = Uri.parse(ALL_BUILDINGS_GOOGLE_MAPS_URL);
+            mapIntent.setData(uri1);
+            startActivity(Intent.createChooser(mapIntent, "YEG Buildings"));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -113,9 +118,7 @@ public class BuildingList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         RelativeBuildingLocation relativeBuilding = (RelativeBuildingLocation) l.getItemAtPosition(position);
         Intent intent = new Intent(BuildingList.this, BuildingMap.class);
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        relativeBuilding.addTo(intent);
-        relativeBuilding.addTo(intent) ;
+        relativeBuilding.addTo(intent);
         startActivity(intent);
     }
 
