@@ -4,7 +4,6 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="10px"
         >
-
     <TextView
             android:id="@+id/building_row_name"
             android:layout_width="fill_parent"

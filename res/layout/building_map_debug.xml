@@ -4,15 +4,6 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <!-- This layout file has the debug.store Google Maps apiKey -->
-    <!-- Look in the templates directory to find the debug.store that holds the keystore that corresponds to this apiKey -->
-    <com.google.android.maps.MapView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:apiKey="05L09-1gDs7cXvTtxJIbkynwwa6c_JbSdti8ifQ"
-            android:clickable="true"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"
                   android:layout_width="fill_parent"
@@ -41,5 +32,13 @@
                 android:gravity="left"
                 />
     </LinearLayout>
-
+    <!-- This layout file has the debug.store Google Maps apiKey -->
+    <!-- Look in the templates directory to find the debug.store that holds the keystore that corresponds to this apiKey -->
+    <com.google.android.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:apiKey="05L09-1gDs7cXvTtxJIbkynwwa6c_JbSdti8ifQ"
+            android:clickable="true"/>
 </LinearLayout>
