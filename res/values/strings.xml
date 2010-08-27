@@ -11,5 +11,7 @@
     <string name="buildingmap_unknown_location">Location: unknown</string>
     <string name="buildingmap_title">Building Map</string>
 
+    <string name="mapofallbuildings_title">All Buildings</string>
+
     <string name="locate_building">Locate Building</string>
 </resources>

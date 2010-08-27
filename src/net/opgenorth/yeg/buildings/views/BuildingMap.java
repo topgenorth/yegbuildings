@@ -74,9 +74,7 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
             setContentView(R.layout.building_map_production);
         }
     }
-
-
-
+    
 	private void initializeMyLocation() {
 		_myLocationOverlay = new MyLocationOverlay(this, _edmontonMapView);
 		_myLocationOverlay.enableMyLocation();
@@ -186,8 +184,6 @@ public class BuildingMap extends MapActivity implements IBuildingMapView {
 	public void setCenter(GeoPoint geoPoint) {
 		_edmontonMapView.getController().setCenter(geoPoint);
 	}
-
-
 
 	private class BuildingLocationOverlay extends ItemizedOverlay<OverlayItem> {
 		private OverlayItem _overlayItem = null;

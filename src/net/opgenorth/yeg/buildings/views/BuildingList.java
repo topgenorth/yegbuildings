@@ -106,10 +106,8 @@ public class BuildingList extends ListActivity {
         } else if (R.id.refreshData == itemId) {
             loadYegOpenData();
         } else if (R.id.showAllOnMap == itemId) {
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-            Uri uri1 = Uri.parse(ALL_BUILDINGS_GOOGLE_MAPS_URL);
-            mapIntent.setData(uri1);
-            startActivity(Intent.createChooser(mapIntent, "YEG Buildings"));
+            Intent intent = new Intent(BuildingList.this, MapOfAllBuildings.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
