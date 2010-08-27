@@ -7,7 +7,9 @@ The City of Edmonton's Open Data Catalogue: http://data.edmonton.ca/
 Website for the Historical Buildings catalogue: http://data.edmonton.ca/DataBrowser/coe/HistoricalBuildings#param=NOFILTER--DataView--Results
 
 Tom Opgenorth
+
 http://www.opgenorth.net
+
 Twitter:  topgenorth
 
 =head2 Some locations around Edmonton for testing:
@@ -32,13 +34,13 @@ Twitter:  topgenorth
 
 =over 4
 
-=item - Setup a build script.
+=item * Setup a build script.
 
-=item - Build server.
+=item * Build server.
 
 =back
 
-=item * Don’t always fetch the data – store it locally
+=item * db4o instead of SQLite?
 
 =item * More efficient JSON parsing?
 
@@ -50,7 +52,7 @@ Twitter:  topgenorth
 
 =item * Create Wikipedia entries and link to that.
 
-=item * Petition the City of Edmonton to convert their PDF’s to a more neutral format?
+=item * Petition the City of Edmonton to convert their PDF's to a more neutral format?
 
 =back
 
@@ -63,11 +65,9 @@ Edmonton.
 
 =back
 
-=item * Allow the user to update their coordinates for YEG’s historical relativeBuildings.
+=item * Allow the user to update their coordinates for YEG's historical relativeBuildings.
 
-=item * Include relativeBuildings that aren’t necessarily designated as historical, but are interesting architecturally or otherwise.
-
-=item * Instead of using YEG OpenData, perhaps an independent cloud based data store (Azure maybe?)
+=item * Include buildings that aren't necessarily designated as historical, but are interesting architecturally or otherwise.
 
 =back
 
