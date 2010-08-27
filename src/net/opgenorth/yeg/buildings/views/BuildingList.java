@@ -5,9 +5,7 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,10 +31,12 @@ import net.opgenorth.yeg.buildings.util.ITransmorgifier;
 import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 import net.opgenorth.yeg.buildings.widget.BuildingListAdapter;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class BuildingList extends ListActivity {
     public static final String ALL_BUILDINGS_GOOGLE_MAPS_URL = "http://maps.google.com/?q=http://datafeed.edmonton.ca/v1/coe/HistoricalBuildings/?$filter=%26format=kml";
@@ -123,12 +123,28 @@ public class BuildingList extends ListActivity {
     private void showMyGpsLocation() {
         if (_myGpsLocation == null)
             return;
+
+
         String myLocation = "I'm not to sure where you are.";
+
+
+
         DecimalFormat formatter = new DecimalFormat("###.######");
+        List myList;
         if (_currentLocation != null) {
             String lat = formatter.format(_currentLocation.getLatitude());
             String lon = formatter.format(_currentLocation.getLongitude());
-            myLocation = "My location: " + lat + ", " + lon;
+            Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+            try {
+                myList = geoCoder.getFromLocation(_currentLocation.getLatitude(), _currentLocation.getLongitude(), 1);
+                Address address = (Address) myList.get(0);
+                myLocation= "My location: " + address.getAddressLine(0) + ", " + address.getLocality();
+            } catch (IOException e) {
+
+                myLocation = "My location: " + lat + ", " + lon;
+
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
         _myGpsLocation.setText(myLocation);
     }
