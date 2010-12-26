@@ -30,5 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".views.BuildingMap" android:label="Map"/>
+        <activity android:name=".views.BuildingList" android:label="Building List"/>
     </application>
 </manifest>
