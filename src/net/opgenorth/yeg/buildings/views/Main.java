@@ -27,7 +27,7 @@ public class Main extends TabActivity {
 
         spec = tabHost.newTabSpec("artists").setIndicator(
                 appResources.getString(R.string.buildingmap_tabtext),
-                appResources.getDrawable(R.drawable.ic_tab_artists))
+                appResources.getDrawable(R.drawable.ic_tab_map))
                 .setContent(intent);
         tabHost.addTab(spec);
 

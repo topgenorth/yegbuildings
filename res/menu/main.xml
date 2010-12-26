@@ -5,10 +5,6 @@
           android:title="@string/main_menu_settings"
           android:icon="@android:drawable/ic_menu_preferences"
           />
-    <item android:id="@+id/refreshData"
-          android:title="@string/main_menu_refreshdata"
-          android:icon="@drawable/ic_menu_refresh"
-          />
     <item android:id="@+id/showAllOnMap"
           android:title="@string/main_menu_showall"
           android:icon="@android:drawable/ic_menu_mapmode"
