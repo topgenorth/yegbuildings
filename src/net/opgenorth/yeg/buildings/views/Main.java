@@ -13,6 +13,10 @@ public class Main extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        setupTabs();
+    }
+
+    private void setupTabs() {
         Resources appResources = getResources();
         TabHost tabHost = getTabHost();
         TabHost.TabSpec spec;
@@ -20,14 +24,17 @@ public class Main extends TabActivity {
 
         // Create an Intent to launch an activity for the "Map" tab
         intent = new Intent().setClass(this, BuildingMap.class);
-        spec = tabHost.newTabSpec("artists").setIndicator("Map",
+
+        spec = tabHost.newTabSpec("artists").setIndicator(
+                appResources.getString(R.string.buildingmap_tabtext),
                 appResources.getDrawable(R.drawable.ic_tab_artists))
                 .setContent(intent);
         tabHost.addTab(spec);
 
         // Create an Intent to launch an activity for the "List" tab
         intent = new Intent().setClass(this, BuildingList.class);
-        spec = tabHost.newTabSpec("albums").setIndicator("List",
+        spec = tabHost.newTabSpec("albums").setIndicator(
+                appResources.getString(R.string.buildinglist_tabtext),
                 appResources.getDrawable(R.drawable.ic_tab_artists))
                 .setContent(intent);
         tabHost.addTab(spec);

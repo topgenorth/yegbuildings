@@ -12,25 +12,14 @@
                  android:debuggable="true"
                  android:description="@string/app_description"
                  android:label="@string/app_name">
-        <provider android:name="net.opgenorth.yeg.buildings.data.SqliteContentProvider"
-                  android:authorities="net.opgenorth.yeg.buildings.Provider" />
         <uses-library android:name="com.google.android.maps" />
-        <activity android:name=".views.BuildingList" android:theme="@android:style/Theme.Light">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".views.BuildingMap" android:label="@string/buildingmap_title">
-        </activity>
-        <activity android:name=".views.MapOfAllBuildings" android:label="@string/mapofallbuildings_title"/>
-        <activity android:name=".views.Main" android:label="YEG Buildings">
+        <activity android:name=".views.Main" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".views.BuildingMap" android:label="Map"/>
-        <activity android:name=".views.BuildingList" android:label="Building List"/>
+        <activity android:name=".views.BuildingMap" android:label="@string/buildingmap_title"/>
+        <activity android:name=".views.BuildingList" android:label="@string/buildinglist_title"/>
     </application>
 </manifest>

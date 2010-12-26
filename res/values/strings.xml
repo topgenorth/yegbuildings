@@ -10,6 +10,10 @@
     <string name="buildingmap_menu_goto_my_location">My Location</string>
     <string name="buildingmap_unknown_location">Location: unknown</string>
     <string name="buildingmap_title">Building Map</string>
+    <string name="buildingmap_tabtext">Map</string>
+
+    <string name="buildinglist_title">Building List</string>
+    <string name="buildinglist_tabtext">List</string>
 
     <string name="mapofallbuildings_title">All Buildings</string>
 
