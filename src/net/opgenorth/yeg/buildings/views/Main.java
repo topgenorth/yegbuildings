@@ -35,7 +35,7 @@ public class Main extends TabActivity {
         intent = new Intent().setClass(this, BuildingList.class);
         spec = tabHost.newTabSpec("albums").setIndicator(
                 appResources.getString(R.string.buildinglist_tabtext),
-                appResources.getDrawable(R.drawable.ic_tab_artists))
+                appResources.getDrawable(R.drawable.ic_tab_list))
                 .setContent(intent);
         tabHost.addTab(spec);
 
