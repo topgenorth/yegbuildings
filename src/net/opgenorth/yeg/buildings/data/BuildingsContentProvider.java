@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.buildings;
+package net.opgenorth.yeg.buildings.data;
 
 import android.content.*;
 import android.database.Cursor;
@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Log;
+import net.opgenorth.yeg.buildings.Constants;
 
 import java.util.HashMap;
 

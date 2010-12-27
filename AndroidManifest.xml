@@ -21,6 +21,6 @@
         </activity>
         <activity android:name=".views.BuildingMap" android:label="@string/buildingmap_title"/>
         <activity android:name=".views.BuildingList" android:label="@string/buildinglist_title"/>
-        <provider android:name="BuildingsContentProvider"  android:authorities="net.opgenorth.yeg.buildings" />
+        <provider android:name=".data.BuildingsContentProvider"  android:authorities="net.opgenorth.yeg.buildings" />
     </application>
 </manifest>

@@ -1,7 +1,7 @@
 package net.opgenorth.yeg.buildings.util;
 
 import android.content.ContentValues;
-import net.opgenorth.yeg.buildings.BuildingsContentProvider;
+import net.opgenorth.yeg.buildings.data.BuildingsContentProvider;
 import net.opgenorth.yeg.buildings.model.Building;
 
 public class BuildingContentValuesTransmorgifier implements ITransmorgifier<Building, ContentValues> {
