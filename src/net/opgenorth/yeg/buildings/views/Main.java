@@ -1,6 +1,5 @@
 package net.opgenorth.yeg.buildings.views;
 
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
