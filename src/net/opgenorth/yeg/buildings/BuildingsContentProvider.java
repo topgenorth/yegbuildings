@@ -14,9 +14,9 @@ import android.util.Log;
 import java.util.HashMap;
 
 public class BuildingsContentProvider extends ContentProvider {
-    public static final String TAG                  = "BuildingsContentProvider";
+    public static final String TAG                  = Constants.LOG_TAG;
     public static final String DATABASE_NAME        = "buildings.db";
-    public static final int    DATABASE_VERSION     = 3;
+    public static final int    DATABASE_VERSION     = 4;
     public static final String BUILDINGS_TABLE_NAME = "buildings";
 
     private static HashMap<String, String> _buildingsProjectionMap;
@@ -26,7 +26,7 @@ public class BuildingsContentProvider extends ContentProvider {
     private static final UriMatcher _uriMatcher;
 
     public static final class Columns implements BaseColumns {
-        public static final String AUTHORITY = "net.opgenorth.yeg.buildings.Provider";
+        public static final String AUTHORITY = "net.opgenorth.yeg.buildings";
 
         /**
          * The content:// style URL for this table
@@ -36,12 +36,12 @@ public class BuildingsContentProvider extends ContentProvider {
         /**
          * The MIME type of {@link #CONTENT_URI} providing a directory of buildings.
          */
-        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.google.building";
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.opgenorth.yeg.building";
 
         /**
          * The MIME type of a {@link #CONTENT_URI} sub-directory of a single building.
          */
-        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.google.building";
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.opgenorth.yet.building";
 
         private Columns() {
         }
@@ -118,6 +118,7 @@ public class BuildingsContentProvider extends ContentProvider {
                     ");";
 
             sqLiteDatabase.execSQL(sql);
+            Log.v(TAG, "Created database with SQL '"  + sql +"'" );
         }
 
         @Override
