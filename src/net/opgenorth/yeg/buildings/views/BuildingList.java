@@ -23,14 +23,17 @@ public class BuildingList extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.buildinglist);
-        _myGpsLocation = (TextView) findViewById(R.id.buildinglist_my_gps);
-        _buildingCount = (TextView) findViewById(R.id.buildinglist_building_count);
 
+        initializeView();
         displayGpsLocation();
         getBuildingList();
         displayBuildingList();
+    }
 
+    private void initializeView() {
+        setContentView(R.layout.buildinglist);
+        _myGpsLocation = (TextView) findViewById(R.id.buildinglist_my_gps);
+        _buildingCount = (TextView) findViewById(R.id.buildinglist_building_count);
     }
 
     private void displayGpsLocation() {
@@ -44,7 +47,7 @@ public class BuildingList extends ListActivity {
     }
 
     private void getBuildingList()  {
-        IBuildingDataService svc = new SQLiteBuildingDataService();
+        IBuildingDataService svc = new SQLiteBuildingDataService(this);
 
         for (Building building : svc.fetchAll()) {
             _buildingList.add(new RelativeBuildingLocation(building, null));
