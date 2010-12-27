@@ -11,7 +11,6 @@ public class Main extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
         setupTabs();
     }
 
@@ -23,7 +22,6 @@ public class Main extends TabActivity {
 
         // Create an Intent to launch an activity for the "Map" tab
         intent = new Intent().setClass(this, BuildingMap.class);
-
         spec = tabHost.newTabSpec("artists").setIndicator(
                 appResources.getString(R.string.buildingmap_tabtext),
                 appResources.getDrawable(R.drawable.ic_tab_map))
@@ -38,6 +36,6 @@ public class Main extends TabActivity {
                 .setContent(intent);
         tabHost.addTab(spec);
 
-        tabHost.setCurrentTab(0);
+        tabHost.setCurrentTab(1);
     }
 }
