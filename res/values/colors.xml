@@ -3,5 +3,5 @@
    <color name="main_tab_background">#4694AB</color>
    <color name="header">#eeeeee</color>
    <color name="rowodd" >#ffffffff</color>
-   <color name="roweven">#afcff1ff</color>
+   <color name="roweven">#999999</color>
 </resources>

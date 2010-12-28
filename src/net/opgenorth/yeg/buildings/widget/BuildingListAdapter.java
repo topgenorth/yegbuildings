@@ -12,9 +12,6 @@ import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * And adapter for displaying a list of RelativeBuildingLocations
- */
 public class BuildingListAdapter extends ArrayAdapter {
     private Activity _context;
     private List<RelativeBuildingLocation> _relativeBuildings;
@@ -30,18 +27,14 @@ public class BuildingListAdapter extends ArrayAdapter {
         }
     }
 
-    public List<Building> getBuildings() {
-        return _buildings;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         BuildingRowWrapper rowWrapper;
 
         if (row == null) {
-            LayoutInflater inflater = _context.getLayoutInflater();
-            row = inflater.inflate(R.layout.historicalbuildingrow, null);
+            LayoutInflater layoutInflater = _context.getLayoutInflater();
+            row = layoutInflater.inflate(R.layout.historicalbuildingrow, null);
             rowWrapper = new BuildingRowWrapper(row);
             row.setTag(rowWrapper);
         } else {
@@ -53,11 +46,13 @@ public class BuildingListAdapter extends ArrayAdapter {
             rowWrapper.display(relativeBuilding);
         }
 
+/*
         if (position % 2 == 0) {
             row.setBackgroundResource(R.color.roweven);
         } else {
             row.setBackgroundResource(R.color.rowodd);
         }
+*/
 
         return (row);
     }
