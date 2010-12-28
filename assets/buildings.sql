@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS "buildings";
-CREATE TABLE buildings (_id INTEGER PRIMARY KEY,name TEXT,entityid TEXT,address TEXT, neighbourhood TEXT,url TEXT,construction_date TEXT,latitude DOUBLE,longitude DOUBLE);
 INSERT INTO "buildings" VALUES(1,'A. Macdonald Building','9c2166b3-0485-4e71-b966-803c3f618c2e','10128 - 105 Avenue','Central-McDougall','http://www.edmonton.ca/infraplan/Heritage/register/pdfs/AMacDonald2Building.pdf','1913-14',53.547918,-113.494301);
 INSERT INTO "buildings" VALUES(2,'Arlington Apartments','08f625a9-9f14-4b7b-9cba-c0c3c577ee2b','10524 - 100 Avenue','Downtown','http://www.edmonton.ca/infraplan/Heritage/register/pdfs/ArlingtonApartments.pdf','1909',53.539056,-113.501645);
 INSERT INTO "buildings" VALUES(3,'Armstrong Block','f976242b-0b8b-449c-9e4c-9d913b3a458b','10125-10127 - 104 Street','Downtown',NULL,'1912',53.541552,-113.499019);
