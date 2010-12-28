@@ -11,7 +11,7 @@ public class BuildingContentValuesTransmorgifier implements ITransmorgifier<Buil
             return null;
 
         ContentValues values = new ContentValues();
-        values.put(BuildingsContentProvider.Columns.ROW_KEY, source.getRowKey().toString());
+        values.put(BuildingsContentProvider.Columns.ENTITY_ID, source.getRowKey().toString());
         values.put(BuildingsContentProvider.Columns.ADDRESS, source.getAddress());
         values.put(BuildingsContentProvider.Columns._ID, source.getId());
         values.put(BuildingsContentProvider.Columns.CONSTRUCTION_DATE, source.getConstructionDate());
