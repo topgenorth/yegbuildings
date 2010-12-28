@@ -119,8 +119,15 @@ public class BuildingsContentProvider extends ContentProvider {
 		private void loadBuildingsTable(SQLiteDatabase sqLiteDatabase) {
 			String sqlLoad = getSqlForBuildingData();
 			if (sqlLoad.length() > 0) {
-				sqLiteDatabase.execSQL(sqlLoad);
-				Log.v(TAG, "Loaded the buildings table with SQL.");
+                int count = 0;
+                // split the one big sqlfile into individual statements
+                String[] insertStatements = sqlLoad.split(";\n");
+                for (String insertBuilding : insertStatements) {
+                    Log.d(TAG, "Running the sql: " + insertBuilding);
+                    sqLiteDatabase.execSQL(insertBuilding);
+                    count++;
+                }
+				Log.i(TAG, "Loaded " + count + " buildings into the database.");
 			}
 		}
 
