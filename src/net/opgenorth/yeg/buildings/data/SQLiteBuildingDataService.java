@@ -1,9 +1,7 @@
-package net.opgenorth.yeg.buildings;
+package net.opgenorth.yeg.buildings.data;
 
 import android.content.ContextWrapper;
 import android.database.Cursor;
-import net.opgenorth.yeg.buildings.data.BuildingsContentProvider;
-import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.model.Building;
 import net.opgenorth.yeg.buildings.model.IBuildingSorter;
 
@@ -31,8 +29,7 @@ public class SQLiteBuildingDataService implements IBuildingDataService {
                 list.add(building);
             } while (c.moveToNext());
 
-        }
-        catch (Exception ex) {
+        } finally {
             c.close();
         }
 
@@ -42,6 +39,30 @@ public class SQLiteBuildingDataService implements IBuildingDataService {
     @Override
     public List<Building> fetchAll(IBuildingSorter sortedBy) {
         return fetchAll();
+    }
+
+    @Override
+    public boolean hasRecords() {
+        // TODO:  there has to be a more efficient way to to this.
+        boolean hasRecords = false;
+        Cursor c = _context.getContentResolver().query(BuildingsContentProvider.Columns.CONTENT_URI, BuildingsContentProvider.Columns.ALL_COLUMNS, null, null, null);
+
+        try {
+            if (c.moveToFirst()) {
+                long count = 0;
+                do {
+                    count++;
+                }
+                while (c.moveToNext());
+                hasRecords = count > 0;
+            }
+        } catch (Exception ex) {
+            hasRecords = false;
+        } finally {
+            c.close();
+        }
+
+        return hasRecords;
     }
 
     private Building getBuildingFromRow(Cursor c) {

@@ -8,4 +8,5 @@ import java.util.List;
 public interface IBuildingDataService {
     List<Building> fetchAll();
     List<Building> fetchAll(IBuildingSorter sortedBy);
+    boolean hasRecords();
 }

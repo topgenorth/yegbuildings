@@ -1,11 +1,10 @@
 package net.opgenorth.yeg.buildings.views;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import net.opgenorth.yeg.buildings.R;
-import net.opgenorth.yeg.buildings.SQLiteBuildingDataService;
+import net.opgenorth.yeg.buildings.data.SQLiteBuildingDataService;
 import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.model.Building;
 import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
