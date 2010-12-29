@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class BuildingList extends ListActivity {
-	private List<RelativeBuildingLocation> _buildingList             = new ArrayList<RelativeBuildingLocation>(76);
-	private LocationListener               _onLocationChangeListener = new MyLocationListener();
+	private ArrayList<RelativeBuildingLocation> _buildingList             = new ArrayList<RelativeBuildingLocation>(76);
+	private LocationListener                    _onLocationChangeListener = new MyLocationListener();
 	private LocationManager     _locationManager;
 	private TextView            _myGpsLocation;
 	private TextView            _buildingCount;
@@ -141,5 +141,26 @@ public class BuildingList extends ListActivity {
 		public void onProviderDisabled(String s) {
 			Log.i(Constants.LOG_TAG, "GPS Provider is disabled.");
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		_locationManager = LocationManagerBuilder.createLocationManager()
+				.with(this)
+				.listeningWith(_onLocationChangeListener)
+				.build();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_locationManager.removeUpdates(_onLocationChangeListener);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_locationManager.removeUpdates(_onLocationChangeListener);
 	}
 }
