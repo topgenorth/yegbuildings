@@ -21,146 +21,146 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class BuildingList extends ListActivity {
-	private ArrayList<RelativeBuildingLocation> _buildingList             = new ArrayList<RelativeBuildingLocation>(76);
-	private LocationListener                    _onLocationChangeListener = new MyLocationListener();
-	private LocationManager     _locationManager;
-	private TextView            _myGpsLocation;
-	private TextView            _buildingCount;
-	private BuildingListAdapter _buildingListAdapter;
-	private Location            _currentLocation;
+public class BuildingList extends ListActivity implements LocationListener {
+    private ArrayList<RelativeBuildingLocation> _buildingList = new ArrayList<RelativeBuildingLocation>(76);
+    private LocationManager     _locationManager;
+    private TextView            _myGpsLocation;
+    private TextView            _buildingCount;
+    private BuildingListAdapter _buildingListAdapter;
+    private Location            _currentLocation;
 
-	public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeView();
 
-		super.onCreate(savedInstanceState);
-		initializeView();
+        displayGpsLocation();
+        getBuildingList();
+        displayBuildingList();
+    }
 
-		_locationManager = LocationManagerBuilder.createLocationManager()
-				.with(this)
-				.listeningWith(_onLocationChangeListener)
-				.build();
+    private void initializeView() {
+        setContentView(R.layout.buildinglist);
+        _myGpsLocation = (TextView) findViewById(R.id.buildinglist_my_gps);
+        _buildingCount = (TextView) findViewById(R.id.buildinglist_building_count);
+    }
 
-		displayGpsLocation();
-		getBuildingList();
-		displayBuildingList();
-	}
+    private void displayGpsLocation() {
+        _myGpsLocation.setText("This is where the user's location would be");
+    }
 
-	private void initializeView() {
-		setContentView(R.layout.buildinglist);
-		_myGpsLocation = (TextView) findViewById(R.id.buildinglist_my_gps);
-		_buildingCount = (TextView) findViewById(R.id.buildinglist_building_count);
-	}
+    private void displayBuildingList() {
+        _buildingCount.setText("Found " + _buildingList.size() + " buildings.");
+        _buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
+        setListAdapter(_buildingListAdapter);
+    }
 
-	private void displayGpsLocation() {
-		_myGpsLocation.setText("This is where the user's location would be");
-	}
+    private void getBuildingList() {
+        IBuildingDataService svc = new SQLiteBuildingDataService(this);
 
-	private void displayBuildingList() {
-		_buildingCount.setText("Found " + _buildingList.size() + " buildings.");
-		_buildingListAdapter = new BuildingListAdapter(BuildingList.this, _buildingList);
-		setListAdapter(_buildingListAdapter);
-	}
+        for (Building building : svc.fetchAll()) {
+            _buildingList.add(new RelativeBuildingLocation(building, null));
+        }
+    }
 
-	private void getBuildingList() {
-		IBuildingDataService svc = new SQLiteBuildingDataService(this);
+    private void updateWithNewLocation() {
+        for (RelativeBuildingLocation relativeBuildingLocation : _buildingList) {
+            relativeBuildingLocation.setRelativeLocation(_currentLocation);
+        }
+        Collections.sort(_buildingList);
+        if (_buildingListAdapter == null) {
+            Log.e(Constants.LOG_TAG, "Why isn't there a _buildingListAdapter?");
+        }
+        else {
+            _buildingListAdapter.notifyDataSetChanged();
+        }
+        showMyGpsLocation();
+    }
 
-		for (Building building : svc.fetchAll()) {
-			_buildingList.add(new RelativeBuildingLocation(building, null));
-		}
-	}
+    private void showMyGpsLocation() {
+        if (_myGpsLocation == null) {
+            return;
+        }
+        String myLocation = "I'm not to sure where you are.";
+        if (_currentLocation != null) {
+            DecimalFormat formatter = new DecimalFormat("###.######");
+            List myList;
+            String lat = formatter.format(_currentLocation.getLatitude());
+            String lon = formatter.format(_currentLocation.getLongitude());
+            String loc = lat + "," + lon;
+            myLocation = "My location: " + loc;
+            Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+            try {
+                myList = geoCoder.getFromLocation(_currentLocation.getLatitude(), _currentLocation.getLongitude(), 1);
+                if (myList.size() > 0) {
+                    Address address = (Address) myList.get(0);
+                    myLocation = "My location: " + address.getAddressLine(0) + ", " + address.getLocality();
+                }
+                else {
+                    Log.d(Constants.LOG_TAG, "Couldn't translate the location " + loc + " into an address.");
+                }
+            }
+            catch (IOException e) {
+                myLocation = "My location: " + lat + ", " + lon;
+            }
+        }
+        _myGpsLocation.setText(myLocation);
+    }
 
-	private void updateWithNewLocation() {
-		for (RelativeBuildingLocation relativeBuildingLocation : _buildingList) {
-			relativeBuildingLocation.setRelativeLocation(_currentLocation);
-		}
-		Collections.sort(_buildingList);
-		if (_buildingListAdapter == null) {
-			Log.e(Constants.LOG_TAG, "Why isn't there a _buildingListAdapter?");
-		}
-		else {
-			_buildingListAdapter.notifyDataSetChanged();
-		}
-		showMyGpsLocation();
-	}
+    @Override
+    public void onLocationChanged(Location location) {
+        _currentLocation = location;
+        if (location == null) {
+            Log.w(Constants.LOG_TAG, "We have a NULL location for some reason.");
+            return;
+        }
+        Log.d(Constants.LOG_TAG, "new location " + location.getLongitude() + " " + location.getLatitude());
 
-	private void showMyGpsLocation() {
-		if (_myGpsLocation == null) {
-			return;
-		}
-		String myLocation = "I'm not to sure where you are.";
-		if (_currentLocation != null) {
-			DecimalFormat formatter = new DecimalFormat("###.######");
-			List myList;
-			String lat = formatter.format(_currentLocation.getLatitude());
-			String lon = formatter.format(_currentLocation.getLongitude());
-			String loc = lat + "," + lon;
-			myLocation = "My location: " + loc;
-			Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
-			try {
-				myList = geoCoder.getFromLocation(_currentLocation.getLatitude(), _currentLocation.getLongitude(), 1);
-				if (myList.size() > 0) {
-					Address address = (Address) myList.get(0);
-					myLocation = "My location: " + address.getAddressLine(0) + ", " + address.getLocality();
-				}
-				else {
-					Log.d(Constants.LOG_TAG, "Couldn't translate the location " + loc + " into an address.");
-				}
-			}
-			catch (IOException e) {
-				myLocation = "My location: " + lat + ", " + lon;
-			}
-		}
-		_myGpsLocation.setText(myLocation);
-	}
+        updateWithNewLocation();
+    }
 
-	private class MyLocationListener implements LocationListener {
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+        Log.i(Constants.LOG_TAG, "GPS Provider status changed.");
+    }
 
-		@Override
-		public void onLocationChanged(Location location) {
-			_currentLocation = location;
-			if (location == null) {
-				Log.w(Constants.LOG_TAG, "We have a NULL location for some reason.");
-				return;
-			}
-			Log.d(Constants.LOG_TAG, "new location " + location.getLongitude() + " " + location.getLatitude());
+    @Override
+    public void onProviderEnabled(String s) {
+        Log.i(Constants.LOG_TAG, "GPS Provider is enabled.");
+    }
 
-			updateWithNewLocation();
-		}
+    @Override
+    public void onProviderDisabled(String s) {
+        Log.i(Constants.LOG_TAG, "GPS Provider is disabled.");
+    }
 
-		@Override
-		public void onStatusChanged(String s, int i, Bundle bundle) {
-			Log.i(Constants.LOG_TAG, "GPS Provider status changed.");
-		}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        _locationManager = LocationManagerBuilder.createLocationManager()
+                .with(this)
+                .listeningWith(this)
+                .build();
+    }
 
-		@Override
-		public void onProviderEnabled(String s) {
-			Log.i(Constants.LOG_TAG, "GPS Provider is enabled.");
-		}
+    @Override
+    protected void onPause() {
+        super.onPause();
+        _locationManager.removeUpdates(this);
+    }
 
-		@Override
-		public void onProviderDisabled(String s) {
-			Log.i(Constants.LOG_TAG, "GPS Provider is disabled.");
-		}
-	}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        _locationManager.removeUpdates(this);
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		_locationManager = LocationManagerBuilder.createLocationManager()
-				.with(this)
-				.listeningWith(_onLocationChangeListener)
-				.build();
-	}
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		_locationManager.removeUpdates(_onLocationChangeListener);
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		_locationManager.removeUpdates(_onLocationChangeListener);
-	}
+        _locationManager = LocationManagerBuilder.createLocationManager()
+                .with(this)
+                .listeningWith(this)
+                .build();
+    }
 }

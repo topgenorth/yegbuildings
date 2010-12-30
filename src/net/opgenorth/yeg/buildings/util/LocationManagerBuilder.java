@@ -12,10 +12,10 @@ import net.opgenorth.yeg.buildings.Constants;
  * Used to tell the LocationManager the requirements for this application.
  */
 public class LocationManagerBuilder {
-    public static final int TIME_BETWEEN_GPS_UPDATES = 20000;
+    public static final int TIME_BETWEEN_GPS_UPDATES     = 20000;
     public static final int DISTANCE_BETWEEN_GPS_UPDATES = 100;
 
-    private LocationManager _locationManager;
+    private LocationManager  _locationManager;
     private LocationListener _locationListener;
 
     private LocationManagerBuilder() {
@@ -59,9 +59,9 @@ public class LocationManagerBuilder {
         String provider = _locationManager.getBestProvider(createCriteria(), true);
         Log.d(Constants.LOG_TAG, "Using provider " + provider + " for requesting location updates.");
         _locationManager.requestLocationUpdates(provider,
-                TIME_BETWEEN_GPS_UPDATES,
-                DISTANCE_BETWEEN_GPS_UPDATES,
-                _locationListener);
+                                                TIME_BETWEEN_GPS_UPDATES,
+                                                DISTANCE_BETWEEN_GPS_UPDATES,
+                                                _locationListener);
 
         return _locationManager;
     }
