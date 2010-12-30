@@ -1,28 +1,31 @@
 package net.opgenorth.yeg.buildings.views;
 
-import android.app.Activity;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import com.google.android.maps.MapActivity;
+import net.opgenorth.yeg.buildings.Constants;
+import net.opgenorth.yeg.buildings.R;
 
 public class BuildingMap extends MapActivity implements LocationListener {
     private ActivityHelper _activityHelper = new ActivityHelper(this);
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TextView tv = new TextView(this);
-        if (_activityHelper.isDebug()) {
-            tv.setText("(DEBUG)This will show a buildings on a map.");
+        initializeContentView();
+    }
 
+    private void initializeContentView() {
+        if (_activityHelper.isDebug()) {
+            Log.d(Constants.LOG_TAG, "Debuggable == TRUE, using building_map_debug.");
+            setContentView(R.layout.mapofallbuildings_debug);
         }
         else {
-            tv.setText("(PROD)This will show a buildings on a map.");
-
+            Log.d(Constants.LOG_TAG, "Debuggable == FALSE, using building_map_production.");
+            setContentView(R.layout.mapofallbuildings_production);
         }
-
-        setContentView(tv);
-
     }
 
     @Override
