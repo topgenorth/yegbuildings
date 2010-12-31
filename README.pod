@@ -14,13 +14,17 @@ Twitter:  topgenorth
 
 =head2 Some locations around Edmonton for testing:
 
+You can set the GPS location in the emulator by using telnet, and then typing 'geo fix <lat> <lon>'
+
 =over 4
 
-=item * Intersection of 100 Ave & 105 Street: -113.501118 53.538860
+=item * Intersection of 100 Ave & 105 Street: 53.538860 -113.501118
 
-=item * 109 Street & Jasper Ave -113.508838 53.541111
+=item * 109 Street & Jasper Ave 53.541111 -113.508838
 
-=item * Jasper ave & 101 Street : -113.49332 53.54270
+=item * Jasper ave & 101 Street : 53.54270 -113.49332
+
+=item * The Cenotaph in front of City Hall: 53.544643 -113.49006
 
 =back
 
