@@ -151,8 +151,8 @@ public class BuildingList extends ListActivity implements LocationListener {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         _locationManager.removeUpdates(this);
     }
 
