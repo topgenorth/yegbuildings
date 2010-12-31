@@ -6,10 +6,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapView;
-import com.google.android.maps.Overlay;
+import com.google.android.maps.*;
 import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
 import net.opgenorth.yeg.buildings.data.IBuildingDataService;
@@ -18,6 +15,7 @@ import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 
 public class BuildingMap extends MapActivity implements LocationListener {
 	private MapView _map;
+	private MyLocationOverlay _myLocationOverlay;
 	private Overlay _historicalBuildingsOverlay;
 	private ActivityHelper       _activityHelper      = new ActivityHelper(this);
 	private IBuildingDataService _buildingDataService = new SQLiteBuildingDataService(this);
@@ -37,13 +35,14 @@ public class BuildingMap extends MapActivity implements LocationListener {
 	protected void onStop() {
 
 		_locationManager.removeUpdates(this);
+		_myLocationOverlay.disableMyLocation();
 
 		SharedPreferences settings = getPreferences(MODE_PRIVATE);
 		SharedPreferences.Editor settingsEditor = settings.edit();
 		settingsEditor.putInt(Constants.LAST_MAP_ZOOM, _map.getZoomLevel());
 
 		// this should get the point that is in the middle of the map.
-		GeoPoint p = _map.getProjection().fromPixels(_map.getWidth() /2, _map.getHeight() /2);
+		GeoPoint p = _map.getProjection().fromPixels(_map.getWidth() / 2, _map.getHeight() / 2);
 		settingsEditor.putInt(Constants.LAST_LAT, p.getLatitudeE6());
 		settingsEditor.putInt(Constants.LAST_LON, p.getLongitudeE6());
 
@@ -55,26 +54,29 @@ public class BuildingMap extends MapActivity implements LocationListener {
 	@Override
 	protected void onStart() {
 		super.onStart();
-        _locationManager = LocationManagerBuilder.createLocationManager()
-                .with(this)
-                .listeningWith(this)
-                .build();
+		_locationManager = LocationManagerBuilder.createLocationManager()
+				.with(this)
+				.listeningWith(this)
+				.build();
+		_myLocationOverlay.enableMyLocation();
 	}
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        _locationManager = LocationManagerBuilder.createLocationManager()
-                .with(this)
-                .listeningWith(this)
-                .build();
-    }
+	@Override
+	protected void onResume() {
+		super.onResume();
+		_locationManager = LocationManagerBuilder.createLocationManager()
+				.with(this)
+				.listeningWith(this)
+				.build();
+		_myLocationOverlay.enableMyLocation();
+	}
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        _locationManager.removeUpdates(this);
-    }
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_locationManager.removeUpdates(this);
+		_myLocationOverlay.disableMyLocation();
+	}
 
 	private void initializeMapView() {
 		if (_activityHelper.isDebug()) {
@@ -86,6 +88,12 @@ public class BuildingMap extends MapActivity implements LocationListener {
 			setContentView(R.layout.mapofallbuildings_production);
 		}
 		_map = (MapView) findViewById(R.id.mapofallbuildings);
+		_map.invalidate();
+
+		_myLocationOverlay = new MyLocationOverlay(this, _map);
+		_myLocationOverlay.enableMyLocation();
+		_map.getOverlays().add(_myLocationOverlay);
+
 		_map.setClickable(true);
 		_map.setLongClickable(true);
 		_map.setBuiltInZoomControls(true);
@@ -99,6 +107,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
 		int mapZoom = settings.getInt(Constants.LAST_MAP_ZOOM, Constants.DEFAULT_MAP_ZOOM);
 		_map.getController().setZoom(mapZoom);
+
 	}
 
 	@Override

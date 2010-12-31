@@ -4,8 +4,7 @@ public final class Constants {
 	private Constants() {
 	}
 
-	public static final String LOG_TAG = "net.opgenorth.yeg.buildings";
-
+	public static final String LOG_TAG          = "net.opgenorth.yeg.buildings";
 	public static final String LAST_LAT         = "LastKnownLatitude";
 	public static final String LAST_LON         = "LastKnownLongitude";
 	public static final int    DEFAULT_LAT      = 53544643;
