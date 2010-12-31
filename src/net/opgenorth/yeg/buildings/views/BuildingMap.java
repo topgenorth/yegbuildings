@@ -3,6 +3,7 @@ package net.opgenorth.yeg.buildings.views;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import com.google.android.maps.GeoPoint;
@@ -15,10 +16,12 @@ import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.data.SQLiteBuildingDataService;
 
 public class BuildingMap extends MapActivity implements LocationListener {
-	private ActivityHelper       _activityHelper      = new ActivityHelper(this);
-	private IBuildingDataService _buildingDataService = new SQLiteBuildingDataService(this);
 	private MapView _map;
 	private Overlay _historicalBuildingsOverlay;
+	private ActivityHelper       _activityHelper      = new ActivityHelper(this);
+	private IBuildingDataService _buildingDataService = new SQLiteBuildingDataService(this);
+	private LocationManager _locationManager;
+	private Location        _currentLocation;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,6 +30,22 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
 	private void initializeContentView() {
 		initializeMapView();
+	}
+
+	@Override
+	protected void onStop() {
+		SharedPreferences settings = getPreferences(MODE_PRIVATE);
+		SharedPreferences.Editor settingsEditor = settings.edit();
+		settingsEditor.putInt(Constants.LAST_MAP_ZOOM, _map.getZoomLevel());
+
+		// this should get the point that is in the middle of the map.
+		GeoPoint p = _map.getProjection().fromPixels(_map.getWidth() /2, _map.getHeight() /2);
+		settingsEditor.putInt(Constants.LAST_LAT, p.getLatitudeE6());
+		settingsEditor.putInt(Constants.LAST_LON, p.getLongitudeE6());
+
+		settingsEditor.commit();
+
+		super.onStop();
 	}
 
 	private void initializeMapView() {
@@ -51,7 +70,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 		_map.getController().animateTo(centerOfMap);
 
 		int mapZoom = settings.getInt(Constants.LAST_MAP_ZOOM, Constants.DEFAULT_MAP_ZOOM);
-	    _map.getController().setZoom(mapZoom);
+		_map.getController().setZoom(mapZoom);
 	}
 
 	@Override

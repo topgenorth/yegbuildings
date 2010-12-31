@@ -4,7 +4,9 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <!-- This layout file has the debug.store Google Maps apiKey -->
+    <!-- This layout file has the debug.store Google Maps apiKey, it should only be used in development.  The application
+     will use this layout if <application android:icon="@drawable/icon" android:debuggable="true" /> in
+     AndroidManifest.xml !-->
     <!-- Look in the templates directory to find the debug.store that holds the keystore that corresponds to this apiKey -->
     <com.google.android.maps.MapView
             xmlns:android="http://schemas.android.com/apk/res/android"

@@ -80,6 +80,8 @@ public class BuildingList extends ListActivity implements LocationListener {
         if (_myGpsLocation == null) {
             return;
         }
+
+		// TODO : refactor this location formatting to it's own class.
         String myLocation = "I'm not to sure where you are.";
         if (_currentLocation != null) {
             DecimalFormat formatter = new DecimalFormat("###.######");
