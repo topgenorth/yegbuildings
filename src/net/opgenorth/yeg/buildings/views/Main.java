@@ -3,11 +3,13 @@ package net.opgenorth.yeg.buildings.views;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.widget.TabHost;
 import net.opgenorth.yeg.buildings.R;
 
-public class Main extends TabActivity {
+public class Main extends TabActivity  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);

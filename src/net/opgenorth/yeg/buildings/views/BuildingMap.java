@@ -14,6 +14,7 @@ import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
 import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.data.SQLiteBuildingDataService;
+import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 
 public class BuildingMap extends MapActivity implements LocationListener {
 	private MapView _map;
@@ -34,6 +35,9 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
 	@Override
 	protected void onStop() {
+
+		_locationManager.removeUpdates(this);
+
 		SharedPreferences settings = getPreferences(MODE_PRIVATE);
 		SharedPreferences.Editor settingsEditor = settings.edit();
 		settingsEditor.putInt(Constants.LAST_MAP_ZOOM, _map.getZoomLevel());
@@ -47,6 +51,30 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
 		super.onStop();
 	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+        _locationManager = LocationManagerBuilder.createLocationManager()
+                .with(this)
+                .listeningWith(this)
+                .build();
+	}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        _locationManager = LocationManagerBuilder.createLocationManager()
+                .with(this)
+                .listeningWith(this)
+                .build();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        _locationManager.removeUpdates(this);
+    }
 
 	private void initializeMapView() {
 		if (_activityHelper.isDebug()) {
@@ -80,6 +108,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
+		_currentLocation = location;
 	}
 
 	@Override
