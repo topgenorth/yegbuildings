@@ -55,8 +55,8 @@ public class BuildingList extends ListActivity implements LocationListener {
 	}
 
 	private void getBuildingList() {
+		// TODO : Duplication with BuildingMap.java
 		IBuildingDataService svc = new SQLiteBuildingDataService(this);
-
 		for (Building building : svc.fetchAll()) {
 			_buildingList.add(new RelativeBuildingLocation(building, null));
 		}
