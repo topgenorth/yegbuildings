@@ -1,6 +1,7 @@
 package net.opgenorth.yeg.buildings.views;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -11,9 +12,14 @@ import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
 import net.opgenorth.yeg.buildings.data.IBuildingDataService;
 import net.opgenorth.yeg.buildings.data.SQLiteBuildingDataService;
+import net.opgenorth.yeg.buildings.model.Building;
+import net.opgenorth.yeg.buildings.model.RelativeBuildingLocation;
 import net.opgenorth.yeg.buildings.util.LocationManagerBuilder;
 
+import java.util.ArrayList;
+
 public class BuildingMap extends MapActivity implements LocationListener {
+	private ArrayList<RelativeBuildingLocation> _buildingList = new ArrayList<RelativeBuildingLocation>(76);
 	private MapView _map;
 	private MyLocationOverlay _myLocationOverlay;
 	private Overlay _historicalBuildingsOverlay;
@@ -133,6 +139,28 @@ public class BuildingMap extends MapActivity implements LocationListener {
 	@Override
 	public void onProviderDisabled(String s) {
 		Log.i(Constants.LOG_TAG, "GPS Provider is disabled.");
+	}
+
+	/**
+	 * Overlay to show the historical buildings.
+	 */
+	private class HistoricalBuildingsOverlap extends ItemizedOverlay<OverlayItem> {
+
+		public HistoricalBuildingsOverlap(Drawable drawable) {
+			super(drawable);
+		}
+
+		@Override
+		protected OverlayItem createItem(int i) {
+			Building building = _buildingList.get(i).getBuilding();
+			OverlayItem buildingOverlayItem =  new OverlayItem(building.getGeoPoint(), building.getName(), building.getAddress());
+			return buildingOverlayItem;
+		}
+
+		@Override
+		public int size() {
+			return _buildingList.size();
+		}
 	}
 
 }
