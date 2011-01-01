@@ -91,7 +91,9 @@ public class Building {
     }
 
 	public GeoPoint getGeoPoint() {
-		GeoPoint geopoint = new GeoPoint((int) (_latitude * 1000000.0), (int) (_longitude * 1000000.0));
+		int latE6 = (int) (_latitude * 1000000.0);
+		int lonE6 = (int) (_longitude * 1000000.0);
+		GeoPoint geopoint = new GeoPoint(latE6, lonE6);
 		return geopoint;
 	}
 
