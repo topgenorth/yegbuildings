@@ -1,5 +1,7 @@
 package net.opgenorth.yeg.buildings.model;
 
+import com.google.android.maps.GeoPoint;
+
 import java.util.UUID;
 
 public class Building {
@@ -10,6 +12,9 @@ public class Building {
     private String _url;
     private String _constructionDate;
     private LatLongLocation _location;
+	private double _latitude;
+	private double _longitude;
+
 
     public Long getId() {
         return _id;
@@ -81,7 +86,14 @@ public class Building {
 
     public void setLocation(double latitude, double longitude) {
         _location = new LatLongLocation(latitude, longitude);
+		_latitude = latitude;
+		_longitude = longitude;
     }
+
+	public GeoPoint getGeoPoint() {
+		GeoPoint geopoint = new GeoPoint((int) (_latitude * 1000000.0), (int) (_longitude * 1000000.0));
+		return geopoint;
+	}
 
     @Override
     public boolean equals(Object o) {
