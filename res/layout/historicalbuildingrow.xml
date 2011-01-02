@@ -3,7 +3,7 @@
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
              android:stretchColumns="0">
->
+    >
     <TableRow>
         <TextView
                 android:id="@+id/building_row_name"
@@ -26,11 +26,11 @@
     </TableRow>
     <TableRow>
         <TextView
-            android:id="@+id/building_distance_to_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:gravity="left" />
+                android:id="@+id/building_distance_to_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:gravity="left"/>
     </TableRow>
     <TableRow>
         <TextView

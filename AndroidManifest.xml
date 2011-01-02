@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.opgenorth.yeg.buildings"
           android:versionCode="15"
-          android:versionName="2.0.0.0" >
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+          android:versionName="2.0.0.0">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="4"/>
 
     <!-- IMPORTANT: Remember to set debuggable to "false" for release! -->
@@ -12,15 +12,15 @@
                  android:debuggable="true"
                  android:description="@string/app_description"
                  android:label="@string/app_name">
-        <uses-library android:name="com.google.android.maps" />
-        <activity android:name=".views.Main" android:label="@string/app_name" >
+        <uses-library android:name="com.google.android.maps"/>
+        <activity android:name=".views.Main" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".views.BuildingMap" android:label="@string/buildingmap_title" />
-        <activity android:name=".views.BuildingList" android:label="@string/buildinglist_title" />
-        <provider android:name=".data.BuildingsContentProvider"  android:authorities="net.opgenorth.yeg.buildings" />
+        <activity android:name=".views.BuildingMap" android:label="@string/buildingmap_title"/>
+        <activity android:name=".views.BuildingList" android:label="@string/buildinglist_title"/>
+        <provider android:name=".data.BuildingsContentProvider" android:authorities="net.opgenorth.yeg.buildings"/>
     </application>
 </manifest>

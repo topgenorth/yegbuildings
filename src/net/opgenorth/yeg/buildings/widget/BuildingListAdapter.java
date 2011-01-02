@@ -46,13 +46,7 @@ public class BuildingListAdapter extends ArrayAdapter {
 			RelativeBuildingLocation relativeBuilding = _relativeBuildings.get(position);
 			rowWrapper.display(relativeBuilding);
 		}
-/*
-        if (position % 2 == 0) {
-            row.setBackgroundResource(R.color.roweven);
-        } else {
-            row.setBackgroundResource(R.color.rowodd);
-        }
-*/
+
 		return (row);
 	}
 

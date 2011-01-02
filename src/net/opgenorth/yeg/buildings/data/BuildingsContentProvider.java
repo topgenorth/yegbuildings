@@ -14,8 +14,8 @@ import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.util.ITransmorgifier;
 import net.opgenorth.yeg.buildings.util.InputStreamToString;
 
-
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 public class BuildingsContentProvider extends ContentProvider {
@@ -119,14 +119,14 @@ public class BuildingsContentProvider extends ContentProvider {
 		private void loadBuildingsTable(SQLiteDatabase sqLiteDatabase) {
 			String sqlLoad = getSqlForBuildingData();
 			if (sqlLoad.length() > 0) {
-                int count = 0;
-                // split the one big sqlfile into individual statements
-                String[] insertStatements = sqlLoad.split(";\n");
-                for (String insertBuilding : insertStatements) {
-                    Log.d(TAG, "Running the sql: " + insertBuilding);
-                    sqLiteDatabase.execSQL(insertBuilding);
-                    count++;
-                }
+				int count = 0;
+				// split the one big sqlfile into individual statements
+				String[] insertStatements = sqlLoad.split(";\n");
+				for (String insertBuilding : insertStatements) {
+					Log.d(TAG, "Running the sql: " + insertBuilding);
+					sqLiteDatabase.execSQL(insertBuilding);
+					count++;
+				}
 				Log.i(TAG, "Loaded " + count + " buildings into the database.");
 			}
 		}
@@ -135,10 +135,10 @@ public class BuildingsContentProvider extends ContentProvider {
 			ITransmorgifier<InputStream, String> inputStreamToString = new InputStreamToString();
 			String sql = "";
 
-			try  {
-				sql =inputStreamToString.transmorgify(_context.getAssets().open("buildings.sql"));
+			try {
+				sql = inputStreamToString.transmorgify(_context.getAssets().open("buildings.sql"));
 			}
-			catch (IOException ioex)  {
+			catch (IOException ioex) {
 				Log.e(TAG, "Couldn't load buildings.sql", ioex);
 				sql = "";
 			}

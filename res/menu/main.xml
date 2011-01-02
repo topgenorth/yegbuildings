@@ -4,9 +4,9 @@
     <item android:id="@+id/configureSettings"
           android:title="@string/main_menu_settings"
           android:icon="@android:drawable/ic_menu_preferences"
-          />
+            />
     <item android:id="@+id/showAllOnMap"
           android:title="@string/main_menu_showall"
           android:icon="@android:drawable/ic_menu_mapmode"
-          />
+            />
 </menu>
