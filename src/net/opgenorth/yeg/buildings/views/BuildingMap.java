@@ -119,7 +119,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 	}
 
 	private void initializeHistoricalBuildingsOverlay() {
-		Drawable buildingMarker = getResources().getDrawable(R.drawable.marker);
+		Drawable buildingMarker = getResources().getDrawable(R.drawable.building_medium);
 		buildingMarker.setBounds(0, 0, buildingMarker.getIntrinsicWidth(), buildingMarker.getIntrinsicHeight());
 		_map.getOverlays().add(new BuildingsOverlay(buildingMarker));
 	}
