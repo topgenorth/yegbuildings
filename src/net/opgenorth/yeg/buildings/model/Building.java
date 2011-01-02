@@ -97,7 +97,15 @@ public class Building {
 		return geopoint;
 	}
 
-    @Override
+	public double getLatitude() {
+		return _latitude;
+	}
+
+	public double getLongitude() {
+		return _longitude;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
