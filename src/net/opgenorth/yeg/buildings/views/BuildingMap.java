@@ -217,5 +217,11 @@ public class BuildingMap extends MapActivity implements LocationListener {
 		public int size() {
 			return _items.size();
 		}
+
+		@Override
+		protected boolean onTap(int i) {
+			Toast.makeText(BuildingMap.this, _items.get(i).getSnippet(), Toast.LENGTH_LONG).show();
+			return true;
+		}
 	}
 }

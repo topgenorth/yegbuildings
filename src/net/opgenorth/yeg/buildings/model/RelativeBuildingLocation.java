@@ -63,7 +63,8 @@ public class RelativeBuildingLocation implements Comparable<RelativeBuildingLoca
 	}
 
 	public OverlayItem getOverlayItem() {
-		OverlayItem item = new OverlayItem(_building.getGeoPoint(), _building.getName(), _building.getConstructionDate());
+		String snippet = _building.getName() + "\n" + _building.getAddress() + "\n" + _building.getConstructionDate() ;
+		OverlayItem item = new OverlayItem(_building.getGeoPoint(), _building.getName(), snippet);
 		return item;
 	}
 
@@ -71,4 +72,6 @@ public class RelativeBuildingLocation implements Comparable<RelativeBuildingLoca
 	public String toString() {
 		return _building.getName() + ":" + _building.getLatitude() + "," + _building.getLongitude();
 	}
+
+
 }
