@@ -4,6 +4,8 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TabHost;
 import net.opgenorth.yeg.buildings.R;
 
@@ -12,6 +14,11 @@ public class Main extends TabActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		setupTabs();
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(getApplication()).inflate(R.menu.main, menu);
+		return (super.onCreateOptionsMenu(menu));
 	}
 
 	private void setupTabs() {

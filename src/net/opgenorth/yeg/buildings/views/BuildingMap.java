@@ -154,7 +154,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		new MenuInflater(getApplication()).inflate(R.menu.main, menu);
+		new MenuInflater(getApplication()).inflate(R.menu.map, menu);
 		return (super.onCreateOptionsMenu(menu));
 	}
 
