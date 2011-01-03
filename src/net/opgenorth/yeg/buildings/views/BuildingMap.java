@@ -7,6 +7,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 import com.google.android.maps.*;
 import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
@@ -33,6 +37,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 		getBuildingList();
 		initializeHistoricalBuildingsOverlay();
 		initializeMyLocationOverlay();
+		showMyLocationOnMap();
 	}
 
 	private void initializeContentView() {
@@ -75,7 +80,6 @@ public class BuildingMap extends MapActivity implements LocationListener {
 				.with(this)
 				.listeningWith(this)
 				.build();
-		_myLocationOverlay.enableMyLocation();
 	}
 
 	@Override
@@ -148,6 +152,33 @@ public class BuildingMap extends MapActivity implements LocationListener {
 		Log.v(Constants.LOG_TAG, "GPS Provider is disabled.");
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		new MenuInflater(getApplication()).inflate(R.menu.main, menu);
+		return (super.onCreateOptionsMenu(menu));
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		if (R.id.main_showMyLocation == itemId) {
+			showMyLocationOnMap();
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	private void showMyLocationOnMap() {
+		GeoPoint myLocation = _myLocationOverlay.getMyLocation();
+		if (myLocation == null) {
+			Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
+			Log.i(Constants.LOG_TAG, "Can't figure out the user's location.");
+		}
+		else {
+			_map.invalidate();
+			_myLocationOverlay.enableMyLocation();
+			_map.getController().animateTo(myLocation);
+		}
+	}
 
 	private void getBuildingList() {
 		// TODO: duplication with BuildingList.java
@@ -166,31 +197,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 			_marker = drawable;
 			boundCenterBottom(drawable);
 			loadItemsFromBuildings();
-//			sample();
 			populate();
-		}
-
-		private GeoPoint getPoint(double lat, double lon) {
-			return (new GeoPoint((int) (lat * 1000000.0),
-					(int) (lon * 1000000.0)));
-		}
-
-		private void sample() {
-			_items.add(new OverlayItem(getPoint(40.748963847316034,
-					-73.96807193756104),
-					"UN", "United Nations"));
-			_items.add(new OverlayItem(getPoint(40.76866299974387,
-					-73.98268461227417),
-					"Lincoln Center",
-					"Home of Jazz at Lincoln Center"));
-			_items.add(new OverlayItem(getPoint(40.765136435316755,
-					-73.97989511489868),
-					"Carnegie Hall",
-					"Where you go with practice, practice, practice"));
-			_items.add(new OverlayItem(getPoint(40.70686417491799,
-					-74.01572942733765),
-					"The Downtown Club",
-					"Original home of the Heisman Trophy"));
 		}
 
 		private void loadItemsFromBuildings() {

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/configureSettings"
-          android:title="@string/main_menu_settings"
-          android:icon="@android:drawable/ic_menu_preferences"
-            />
-    <item android:id="@+id/showAllOnMap"
-          android:title="@string/main_menu_showall"
-          android:icon="@android:drawable/ic_menu_mapmode"
-            />
+    <item android:id="@+id/main_showMyLocation"
+          android:orderInCategory="1"
+          android:title="@string/main_menu_my_location"
+          android:icon="@android:drawable/ic_menu_mylocation"/>
+
+
+
+    <!--<item android:id="@+id/configureSettings"-->
+          <!--android:title="@string/main_menu_settings"-->
+          <!--android:icon="@android:drawable/ic_menu_preferences"-->
+            <!--/>-->
+    <!--<item android:id="@+id/showAllOnMap"-->
+          <!--android:title="@string/main_menu_showall"-->
+          <!--android:icon="@android:drawable/ic_menu_mapmode"-->
+            <!--/>-->
 </menu>
