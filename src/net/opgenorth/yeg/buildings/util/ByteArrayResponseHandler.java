@@ -11,6 +11,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 public class ByteArrayResponseHandler implements ResponseHandler<byte[]> {
+
 	@Override
 	public byte[] handleResponse(HttpResponse httpResponse) throws IOException {
 		StatusLine statusLine = httpResponse.getStatusLine();

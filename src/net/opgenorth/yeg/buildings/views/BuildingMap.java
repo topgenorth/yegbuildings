@@ -161,7 +161,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
-		if (R.id.main_showMyLocation == itemId) {
+		if (R.id.map_menu_showMyLocation == itemId) {
 			showMyLocationOnMap();
 		}
 		return super.onOptionsItemSelected(item);

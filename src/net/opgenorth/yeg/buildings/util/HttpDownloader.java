@@ -1,4 +1,4 @@
-package net.opgenorth.yeg.buildings.data;
+package net.opgenorth.yeg.buildings.util;
 
 import android.app.Activity;
 import android.app.IntentService;
@@ -17,12 +17,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
-public class Downloader extends IntentService {
+public class HttpDownloader extends IntentService {
 	private HttpClient _httpClient = null;
+	private String _fileName;
 
-	public Downloader() {
+	public HttpDownloader() {
 		super(Constants.INTENT_SERVICE_HISTORICAL_BUILDING_DOWNLOAD);
+		_fileName = Environment.getExternalStorageDirectory() + "/" + Constants.LOG_TAG + ".historical_buildings.csv";
 	}
 
 	@Override
@@ -33,32 +36,43 @@ public class Downloader extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		int result = downloadFile(intent);
-		sendMessageWithResult(intent, result);
-	}
-
-	private int downloadFile(Intent intent) {
-		HttpGet getMethod = new HttpGet(intent.getData().toString());
-		int result = Activity.RESULT_CANCELED;
-
+		int result;
+		String urlToDownload = intent.getData().toString();
+		byte[] downloadedBytes;
 		try {
-			ResponseHandler<byte[]> responseHandler = new ByteArrayResponseHandler();
-			byte[] responseBody = _httpClient.execute(getMethod, responseHandler);
-			File output = new File(Environment.getExternalStorageDirectory(), intent.getData().getLastPathSegment());
-			if (output.exists()) {
-				output.delete();
-			}
-
-			FileOutputStream fos = new FileOutputStream(output.getPath());
-			fos.write(responseBody);
-			fos.close();
+			downloadedBytes = downloadFile(urlToDownload);
+			saveBytesToFile(downloadedBytes);
 			result = Activity.RESULT_OK;
 		}
 		catch (Exception ex) {
-			Log.e(Constants.LOG_TAG, "Exception in download", ex);
+			Log.e(Constants.LOG_TAG, "Exception in download for " + urlToDownload + " to file " + _fileName, ex);
+			result = Activity.RESULT_CANCELED;
 		}
-		return result;
+		sendMessageWithResult(intent, result);
 	}
+
+	private byte[] downloadFile(String urlToDownload) throws IOException {
+		HttpGet getMethod = new HttpGet(urlToDownload);
+		ResponseHandler<byte[]> responseHandler = new ByteArrayResponseHandler();
+		byte[] bytes =  _httpClient.execute(getMethod, responseHandler);
+		Log.d(Constants.LOG_TAG, "Downloaded " + bytes.length + " bytes for " + urlToDownload);
+		return bytes;
+	}
+
+	private void saveBytesToFile(byte[] bytesToSave) throws IOException {
+		File output = new File(_fileName);
+		if (output.exists()) {
+			output.delete();
+			Log.d(Constants.LOG_TAG, "Deleting the old file " + output.getName());
+		}
+
+		output.createNewFile();
+		FileOutputStream fos = new FileOutputStream(output);
+		fos.write(bytesToSave);
+		fos.flush() ;
+		fos.close();
+	}
+
 
 	private void sendMessageWithResult(Intent intent, int result) {
 		Bundle extras = intent.getExtras();
