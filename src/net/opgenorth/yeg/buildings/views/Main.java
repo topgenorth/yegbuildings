@@ -1,5 +1,6 @@
 package net.opgenorth.yeg.buildings.views;
 
+import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -15,7 +16,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
-import net.opgenorth.yeg.buildings.util.HttpDownloader;
+import net.opgenorth.yeg.buildings.util.HttpTextDownloader;
 
 public class Main extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class Main extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (R.id.main_menu_refreshdata == itemId) {
-			Intent i = new Intent(this, HttpDownloader.class);
+			Intent i = new Intent(this, HttpTextDownloader.class);
 			i.setData(Uri.parse("http://data.edmonton.ca/DataBrowser/DownloadCsv?container=coe&entitySet=HistoricalBuildings&filter=NOFILTER"));
 			i.putExtra(Constants.INTENT_SERVICE_DOWNLOAD_MESSENGER, new Messenger(_downloadCompleteHandler));
 			Toast.makeText(this, "Download is starting", Toast.LENGTH_SHORT).show();
@@ -72,7 +73,14 @@ public class Main extends TabActivity {
 	private Handler _downloadCompleteHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			Toast.makeText(Main.this, "File downloaded - now load", Toast.LENGTH_SHORT).show();
+			if (msg.arg1 == Activity.RESULT_OK) {
+				String csv = (String) msg.obj;
+				Toast.makeText(Main.this, "File downloaded " + csv.length() + " bytes - now load.", Toast.LENGTH_SHORT).show();
+			}
+			else {
+				Toast.makeText(Main.this, "Looks like the download didn't work", Toast.LENGTH_SHORT).show();
+			}
+
 		}
 	};
 }
