@@ -16,7 +16,12 @@ import android.widget.TabHost;
 import android.widget.Toast;
 import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
+import net.opgenorth.yeg.buildings.data.HistoricalBuildingsCSVToBuildings;
+import net.opgenorth.yeg.buildings.model.Building;
 import net.opgenorth.yeg.buildings.util.HttpTextDownloader;
+import net.opgenorth.yeg.buildings.util.ITransmorgifier;
+
+import java.util.List;
 
 public class Main extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,8 @@ public class Main extends TabActivity {
 			if (msg.arg1 == Activity.RESULT_OK) {
 				String csv = (String) msg.obj;
 				Toast.makeText(Main.this, "File downloaded " + csv.length() + " bytes - now load.", Toast.LENGTH_SHORT).show();
+				ITransmorgifier<String, List<Building>> transmorgifier = new HistoricalBuildingsCSVToBuildings();
+				List<Building> buildings = transmorgifier.transmorgify(csv);
 			}
 			else {
 				Toast.makeText(Main.this, "Looks like the download didn't work", Toast.LENGTH_SHORT).show();
