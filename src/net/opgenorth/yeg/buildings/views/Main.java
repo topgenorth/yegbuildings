@@ -80,9 +80,10 @@ public class Main extends TabActivity {
 		public void handleMessage(Message msg) {
 			if (msg.arg1 == Activity.RESULT_OK) {
 				String csv = (String) msg.obj;
-				Toast.makeText(Main.this, "File downloaded " + csv.length() + " bytes - now load.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Main.this, "Downloaded " + csv.length() + " bytes.", Toast.LENGTH_SHORT).show();
 				ITransmorgifier<String, List<Building>> transmorgifier = new HistoricalBuildingsCSVToBuildings();
 				List<Building> buildings = transmorgifier.transmorgify(csv);
+				Toast.makeText(Main.this, "Finished.  Downloaded " + buildings.size() + " buildings.", Toast.LENGTH_SHORT).show();
 			}
 			else {
 				Toast.makeText(Main.this, "Looks like the download didn't work", Toast.LENGTH_SHORT).show();
