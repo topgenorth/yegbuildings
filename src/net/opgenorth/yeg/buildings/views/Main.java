@@ -3,7 +3,6 @@ package net.opgenorth.yeg.buildings.views;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,8 +21,6 @@ import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
 import net.opgenorth.yeg.buildings.data.BuildingsContentProvider;
 import net.opgenorth.yeg.buildings.data.HistoricalBuildingsCSVToBuildings;
-import net.opgenorth.yeg.buildings.data.IBuildingDataService;
-import net.opgenorth.yeg.buildings.data.SQLiteBuildingDataService;
 import net.opgenorth.yeg.buildings.model.Building;
 import net.opgenorth.yeg.buildings.util.BuildingContentValuesTransmorgifier;
 import net.opgenorth.yeg.buildings.util.HttpTextDownloader;
@@ -50,7 +48,7 @@ public class Main extends TabActivity {
 		int itemId = item.getItemId();
 		if (R.id.main_menu_refreshdata == itemId) {
 			Intent i = createIntentToReloadYegHistoricalBuildings();
-			//_progressDialog = ProgressDialog.show(Main.this, "Please wait...", "Downloading list");
+			_progressDialog = ProgressDialog.show(Main.this, "Please wait...", "Downloading list");
 			startService(i);
 			return true;
 		}
@@ -91,30 +89,33 @@ public class Main extends TabActivity {
 
 
 	private Handler _downloadCompleteHandler = new Handler() {
-		 private ITransmorgifier<Building, ContentValues> _toContentValues = new BuildingContentValuesTransmorgifier();
+		private ITransmorgifier<Building, ContentValues> _toContentValues = new BuildingContentValuesTransmorgifier();
 		@Override
 		public void handleMessage(Message msg) {
+			String message;
 			if (msg.arg1 == Activity.RESULT_OK) {
 				String csv = (String) msg.obj;
-//				Toast.makeText(Main.this, "Downloaded " + csv.length() + " bytes.", Toast.LENGTH_SHORT).show();
+				Log.d(Constants.LOG_TAG, "Downloaded " + csv.length() + " bytes.");
 				ITransmorgifier<String, List<Building>> transmorgifier = new HistoricalBuildingsCSVToBuildings();
 				List<Building> buildings = transmorgifier.transmorgify(csv);
-//				Toast.makeText(Main.this, "Downloaded " + buildings.size() + " buildings. Now to add them to the database.", Toast.LENGTH_SHORT).show();
+
+				Log.d(Constants.LOG_TAG, "Downloaded " + buildings.size() + " buildings. Now to add them to the database.");
 
 				// TODO this is a cheat:  just blast the contents of the whole database
-				int rowsDeleted = getContentResolver().delete(BuildingsContentProvider.Columns.CONTENT_URI, "_id!=-1", null );
-
-				for(Building building: buildings) {
+				int rowsDeleted = getContentResolver().delete(BuildingsContentProvider.Columns.CONTENT_URI, "_id!=-1", null);
+				Log.d(Constants.LOG_TAG, "Deleted " + rowsDeleted + " rows from the buildings table.");
+				for (Building building : buildings) {
 					ContentValues contentValues = _toContentValues.transmorgify(building);
 					getContentResolver().insert(BuildingsContentProvider.Columns.CONTENT_URI, contentValues);
 				}
-				Toast.makeText(Main.this, "Done.", Toast.LENGTH_SHORT).show();
+				Log.d(Constants.LOG_TAG, "Added " + buildings.size() + " to the buildings table.");
+				message = "Done.";
 			}
 			else {
-				Toast.makeText(Main.this, "Looks like the download didn't work", Toast.LENGTH_SHORT).show();
+				message = "Looks like the download didn't work.";
 			}
-
 			_progressDialog.dismiss();
+			Toast.makeText(Main.this, message, Toast.LENGTH_SHORT).show();
 		}
 	};
 }
