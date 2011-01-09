@@ -19,7 +19,7 @@ project = app_pkg.gsub(/\./, '_')
 
 sdk_location = ENV['ANDROID_SDK'] || '/home/tom/opt/android-sdk-linux'
 jsdk_location = ENV['JAVA_SDK'] || '/usr/lib/jvm/java-6-sun'
-android_platform = "android-2.0.1"
+android_platform = "android-4"
 
 src = 'src'
 gen = 'gen'
@@ -33,7 +33,7 @@ apk = "#{bin}/#{project}.apk"
 
 
 # android stuff
-google_maps_api_location = "#{sdk_location}/add-ons/google_apis-6_r01/libs/maps.jar"
+google_maps_api_location = "#{sdk_location}/add-ons/addon_google_apis_google_inc_4/libs/maps.jar"
 android_platform_location = "#{sdk_location}/platforms/#{android_platform}"
 android_jar = "#{android_platform_location}/android.jar"
 android_aidl = "#{android_platform_location}/framework.aidl"
