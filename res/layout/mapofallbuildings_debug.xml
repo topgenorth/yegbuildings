@@ -7,11 +7,14 @@
     <!-- This layout file has the debug.store Google Maps apiKey, it should only be used in development.  The application
      will use this layout if <application android:icon="@drawable/icon" android:debuggable="true" /> in
      AndroidManifest.xml !-->
+    <!-- If you need to sign your keystore: http://code.google.com/android/maps-api-signup.html   -->
+    <!-- Fingerprint                                      API Key                                 -->
+    <!-- EA:4F:37:11:A7:74:D3:98:CB:E8:01:31:17:4C:E3:64  05L09-1gDs7cX6324wgL7A6Kjp2XjeGWemDLl4A -->
     <com.google.android.maps.MapView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mapofallbuildings"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:apiKey="05L09-1gDs7eEOHCIhW4PXVZI4gbbiIj3-2SOfQ"
+            android:apiKey="05L09-1gDs7cX6324wgL7A6Kjp2XjeGWemDLl4A"
             android:clickable="true"/>
 </LinearLayout>
