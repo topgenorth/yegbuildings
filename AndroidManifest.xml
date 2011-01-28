@@ -25,3 +25,4 @@
         <provider android:name=".data.BuildingsContentProvider" android:authorities="net.opgenorth.yeg.buildings"/>
     </application>
 </manifest>
+
