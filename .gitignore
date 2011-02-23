@@ -4,3 +4,5 @@ gen
 gen/*
 bin
 bin/*
+java/.idea/workspace.xml
+java/.idea/tasks.xml
