@@ -44,6 +44,8 @@ Ankh.NoLoad
 _ReSharper*/
 *.resharper
 [Tt]est[Rr]esult*
+*.fb7l
+*.fb7lck
 
 #Project files
 [Bb]uild/
