@@ -2,9 +2,9 @@
 using Android.OS;
 using Android.Widget;
 
-namespace yegbuildings
+namespace net.opgenorth.yeg.buildings
 {
-    [Activity(Label = "yegbuildings", MainLauncher = true)]
+    [Activity(Label = "YEG Buildings", MainLauncher = true)]
     public class Activity1 : Activity
     {
         private int count = 1;

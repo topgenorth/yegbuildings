@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="internalOnly" package="net.opgenorth.yeg.buildings" android:versionCode="20" android:versionName="20">
+  <application android:label="YEG Buildings">
+  </application>
+  <uses-sdk android:minSdkVersion="8" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+</manifest>
