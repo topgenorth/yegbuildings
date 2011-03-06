@@ -5,13 +5,8 @@ namespace net.opgenorth.yeg.buildings
 {
     public interface IBuildingDataService
     {
+        bool HasRecords { get; }
         IList<Building> FetchAll();
         IList<Building> FetchAll(IBuildingSorter sortedBy);
-        bool HasRecords { get;  }
-    }
-
-    public interface IBuildingSorter
-    {
-        IList<Building> Sort(IList<Building> buildings);
     }
 }
