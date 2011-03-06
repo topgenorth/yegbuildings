@@ -2,8 +2,12 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("YEG Buildings")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A simple little program for showing you some of the historical buildings in Edmonton, Alberta, Canada.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("MonoDroid - DEBUG")]
+#elif
 [assembly: AssemblyConfiguration("MonoDroid")]
+#endif
 [assembly: AssemblyCompany("Opgenorth Holdings")]
 [assembly: AssemblyProduct("net.opgenorth.yeg.buildings")]
 [assembly: AssemblyCopyright("Copyright ©  2011")]
