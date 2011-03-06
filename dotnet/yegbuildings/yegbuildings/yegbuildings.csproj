@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="model\Building.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -68,6 +70,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\Drawable\building_medium.png" />
+    <AndroidResource Include="Resources\Drawable\ic_tab_map_white.png" />
+    <AndroidResource Include="Resources\Drawable\empty.png" />
+    <AndroidResource Include="Resources\Drawable\ic_menu_mapmode.png" />
+    <AndroidResource Include="Resources\Drawable\ic_menu_refresh.png" />
+    <AndroidResource Include="Resources\Drawable\ic_tab_list.xml" />
+    <AndroidResource Include="Resources\Drawable\ic_tab_list_bullets.png" />
+    <AndroidResource Include="Resources\Drawable\ic_tab_map.xml" />
+    <AndroidResource Include="Resources\Drawable\ic_tab_map_grey.png" />
+    <AndroidResource Include="Resources\Drawable\maps1.png" />
+    <AndroidResource Include="Resources\Drawable\marker.png" />
+    <AndroidResource Include="Resources\Drawable\maps2.png" />
+    <AndroidResource Include="Resources\Values\Colors.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

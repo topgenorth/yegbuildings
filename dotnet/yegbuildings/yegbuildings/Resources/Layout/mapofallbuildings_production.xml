@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <!-- This layout file has the debug.store Google Maps apiKey, it should only be used in production.  The application
+     will use this layout if <application android:icon="@drawable/icon" android:debuggable="false" /> in
+     AndroidManifest.xml !-->
+    <com.google.android.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapofallbuildings"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:apiKey="05L09-1gDs7f-7MgAupHR-H2sixSWg6n0CKV2zw"
+            android:clickable="true"/>
+</LinearLayout>
