@@ -1,18 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace net.opgenorth.yeg.buildings.model
 {
-    class Building
+    public class Building
     {
         public long Id { get; set; }
         public Guid RowKey { get; set; }
@@ -23,10 +13,5 @@ namespace net.opgenorth.yeg.buildings.model
         public string ConstructionDate { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-    }
-
-    public class LatLonLocation
-    {
-        
     }
 }
