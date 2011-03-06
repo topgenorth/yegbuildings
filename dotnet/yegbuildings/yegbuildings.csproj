@@ -49,9 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity1.cs" />
+    <Compile Include="data\CsvLinesToBuildingList.cs" />
+    <Compile Include="data\CsvToBuilding.cs" />
+    <Compile Include="IBuildingDataService.cs" />
+    <Compile Include="IBuildingSorter.cs" />
+    <Compile Include="ITransmorgifier.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="model\Building.cs" />
+    <Compile Include="model\LatLonLocation.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
