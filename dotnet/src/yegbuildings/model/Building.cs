@@ -1,9 +1,11 @@
 using System;
+using Android.Locations;
 
 namespace net.opgenorth.yeg.buildings.model
 {
     public class Building
     {
+
         public long Id { get; set; }
         public Guid RowKey { get; set; }
         public string Name { get; set; }
@@ -13,5 +15,6 @@ namespace net.opgenorth.yeg.buildings.model
         public string ConstructionDate { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        
     }
 }
