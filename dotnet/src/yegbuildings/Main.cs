@@ -1,5 +1,5 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -13,6 +13,30 @@ namespace net.opgenorth.yeg.buildings
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            SetupTabs();
+        }
+
+        private void SetupTabs()
+        {
+            TabHost.TabSpec spec;
+
+            // Set up the first intent for the map.
+            var mapIntent = new Intent().SetClass(this, typeof (BuildingMap));
+            spec = TabHost.NewTabSpec("Map")
+                .SetIndicator(
+                    Resources.GetString(Resource.String.buildinglist_tabtext),
+                    Resources.GetDrawable(Resource.Drawable.maps2))
+                .SetContent(mapIntent);
+            TabHost.AddTab(spec);
+
+            // Setup another intent for the list.
+            var listIntent = new Intent().SetClass(this, typeof (BuildingList));
+            spec = TabHost.NewTabSpec("List")
+                .SetIndicator(
+                    Resources.GetString(Resource.String.buildinglist_tabtext),
+                    Resources.GetDrawable(Resource.Drawable.ic_tab_list))
+                .SetContent(listIntent);
+            TabHost.AddTab(spec);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -33,6 +57,7 @@ namespace net.opgenorth.yeg.buildings
             {
                 Toast.MakeText(this, "Don't know how to handle menu item " + item.ItemId, ToastLength.Short);
             }
+            return true;
         }
     }
 }
