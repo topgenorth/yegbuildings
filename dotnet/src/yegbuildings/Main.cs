@@ -7,10 +7,8 @@ using Android.Widget;
 namespace net.opgenorth.yeg.buildings
 {
     [Activity(Label = "YEG Buildings", MainLauncher = true)]
-    public class Main : TabActivity 
+    public class Main : TabActivity
     {
-        private int count = 1;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -25,5 +23,16 @@ namespace net.opgenorth.yeg.buildings
             return true;
         }
 
+        public override bool OnMenuItemSelected(int featureId, IMenuItem item)
+        {
+            if (item.ItemId == Resource.Id.main_menu_refreshdata)
+            {
+                Toast.MakeText(this, "TODO: Reload buildings from data.edmonton.ca", ToastLength.Short);
+            }
+            else
+            {
+                Toast.MakeText(this, "Don't know how to handle menu item " + item.ItemId, ToastLength.Short);
+            }
+        }
     }
 }
