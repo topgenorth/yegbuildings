@@ -57,12 +57,12 @@
     <Compile Include="Main.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="model\Building.cs" />
-    <Compile Include="model\LatLonLocation.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LocationHelpers.cs" />
+    <Compile Include="Util\HttpTextDownloader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,8 @@
     <AndroidResource Include="Resources\Drawable\marker.png" />
     <AndroidResource Include="Resources\Drawable\maps2.png" />
     <AndroidResource Include="Resources\Values\Colors.xml" />
+    <AndroidResource Include="Resources\Menu\map.xml" />
+    <AndroidResource Include="Resources\Menu\main.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
