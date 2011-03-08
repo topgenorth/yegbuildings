@@ -90,6 +90,20 @@ namespace net.opgenorth.yeg.buildings
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int main_menu_refreshdata = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int map_menu_showMyLocation = 2131165185;
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class Layout
 		{
 			
@@ -97,6 +111,20 @@ namespace net.opgenorth.yeg.buildings
 			public const int Main = 2130903040;
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int main = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int map = 2131099649;
+			
+			private Menu()
 			{
 			}
 		}
