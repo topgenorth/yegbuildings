@@ -10,7 +10,6 @@ namespace net.opgenorth.yeg.buildings
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.buildinglist);
-            // Create your application here
         }
 
     }

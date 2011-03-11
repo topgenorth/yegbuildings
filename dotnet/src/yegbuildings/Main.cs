@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 
@@ -55,6 +56,7 @@ namespace net.opgenorth.yeg.buildings
             }
             else
             {
+                Log.Wtf(Constants.LOG_TAG, "Don't know what to do with this IMenuItem: " + item.ItemId);
                 Toast.MakeText(this, "Don't know how to handle menu item " + item.ItemId, ToastLength.Short);
             }
             return true;
