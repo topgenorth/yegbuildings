@@ -51,8 +51,11 @@
   <ItemGroup>
     <Compile Include="BuildingList.cs" />
     <Compile Include="BuildingMap.cs" />
+    <Compile Include="data\BuildingContentProvider.cs" />
+    <Compile Include="data\Columns.cs" />
     <Compile Include="data\CsvLinesToBuildingList.cs" />
     <Compile Include="data\CsvToBuilding.cs" />
+    <Compile Include="data\DatabaseHelper.cs" />
     <Compile Include="IBuildingDataService.cs" />
     <Compile Include="IBuildingSorter.cs" />
     <Compile Include="ITransmorgifier.cs" />
@@ -95,7 +98,9 @@
     <AndroidResource Include="Resources\Drawable\maps2.png" />
     <AndroidResource Include="Resources\Values\Colors.xml" />
     <AndroidResource Include="Resources\Menu\map.xml" />
-    <AndroidResource Include="Resources\Menu\main.xml" />
+    <AndroidResource Include="Resources\Menu\main.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\Layout\buildinglist.axml" />
     <AndroidResource Include="Resources\Layout\historicalbuildingrow.axml" />
     <AndroidResource Include="Resources\Layout\mapofallbuildings_debug.axml" />
