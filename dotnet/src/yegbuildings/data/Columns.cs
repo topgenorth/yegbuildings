@@ -33,7 +33,7 @@ namespace net.opgenorth.yeg.buildings.data
                                                               LATITUDE
                                                           };
 
-        private static readonly String[] REQUIRED_COLUMNS = new[]
+        public  static readonly String[] REQUIRED_COLUMNS = new[]
                                                                 {
                                                                     ENTITY_ID,
                                                                     NAME,

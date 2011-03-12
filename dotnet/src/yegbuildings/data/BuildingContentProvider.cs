@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Database;
 using Android.Database.Sqlite;
@@ -17,7 +18,7 @@ namespace net.opgenorth.yeg.buildings.data
         private static readonly UriMatcher _uriMatcher;
         private const int BUILDINGS = 1;
         private const int BUILDING_ID = 3;
-        private DatabaseHelper _openHelper;
+        private DatabaseHelper _dbHelper;
 
         static BuildingContentProvider()
         {
@@ -26,22 +27,48 @@ namespace net.opgenorth.yeg.buildings.data
             _uriMatcher.AddURI(Columns.AUTHORITY, "buildings", BUILDING_ID);
 
             _buildingsProjectionMap = new Dictionary<string, string>
-                                       {
-                                           {Columns.ENTITY_ID, Columns.ENTITY_ID},
-                                           {Columns.NAME, Columns.NAME},
-                                           {Columns.ADDRESS, Columns.ADDRESS},
-                                           {Columns.NEIGHBOURHOOD, Columns.NEIGHBOURHOOD},
-                                           {Columns.URL, Columns.URL},
-                                           {Columns.CONSTRUCTION_DATE, Columns.CONSTRUCTION_DATE},
-                                           {Columns.LONGITUDE, Columns.LONGITUDE},
-                                           {Columns.LATITUDE, Columns.LATITUDE},
-                                           {Columns._ID, Columns._ID}
-                                       };
+                                          {
+                                              {Columns.ENTITY_ID, Columns.ENTITY_ID},
+                                              {Columns.NAME, Columns.NAME},
+                                              {Columns.ADDRESS, Columns.ADDRESS},
+                                              {Columns.NEIGHBOURHOOD, Columns.NEIGHBOURHOOD},
+                                              {Columns.URL, Columns.URL},
+                                              {Columns.CONSTRUCTION_DATE, Columns.CONSTRUCTION_DATE},
+                                              {Columns.LONGITUDE, Columns.LONGITUDE},
+                                              {Columns.LATITUDE, Columns.LATITUDE},
+                                              {Columns._ID, Columns._ID}
+                                          };
         }
 
         public override int Delete(Uri uri, string selection, string[] selectionArgs)
         {
-            throw new NotImplementedException();
+            var db = _dbHelper.WritableDatabase;
+            string where;
+
+            switch (_uriMatcher.Match(uri))
+            {
+                case BUILDINGS:
+                    where = selection;
+                    break;
+                case BUILDING_ID:
+                    where = GetWhereClause(uri, selection);
+                    break;
+                default:
+                    throw new ArgumentException("Unknown URI:" + uri, "uri");
+            }
+            var count = db.Delete(BUILDINGS_TABLE_NAME, where, selectionArgs);
+            return count;
+        }
+
+        private static string GetWhereClause(Uri uri, string selection)
+        {
+            var segment = uri.PathSegments[1];
+            var where = Columns._ID + "=" + segment;
+            if (!String.IsNullOrWhiteSpace(selection))
+            {
+                where += " AND (" + where + ")";
+            }
+            return where;
         }
 
         public override string GetType(Uri uri)
@@ -56,14 +83,32 @@ namespace net.opgenorth.yeg.buildings.data
             }
         }
 
-        public override Uri Insert(Uri uri, ContentValues values)
+        public override Uri Insert(Uri uri, ContentValues initialValues)
         {
-            throw new NotImplementedException();
+            if (_uriMatcher.Match(uri) != BUILDINGS)
+            {
+                throw new ArgumentException("Unknown URI: " + uri, "uri");
+            }
+            var values = initialValues == null ? new ContentValues() : new ContentValues(initialValues);
+
+            foreach (var columnName in Columns.REQUIRED_COLUMNS.Where(columnName => !values.ContainsKey(columnName)))
+            {
+                throw new ArgumentException("Missing value for column " + columnName, "initialValues");
+            }
+            var db = _dbHelper.WritableDatabase;
+            var rowId = db.Insert(BUILDINGS_TABLE_NAME, Columns.NAME, values);
+            if (rowId > 0)
+            {
+                var buildingUri = ContentUris.WithAppendedId(Columns.CONTENT_URI, rowId);
+                Context.ContentResolver.NotifyChange(uri, null);
+                return buildingUri;
+            }
+            throw new SQLException("Failed to insert row into " + uri);
         }
 
         public override bool OnCreate()
         {
-            _openHelper = new DatabaseHelper(this.Context);
+            _dbHelper = new DatabaseHelper(Context);
             return true;
         }
 
@@ -80,28 +125,35 @@ namespace net.opgenorth.yeg.buildings.data
             }
 
 
-            string orderBy;
-            if (String.IsNullOrWhiteSpace(sortOrder))
-            {
-                orderBy = Columns.DEFAULT_SORT_ORDER;
-            }
-            else
-            {
-                orderBy = sortOrder;
-            }
+            var orderBy = String.IsNullOrWhiteSpace(sortOrder) ? Columns.DEFAULT_SORT_ORDER : sortOrder;
 
-            var db = _openHelper.ReadableDatabase;
+            var db = _dbHelper.ReadableDatabase;
             var c = qb.Query(db, projection, selection, selectionArgs, null, null, orderBy);
-            c.SetNotificationUri(this.Context.ContentResolver, uri);
+            c.SetNotificationUri(Context.ContentResolver, uri);
             return c;
         }
 
         public override int Update(Uri uri, ContentValues values, string selection, string[] selectionArgs)
         {
-            throw new NotImplementedException();
+            var db = _dbHelper.WritableDatabase;
+            string where;
+            switch (_uriMatcher.Match(uri))
+            {
+                case BUILDINGS:
+                    where = selection;
+                    break;
+                case BUILDING_ID:
+                    where = GetWhereClause(uri, selection);
+                    break;
+                default:
+                    throw new ArgumentException("Unknown URI : " + uri, "uri");
+            }
+            var count = db.Update(BUILDINGS_TABLE_NAME, values, where, selectionArgs);
+            Context.ContentResolver.NotifyChange(uri, null);
+            return count;
         }
 
-        private bool IsCollectionUri(Uri uri)
+        private static bool IsCollectionUri(Uri uri)
         {
             return (_uriMatcher.Match(uri) == BUILDINGS);
         }
