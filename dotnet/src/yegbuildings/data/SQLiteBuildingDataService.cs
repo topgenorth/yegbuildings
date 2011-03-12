@@ -94,8 +94,7 @@ namespace net.opgenorth.yeg.buildings.data
         public IList<Building> FetchAll(IBuildingSorter sortedBy)
         {
             var buildings = FetchAllInternal();
-//            buildings.Sort(sortedBy);
-            return buildings;
+            return sortedBy == null ? buildings : sortedBy.Sort(buildings);
         }
     }
 }
