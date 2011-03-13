@@ -67,7 +67,7 @@
     <Compile Include="Model\SortByDistanceFromLocation.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LocationHelpers.cs" />
+    <Compile Include="Util\LocationHelpers.cs" />
     <Compile Include="Util\ActivityHelpers.cs" />
     <Compile Include="Util\HttpTextDownloader.cs" />
     <Compile Include="Widgets\BuildingListAdapter.cs" />
