@@ -1,6 +1,7 @@
 using System;
 using Android.Content;
 using Android.Locations;
+using Net.Opgenorth.Yeg.Buildings.Util;
 
 namespace Net.Opgenorth.Yeg.Buildings.model
 {
@@ -27,17 +28,31 @@ namespace Net.Opgenorth.Yeg.Buildings.model
 
         public double Distance
         {
-            get { throw new NotImplementedException(); }
+            get { return _relativeLocation == null ? 0 : _relativeLocation.DistanceTo(_building); }
         }
 
         public void AddTo(Intent intent)
         {
-            throw new NotImplementedException();
+            intent.PutExtra(Constants.INTENT_BUILDING_NAME_KEY, _building.Name);
+            intent.PutExtra(Constants.INTENT_BUILDING_ADDRESS_KEY, _building.Address);
+            intent.PutExtra(Constants.INTENT_BUILDING_CONSTRUCTION_DATE_KEY, _building.ConstructionDate);
+            intent.PutExtra(Constants.INTENT_LATITUDE_KEY, _building.Latitude);
+            intent.PutExtra(Constants.INTENT_LONGITUDE_KEY, _building.Longitude);
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return String.Format("{0}:{1},{2}", _building.Name, _building.Latitude, _building.Longitude);
+        }
+
+        public Building Building
+        {
+            get { return _building; }
+        }
+
+        public Location Location
+        {
+            get { return _relativeLocation; }
         }
     }
 }

@@ -4,8 +4,9 @@ using Net.Opgenorth.Yeg.Buildings.model;
 
 namespace Net.Opgenorth.Yeg.Buildings.Widgets
 {
-    public class BuildingRowWrapper
+    public class BuildingRowWrapper: Java.Lang.Object 
     {
+        public static readonly int TAG_KEY = 1;
         private readonly View _baseView;
         private TextView _nameLabel;
         private TextView _addressLabel;
@@ -15,6 +16,7 @@ namespace Net.Opgenorth.Yeg.Buildings.Widgets
         public BuildingRowWrapper(View baseView)
         {
             _baseView = baseView;
+            _baseView.Tag = this;
         }
 
         public TextView NameLabel
@@ -56,5 +58,6 @@ namespace Net.Opgenorth.Yeg.Buildings.Widgets
                 DistanceToMeLabel.Text = "Distance: " + string.Format(formatString, distance) + units;
             }
         }
+
     }
 }
