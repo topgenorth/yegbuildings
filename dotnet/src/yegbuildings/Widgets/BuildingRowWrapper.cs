@@ -6,7 +6,6 @@ namespace Net.Opgenorth.Yeg.Buildings.Widgets
 {
     public class BuildingRowWrapper: Java.Lang.Object 
     {
-        public static readonly int TAG_KEY = 1;
         private readonly View _baseView;
         private TextView _nameLabel;
         private TextView _addressLabel;
