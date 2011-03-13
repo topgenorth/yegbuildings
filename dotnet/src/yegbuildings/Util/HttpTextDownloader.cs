@@ -5,7 +5,7 @@ using Android.App;
 using Android.Content;
 using Environment = Android.OS.Environment;
 
-namespace net.opgenorth.yeg.buildings.Util
+namespace Net.Opgenorth.Yeg.Buildings.Util
 {
     // todo don't think we need this.
     public class HttpTextDownloader : IntentService

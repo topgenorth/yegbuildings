@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.Locations;
 
-namespace net.opgenorth.yeg.buildings.model
+namespace Net.Opgenorth.Yeg.Buildings.model
 {
     public class SortByDistanceFromLocation : IBuildingSorter
     {

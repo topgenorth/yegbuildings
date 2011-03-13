@@ -3,7 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Util;
 
-namespace net.opgenorth.yeg.buildings.Util
+namespace Net.Opgenorth.Yeg.Buildings.Util
 {
     public static class ActivityHelpers
     {

@@ -1,7 +1,8 @@
 ﻿using Android.App;
 using Android.OS;
+using Net.Opgenorth.Yeg.Buildings;
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     [Activity(Label ="List")]
     public class BuildingList : ListActivity

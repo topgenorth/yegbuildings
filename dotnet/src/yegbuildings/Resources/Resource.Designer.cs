@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
 	
 	

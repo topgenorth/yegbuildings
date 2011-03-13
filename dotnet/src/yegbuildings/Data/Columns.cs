@@ -2,7 +2,7 @@
 using Android.Provider;
 using Uri = Android.Net.Uri;
 
-namespace net.opgenorth.yeg.buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.data
 {
     public static class Columns
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{7A6FB0C0-2D1A-4FE1-BF03-D81728D18E0D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>net.opgenorth.yeg.buildings.tests</RootNamespace>
-    <AssemblyName>net.opgenorth.yeg.buildings.tests</AssemblyName>
+    <RootNamespace>Net.Opgenorth.Yeg.Buildings.Tests</RootNamespace>
+    <AssemblyName>yegbuildings.tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

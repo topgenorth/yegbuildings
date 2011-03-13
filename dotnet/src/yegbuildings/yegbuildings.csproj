@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>net.opgenorth.yeg.buildings</RootNamespace>
+    <RootNamespace>Net.Opgenorth.Yeg.Buildings</RootNamespace>
     <AssemblyName>yegbuildings</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
@@ -51,20 +51,20 @@
   <ItemGroup>
     <Compile Include="BuildingList.cs" />
     <Compile Include="BuildingMap.cs" />
-    <Compile Include="data\BuildingContentProvider.cs" />
-    <Compile Include="data\Columns.cs" />
-    <Compile Include="data\CsvLinesToBuildingList.cs" />
-    <Compile Include="data\CsvToBuilding.cs" />
-    <Compile Include="data\DatabaseHelper.cs" />
-    <Compile Include="data\SQLiteBuildingDataService.cs" />
+    <Compile Include="Data\BuildingContentProvider.cs" />
+    <Compile Include="Data\Columns.cs" />
+    <Compile Include="Data\CsvLinesToBuildingList.cs" />
+    <Compile Include="Data\CsvToBuilding.cs" />
+    <Compile Include="Data\DatabaseHelper.cs" />
+    <Compile Include="Data\SQLiteBuildingDataService.cs" />
     <Compile Include="IBuildingDataService.cs" />
     <Compile Include="IBuildingSorter.cs" />
     <Compile Include="ITransmorgifier.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="model\Building.cs" />
-    <Compile Include="model\RelativeBuildingLocation.cs" />
-    <Compile Include="model\SortByDistanceFromLocation.cs" />
+    <Compile Include="Model\Building.cs" />
+    <Compile Include="Model\RelativeBuildingLocation.cs" />
+    <Compile Include="Model\SortByDistanceFromLocation.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LocationHelpers.cs" />

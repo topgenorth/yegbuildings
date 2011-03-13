@@ -1,6 +1,6 @@
 using System;
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     public static class Constants
     {

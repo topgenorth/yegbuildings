@@ -5,7 +5,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     [Activity(Label = "YEG Buildings", MainLauncher = true)]
     public class Main : TabActivity

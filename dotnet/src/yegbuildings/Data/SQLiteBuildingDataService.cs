@@ -4,10 +4,10 @@ using Android.Content;
 using Android.Database;
 using Android.Util;
 using Java.Lang;
-using net.opgenorth.yeg.buildings.model;
+using Net.Opgenorth.Yeg.Buildings.model;
 using Exception = System.Exception;
 
-namespace net.opgenorth.yeg.buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.data
 {
     public class SQLiteBuildingDataService : IBuildingDataService
     {

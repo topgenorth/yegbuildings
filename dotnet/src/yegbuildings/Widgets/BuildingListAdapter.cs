@@ -1,4 +1,4 @@
-namespace net.opgenorth.yeg.buildings.Widgets
+namespace Net.Opgenorth.Yeg.Buildings.Widgets
 {
     public class BuildingListAdapter
     {

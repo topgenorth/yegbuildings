@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using net.opgenorth.yeg.buildings.model;
+using Net.Opgenorth.Yeg.Buildings.model;
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     public interface IBuildingDataService
     {

@@ -6,7 +6,7 @@ using Android.Database;
 using Android.Database.Sqlite;
 using Uri = Android.Net.Uri;
 
-namespace net.opgenorth.yeg.buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.data
 {
     public class BuildingContentProvider : ContentProvider
     {

@@ -1,8 +1,8 @@
 using Android.Content;
 using Android.Locations;
-using net.opgenorth.yeg.buildings.model;
+using Net.Opgenorth.Yeg.Buildings.model;
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     public static class LocationHelpers
     {

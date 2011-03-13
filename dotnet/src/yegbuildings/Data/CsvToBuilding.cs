@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using net.opgenorth.yeg.buildings.model;
+using Net.Opgenorth.Yeg.Buildings.model;
 
-namespace net.opgenorth.yeg.buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.data
 {
     public class CsvLineToBuilding : ITransmorgifier<IList<string>, Building>, ITransmorgifier<string, Building>
     {

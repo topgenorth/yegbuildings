@@ -1,8 +1,9 @@
 using Android.App;
 using Android.OS;
-using net.opgenorth.yeg.buildings.Util;
+using Net.Opgenorth.Yeg.Buildings;
+using Net.Opgenorth.Yeg.Buildings.Util;
 
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     [Activity(Label = "Map")]
     public class BuildingMap : Activity

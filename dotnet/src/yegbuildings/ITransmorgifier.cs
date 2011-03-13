@@ -1,4 +1,4 @@
-namespace net.opgenorth.yeg.buildings
+namespace Net.Opgenorth.Yeg.Buildings
 {
     /// <summary>
     /// Implemented by classes that will convert objects from one type to another.

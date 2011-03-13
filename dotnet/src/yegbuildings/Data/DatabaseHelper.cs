@@ -5,7 +5,7 @@ using Android.Content;
 using Android.Database.Sqlite;
 using Android.Util;
 
-namespace net.opgenorth.yeg.buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.data
 {
     public class DatabaseHelper : SQLiteOpenHelper
     {

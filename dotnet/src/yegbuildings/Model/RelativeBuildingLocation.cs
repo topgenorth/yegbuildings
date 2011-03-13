@@ -2,7 +2,7 @@ using System;
 using Android.Content;
 using Android.Locations;
 
-namespace net.opgenorth.yeg.buildings.model
+namespace Net.Opgenorth.Yeg.Buildings.model
 {
     public class RelativeBuildingLocation
     {
