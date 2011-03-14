@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Net.Opgenorth.Yeg.Buildings.model;
+using Net.Opgenorth.Yeg.Buildings.Model;
 
 namespace Net.Opgenorth.Yeg.Buildings
 {

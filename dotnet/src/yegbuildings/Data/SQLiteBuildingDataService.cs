@@ -4,10 +4,10 @@ using Android.Content;
 using Android.Database;
 using Android.Util;
 using Java.Lang;
-using Net.Opgenorth.Yeg.Buildings.model;
+using Net.Opgenorth.Yeg.Buildings.Model;
 using Exception = System.Exception;
 
-namespace Net.Opgenorth.Yeg.Buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.Data
 {
     public class SQLiteBuildingDataService : IBuildingDataService
     {
@@ -48,7 +48,7 @@ namespace Net.Opgenorth.Yeg.Buildings.data
             }
         }
 
-        public List<Building> FetchAllInternal()
+        private List<Building> FetchAllInternal()
         {
             var buildings = new List<Building>();
             var c = _context.ContentResolver.Query(Columns.CONTENT_URI, Columns.ALL_COLUMNS, null, null, null);

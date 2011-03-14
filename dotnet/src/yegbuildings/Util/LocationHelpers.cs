@@ -1,6 +1,6 @@
 using Android.Content;
 using Android.Locations;
-using Net.Opgenorth.Yeg.Buildings.model;
+using Net.Opgenorth.Yeg.Buildings.Model;
 
 namespace Net.Opgenorth.Yeg.Buildings.Util
 {

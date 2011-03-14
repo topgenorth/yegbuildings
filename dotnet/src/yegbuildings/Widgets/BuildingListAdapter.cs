@@ -3,11 +3,11 @@ using System.Linq;
 using Android.App;
 using Android.Views;
 using Android.Widget;
-using Net.Opgenorth.Yeg.Buildings.model;
+using Net.Opgenorth.Yeg.Buildings.Model;
 
 namespace Net.Opgenorth.Yeg.Buildings.Widgets
 {
-    public class BuildingListAdapter : ArrayAdapter
+    public class BuildingListAdapter : ArrayAdapter<RelativeBuildingLocation>
     {
         private readonly Activity _context;
         private readonly List<RelativeBuildingLocation> _buildingLocations;

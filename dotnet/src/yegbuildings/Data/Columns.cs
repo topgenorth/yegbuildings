@@ -2,12 +2,12 @@
 using Android.Provider;
 using Uri = Android.Net.Uri;
 
-namespace Net.Opgenorth.Yeg.Buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.Data
 {
     public static class Columns
     {
         public static readonly String AUTHORITY = "net.opgenorth.yeg.buildings";
-        public static readonly Uri CONTENT_URI = Uri.Parse("content://" + AUTHORITY + "/buidlings");
+        public static readonly Uri CONTENT_URI = Uri.Parse("content://" + AUTHORITY + "/buildings");
         public static readonly String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.opgenorth.yeg.building";
         public static readonly String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.opgenorth.yet.building";
         public static readonly String _ID = BaseColumnsConsts.Id;

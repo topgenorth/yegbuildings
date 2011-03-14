@@ -1,6 +1,6 @@
 using System;
 
-namespace Net.Opgenorth.Yeg.Buildings.model
+namespace Net.Opgenorth.Yeg.Buildings.Model
 {
     public class Building
     {

@@ -1,6 +1,6 @@
 using Android.Views;
 using Android.Widget;
-using Net.Opgenorth.Yeg.Buildings.model;
+using Net.Opgenorth.Yeg.Buildings.Model;
 
 namespace Net.Opgenorth.Yeg.Buildings.Widgets
 {

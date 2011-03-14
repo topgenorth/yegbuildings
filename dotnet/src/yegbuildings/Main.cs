@@ -7,7 +7,7 @@ using Android.Widget;
 
 namespace Net.Opgenorth.Yeg.Buildings
 {
-    [Activity(Label = "YEG Buildings", MainLauncher = true)]
+    [Activity(Label = "YEG Buildings")]
     public class Main : TabActivity
     {
         protected override void OnCreate(Bundle bundle)

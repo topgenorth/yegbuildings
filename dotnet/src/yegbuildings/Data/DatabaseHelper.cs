@@ -5,7 +5,7 @@ using Android.Content;
 using Android.Database.Sqlite;
 using Android.Util;
 
-namespace Net.Opgenorth.Yeg.Buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.Data
 {
     public class DatabaseHelper : SQLiteOpenHelper
     {
@@ -78,7 +78,7 @@ namespace Net.Opgenorth.Yeg.Buildings.data
         private String GetSqlForBuildingData()
         {
 //                ITransmorgifier<object, string> inputStreamToString = new Inp
-            var stream = new StreamReader(_context.Assets.Open("buidlings.sql"));
+            var stream = new StreamReader(_context.Assets.Open("buildings.sql"));
             var sql = stream.ReadToEnd();
             stream.Close();
             return sql;

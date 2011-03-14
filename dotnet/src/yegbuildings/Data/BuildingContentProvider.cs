@@ -6,7 +6,7 @@ using Android.Database;
 using Android.Database.Sqlite;
 using Uri = Android.Net.Uri;
 
-namespace Net.Opgenorth.Yeg.Buildings.data
+namespace Net.Opgenorth.Yeg.Buildings.Data
 {
     public class BuildingContentProvider : ContentProvider
     {
@@ -24,7 +24,7 @@ namespace Net.Opgenorth.Yeg.Buildings.data
         {
             _uriMatcher = new UriMatcher(UriMatcher.NoMatch);
             _uriMatcher.AddURI(Columns.AUTHORITY, "buildings", BUILDINGS);
-            _uriMatcher.AddURI(Columns.AUTHORITY, "buildings", BUILDING_ID);
+            _uriMatcher.AddURI(Columns.AUTHORITY, "buildings/#", BUILDING_ID);
 
             _buildingsProjectionMap = new Dictionary<string, string>
                                           {
