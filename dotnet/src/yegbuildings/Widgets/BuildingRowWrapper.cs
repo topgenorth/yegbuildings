@@ -1,10 +1,11 @@
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
 using Net.Opgenorth.Yeg.Buildings.Model;
 
 namespace Net.Opgenorth.Yeg.Buildings.Widgets
 {
-    public class BuildingRowWrapper: Java.Lang.Object 
+    public class BuildingRowWrapper : Object
     {
         private readonly View _baseView;
         private TextView _nameLabel;
@@ -18,22 +19,22 @@ namespace Net.Opgenorth.Yeg.Buildings.Widgets
             _baseView.Tag = this;
         }
 
-        public TextView NameLabel
+        private TextView NameLabel
         {
             get { return _nameLabel ?? (_nameLabel = _baseView.FindViewById<TextView>(Resource.Id.building_row_name)); }
         }
 
-        public TextView AddressLabel
+        private TextView AddressLabel
         {
             get { return _addressLabel ?? (_addressLabel = _baseView.FindViewById<TextView>(Resource.Id.building_row_address)); }
         }
 
-        public TextView YearBuilt
+        private TextView YearBuilt
         {
             get { return _yearBuiltLabel ?? (_yearBuiltLabel = _baseView.FindViewById<TextView>(Resource.Id.building_row_year_built)); }
         }
 
-        public TextView DistanceToMeLabel
+        private TextView DistanceToMeLabel
         {
             get { return _distanceToMeLabel ?? (_distanceToMeLabel = _baseView.FindViewById<TextView>(Resource.Id.building_distance_to_me)); }
         }
@@ -57,6 +58,5 @@ namespace Net.Opgenorth.Yeg.Buildings.Widgets
                 DistanceToMeLabel.Text = "Distance: " + string.Format(formatString, distance) + units;
             }
         }
-
     }
 }
