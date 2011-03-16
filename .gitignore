@@ -6,6 +6,7 @@ bin
 bin/*
 java/.idea/workspace.xml
 java/.idea/tasks.xml
+*.apk
 
 #OS junk files
 [Tt]humbs.db
