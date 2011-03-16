@@ -85,20 +85,24 @@ public class BuildingMap extends MapActivity implements LocationListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
+/*
 		_locationManager = LocationManagerBuilder.createLocationManager()
 				.with(this)
 				.listeningWith(this)
 				.build();
 		_myLocationOverlay.enableMyLocation();
 		_myLocationOverlay.enableCompass();
+*/
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+/*
 		_locationManager.removeUpdates(this);
 		_myLocationOverlay.disableMyLocation();
 		_myLocationOverlay.disableCompass();
+*/
 	}
 
 	private void initializeMapView() {
