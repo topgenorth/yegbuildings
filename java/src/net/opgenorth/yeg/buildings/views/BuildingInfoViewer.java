@@ -1,9 +1,11 @@
 package net.opgenorth.yeg.buildings.views;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import net.opgenorth.yeg.buildings.Constants;
 import net.opgenorth.yeg.buildings.R;
 
 public class BuildingInfoViewer extends Activity {
@@ -18,7 +20,7 @@ public class BuildingInfoViewer extends Activity {
 //        webSettings.setSaveFormData(false);
 //        webSettings.setJavaScriptEnabled(false);
 //        webSettings.setSupportZoom(true);
-
-        _webView.loadUrl("file:///android_asset/AMacDonald2Building.html");
+        String fileToView = getIntent().getStringExtra(Constants.INTENT_BUILDING_VIEWER_INFO);
+        _webView.loadUrl("file:///android_asset/" + fileToView);
     }
 }

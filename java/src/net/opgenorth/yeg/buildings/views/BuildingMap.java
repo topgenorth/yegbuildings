@@ -182,7 +182,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
     private void showMyLocationOnMap() {
         GeoPoint myLocation = _myLocationOverlay.getMyLocation();
         if (myLocation == null) {
-            Toast.makeText(this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
+            Toast.makeText(BuildingMap.this , "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
             Log.i(Constants.LOG_TAG, "Can't figure out the user's location.");
         } else {
             _map.invalidate();
@@ -232,9 +232,9 @@ public class BuildingMap extends MapActivity implements LocationListener {
         @Override
         protected boolean onTap(int i) {
             Intent viewBuildingIntent = new Intent(BuildingMap.this, BuildingInfoViewer.class);
+            viewBuildingIntent.putExtra(Constants.INTENT_BUILDING_VIEWER_INFO, "AMacDonald2Building.html");
             OverlayItem item = _items.get(i);
             startActivity(viewBuildingIntent);
-//            Toast.makeText(BuildingMap.this, item.getSnippet(), Toast.LENGTH_LONG).show();
             return true;
         }
     }
