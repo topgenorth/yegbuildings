@@ -32,7 +32,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
     private ArrayList<RelativeBuildingLocation> _buildingList = new ArrayList<RelativeBuildingLocation>(76);
     private ActivityHelper _activityHelper = new ActivityHelper(this);
     private final Handler _handler = new Handler();
-    private final long LOCATION_LISTENER_TIMEOUT_DURATION = 1 * 60 * 1000; // time out in milliseconds.
+    private final long LOCATION_LISTENER_TIMEOUT_DURATION = 2 * 60 * 1000; // time out in milliseconds.
 
     private final Runnable _unregisterLocationListener = new Runnable() {
         @Override
