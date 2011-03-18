@@ -1,5 +1,6 @@
 package net.opgenorth.yeg.buildings.views;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -230,7 +231,10 @@ public class BuildingMap extends MapActivity implements LocationListener {
 
         @Override
         protected boolean onTap(int i) {
-            Toast.makeText(BuildingMap.this, _items.get(i).getSnippet(), Toast.LENGTH_LONG).show();
+            Intent viewBuildingIntent = new Intent(BuildingMap.this, BuildingInfoViewer.class);
+            OverlayItem item = _items.get(i);
+            startActivity(viewBuildingIntent);
+//            Toast.makeText(BuildingMap.this, item.getSnippet(), Toast.LENGTH_LONG).show();
             return true;
         }
     }
