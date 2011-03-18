@@ -13,4 +13,6 @@
     <string name="buildinglist_title">Building List</string>
     <string name="buildinglist_tabtext">List</string>
     <string name="buildinglist_row_constructiondate_label">Construction date:</string>
+
+    <string name="buildinginfoviewer_title">Building Information</string>
 </resources>

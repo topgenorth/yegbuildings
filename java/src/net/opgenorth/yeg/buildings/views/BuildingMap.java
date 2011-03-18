@@ -73,8 +73,6 @@ public class BuildingMap extends MapActivity implements LocationListener {
         _locationManager.removeUpdates(this);
         _myLocationOverlay.disableMyLocation();
 
-
-
         // TODO: make this happen off the UI thread.
         // Save the centre of the map and the zoom level for the next time that the user starts up the application.
         GeoPoint p = _map.getProjection().fromPixels(_map.getWidth() / 2, _map.getHeight() / 2);
