@@ -3,16 +3,17 @@
 Dir.glob("*.txt") do |file| File.delete(file) end
 Dir.glob("*.jpg") do |file| File.delete(file) end
 
-Dir.glob("*.pdf") do |file|
-	basename = File.basename(file,'.*')
+Dir.glob("*.pdf") do |pdf_file|
+	basename = File.basename(pdf_file,'.*')
 	if (File.directory?(basename))
-		Dir.glob("./#{basename}/*.*") do |file2| File.delete(file2) end
+		Dir.glob("./#{basename}/*.*") do |file| File.delete(file) end
 	else
 		Dir.mkdir basename unless File.directory?(basename)
 	end
-	system("pdftotext", "-htmlmeta", file, "./#{basename}/#{basename}.html")
-	system("pdfimages", "-j",  file, "./#{basename}/")
-#	File.copy file, "./#{basename}/file"
-	puts "Converted #{file} to text and extracted images to #{basename}."
+	system("pdftotext", "-htmlmeta", pdf_file, "./#{basename}/#{basename}.html")
+	system("pdfimages", "-j",  pdf_file, "./#{basename}/")
+	Dir.glob("*.jpg").do |jpg_file| 
+	end
+	puts "Converted #{pdf_file} to text and extracted images to #{basename}."
 end
 
