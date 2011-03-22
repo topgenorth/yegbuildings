@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class BuildingsContentProvider extends ContentProvider {
     public static final String TAG = Constants.LOG_TAG;
     public static final String DATABASE_NAME = "buildings.db";
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 7;
     public static final String BUILDINGS_TABLE_NAME = "buildings";
 
     private static HashMap<String, String> _buildingsProjectionMap;
@@ -114,22 +114,26 @@ public class BuildingsContentProvider extends ContentProvider {
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
             runSqlAsset(sqLiteDatabase, "sql/005-schema.sql");
-            loadBuildingsTable(sqLiteDatabase);
-            runSqlAsset(sqLiteDatabase, "sql/007-indexes.sql");
+            runMultipleSqlFromAsset(sqLiteDatabase, "sql/006-building_data");
+            runMultipleSqlFromAsset(sqLiteDatabase, "sql/007-indexes.sql");
         }
 
-        private void loadBuildingsTable(SQLiteDatabase sqLiteDatabase) {
-            String sqlLoad = getStringAsset("sql/006-building_data.sql");
-            if (sqlLoad.length() > 0) {
+        private void runMultipleSqlFromAsset(SQLiteDatabase sqLiteDatabase, String assetName) {
+            String sql = getStringAsset("sql/006-building_data.sql");
+            if (sql.length() > 0) {
                 int count = 0;
                 // split the one big SQL file into individual statements
-                String[] insertStatements = sqlLoad.split(";\n");
-                for (String insertBuilding : insertStatements) {
-                    Log.d(TAG, "Running the sql: " + insertBuilding);
-                    sqLiteDatabase.execSQL(insertBuilding);
+                String[] sqlStatements = sql.split(";\n");
+                Log.d(Constants.LOG_TAG, "Loaded " + sqlStatements.length + " from the file " + assetName + ".");
+                for (String sqlStatement : sqlStatements) {
+                    Log.d(Constants.LOG_TAG, "Running the sql: " + sqlStatement);
+                    sqLiteDatabase.execSQL(sqlStatement);
                     count++;
                 }
-                Log.i(TAG, "Loaded " + count + " buildings into the database.");
+                Log.i(TAG, "Ran " + count + " SQL statements against the database.");
+            }
+            else {
+                Log.w(Constants.LOG_TAG, "Could not find anything in the asset " + assetName + ".");
             }
         }
 
