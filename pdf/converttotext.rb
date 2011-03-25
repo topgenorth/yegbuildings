@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+require 'fileutils'
 
 Dir.glob("*.txt") do |file| File.delete(file) end
 Dir.glob("*.jpg") do |file| File.delete(file) end
@@ -10,10 +11,12 @@ Dir.glob("*.pdf") do |pdf_file|
 	else
 		Dir.mkdir basename unless File.directory?(basename)
 	end
-	system("pdftotext", "-htmlmeta", pdf_file, "./#{basename}/#{basename}.html")
+	htmlfile = "./#{basename}/#{basename}.html"
+	asset_htmlfile = "../java/assets/html/#{basename}.html"
+	system("pdftotext", "-htmlmeta", pdf_file, htmlfile)
 	system("pdfimages", "-j",  pdf_file, "./#{basename}/")
-	Dir.glob("*.jpg").do |jpg_file| 
-	end
-	puts "Converted #{pdf_file} to text and extracted images to #{basename}."
+	FileUtils.cp htmlfile, asset_htmlfile
+
+	puts "Converted #{pdf_file} to text and extracted images to #{basename}, copied file to #{asset_htmlfile}."
 end
 
