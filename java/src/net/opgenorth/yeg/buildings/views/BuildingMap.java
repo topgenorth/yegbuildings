@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -109,7 +108,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(Constants.LOG_TAG, "onPause - we'll turn off the location listener after " + LOCATION_LISTENER_TIMEOUT_DURATION/1000 + " seconds.");
+        Log.d(Constants.LOG_TAG, "onPause - we'll turn off the location listener after " + LOCATION_LISTENER_TIMEOUT_DURATION / 1000 + " seconds.");
         _handler.postDelayed(_unregisterLocationListener, LOCATION_LISTENER_TIMEOUT_DURATION);
     }
 
@@ -182,7 +181,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
     private void showMyLocationOnMap() {
         GeoPoint myLocation = _myLocationOverlay.getMyLocation();
         if (myLocation == null) {
-            Toast.makeText(BuildingMap.this , "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
+            Toast.makeText(BuildingMap.this, "Can't seem to figure out your location.", Toast.LENGTH_SHORT);
             Log.i(Constants.LOG_TAG, "Can't figure out the user's location.");
         } else {
             _map.invalidate();
@@ -232,9 +231,17 @@ public class BuildingMap extends MapActivity implements LocationListener {
         @Override
         protected boolean onTap(int i) {
             Intent viewBuildingIntent = new Intent(BuildingMap.this, BuildingInfoViewer.class);
-            viewBuildingIntent.putExtra(Constants.INTENT_BUILDING_VIEWER_INFO, "AMacDonald2Building.html");
-            OverlayItem item = _items.get(i);
-            startActivity(viewBuildingIntent);
+            RelativeBuildingLocation building = _buildingList.get(i);
+            if (building.getBuilding().getUrl() != null) {
+                String url = "html/" + building.getBuilding().getUrl() + ".html";
+                viewBuildingIntent.putExtra(Constants.INTENT_BUILDING_VIEWER_INFO, url);
+                startActivity(viewBuildingIntent);
+            } else {
+                String snippet = building.getBuilding().getName() + "\n" +
+                        building.getBuilding().getAddress() + "\n" +
+                        building.getBuilding().getConstructionDate();
+                Toast.makeText(BuildingMap.this, snippet, Toast.LENGTH_SHORT);
+            }
             return true;
         }
     }

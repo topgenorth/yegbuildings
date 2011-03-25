@@ -11,6 +11,7 @@ Dir.glob("*.pdf") do |pdf_file|
 	else
 		Dir.mkdir basename unless File.directory?(basename)
 	end
+	# TODO: strip out '' (apostrophes)
 	htmlfile = "./#{basename}/#{basename}.html"
 	asset_htmlfile = "../java/assets/html/#{basename}.html"
 	system("pdftotext", "-htmlmeta", pdf_file, htmlfile)
