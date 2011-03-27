@@ -233,7 +233,7 @@ public class BuildingMap extends MapActivity implements LocationListener {
             Intent viewBuildingIntent = new Intent(BuildingMap.this, BuildingInfoViewer.class);
             RelativeBuildingLocation building = _buildingList.get(i);
             if (building.getBuilding().getUrl() != null) {
-                String url = "html/" + building.getBuilding().getUrl() + ".html";
+                String url = building.getBuilding().getUrl();
                 viewBuildingIntent.putExtra(Constants.INTENT_BUILDING_VIEWER_INFO, url);
                 startActivity(viewBuildingIntent);
             } else {
