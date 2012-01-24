@@ -1,7 +1,7 @@
 # YEG Buildings
 
 ## About
-This is just a simple little Android application to show the various historical buildings in the city of Edmonton, Alberta, Canada. This app utilizes the City of [Edmonton's Open Data](http://data.edmonton.ca) feed for [historial buildings](http://data.edmonton.ca/DataBrowser/coe/HistoricalBuildings#param=NOFILTER--DataView--Results).  Hopefully in the future other sources of information can be utilized.
+This is just a simple little Android application to show the various historical buildings in the city of Edmonton, Alberta, Canada. This app utilizes the City of [Edmonton's Open Data](http://data.edmonton.ca) feed for [historical buildings](http://data.edmonton.ca/Facilities-and-Structures/Historical-Buildings/prfy-5m97).  Hopefully in the future other sources of information can be utilized.
 
 [Tom Opgenorth](http://www.opgenorth.net)
 Twitter: [@topgenorth](http://www.twitter.com/topgenorth)
