@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="main_tab_background">#4694AB</color>
-    <color name="header">#eeeeee</color>
-    <color name="rowodd">#ffffffff</color>
-    <color name="roweven">#999999</color>
-</resources>
