@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ApplicationName">YEG Buildings</string>
+    <string name="app_name">YEG Buildings</string>
+    <string name="app_description">Historical Buildings around Edmonton, AB</string>
+
+    <string name="main_menu_refreshdata">Refresh</string>
+    <string name="main_menu_my_location">My Location</string>
+
+    <string name="buildingmap_unknown_location">Location: unknown</string>
+    <string name="buildingmap_title">Building Map</string>
+    <string name="buildingmap_tabtext">Map</string>
+
+    <string name="buildinglist_title">Building List</string>
+    <string name="buildinglist_tabtext">List</string>
+    <string name="buildinglist_row_constructiondate_label">Construction date:</string>
+
+    <string name="buildinginfoviewer_title">Building Information</string>
 </resources>
