@@ -1,10 +1,7 @@
-﻿#region
-using Android.App;
+﻿using Android.App;
 using Android.OS;
 
-#endregion
-
-namespace net.opgenorth.m4a.yegbuildings
+namespace net.opgenorth.yegbuildings.m4a
 {
     [Activity(Label = "@string/ApplicationName", MainLauncher = true, Icon = "@drawable/icon")]
     public class YegBuildingsActivity : Activity
