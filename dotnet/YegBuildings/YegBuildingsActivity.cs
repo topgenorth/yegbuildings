@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace net.opgenorth.yegbuildings.m4a
 {
-    [Activity(Label = "YEG Buildings", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon")]
     public class YegBuildingsActivity : MapActivity 
     {
         protected override void OnCreate(Bundle bundle)

@@ -3,6 +3,9 @@
     <string name="app_name">YEG Buildings</string>
     <string name="app_description">Historical Buildings around Edmonton, AB</string>
 
+    <!-- This is the key for the debug.keystore -->
+    <string name="google_maps_api_key">0U7qxP9sDmYSOxxQFKVQjWOn9XDSARAhf5Ouy3A</string>
+
     <string name="main_menu_refreshdata">Refresh</string>
     <string name="main_menu_my_location">My Location</string>
 

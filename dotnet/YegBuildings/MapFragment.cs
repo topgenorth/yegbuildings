@@ -19,13 +19,14 @@ namespace net.opgenorth.yegbuildings.m4a
 
         private void InitializeMapView()
         {
-            map = new MapView(Activity, "0U7qxP9sDmYSOxxQFKVQjWOn9XDSARAhf5Ouy3A") // todo This is the debug/development API key.
+            var apiKey = Resources.GetString(Resource.String.google_maps_api_key);
+            map = new MapView(Activity, apiKey)
                       {
                           Clickable = true
                       };
 
-
-            map.Controller.SetCenter(GetPoint(40.76793169992044, -73.98180484771729));
+            var point = GetPoint( 53.54270, -113.49332);
+            map.Controller.SetCenter(point);
             map.Controller.SetZoom(17);
             map.SetBuiltInZoomControls(true);
 
@@ -40,8 +41,7 @@ namespace net.opgenorth.yegbuildings.m4a
 
         private GeoPoint GetPoint(double lat, double lon)
         {
-            return (new GeoPoint((int) (lat*1000000.0),
-                                 (int) (lon*1000000.0)));
+            return (new GeoPoint((int) (lat*1000000.0), (int) (lon*1000000.0)));
         }
     }
 }
