@@ -1,17 +1,21 @@
-﻿#region
-using Android.App;
+﻿using Android.App;
+using Android.GoogleMaps;
 using Android.OS;
 
-#endregion
-
-namespace net.opgenorth.m4a.yegbuildings
+namespace net.opgenorth.yegbuildings.m4a
 {
-    [Activity(Label = "@string/ApplicationName", MainLauncher = true, Icon = "@drawable/icon")]
-    public class YegBuildingsActivity : Activity
+    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon")]
+    public class YegBuildingsActivity : MapActivity 
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            SetContentView(Resource.Layout.Main);
+        }
+
+        protected override bool IsRouteDisplayed
+        {
+            get { return false; }
         }
     }
 }
