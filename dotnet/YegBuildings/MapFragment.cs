@@ -1,5 +1,6 @@
 using Android.App;
 using Android.GoogleMaps;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -8,30 +9,52 @@ namespace net.opgenorth.yegbuildings.m4a
 {
     public class MapFragment : Fragment
     {
-        private MapView map;
+        private MapView _map;
+        private MyLocationOverlay _myLocationOverlay;
+        private Drawable _buildingMarker;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
+
+            InitializeBuildingMarker();
             InitializeMapView();
-            ((ViewGroup) View).AddView(map);
+            AddHistoricalBuildingsOverlay();
+            AddMyLocationOverlay();
+
+            ((ViewGroup) View).AddView(_map);
+        }
+
+        private void AddHistoricalBuildingsOverlay()
+        {
+            var loader = new LoadBuildingsFromAssets(Activity);
+            var overlay = new YegBuildingsOverlayItems(_buildingMarker, loader.GetBuildings());
+            _map.Overlays.Add(overlay);
+        }
+
+        private void AddMyLocationOverlay()
+        {
+            _myLocationOverlay = new MyLocationOverlay(Activity, _map);
+            _myLocationOverlay.RunOnFirstFix(() => _map.Controller.AnimateTo(_myLocationOverlay.MyLocation));
+            _map.Overlays.Add(_myLocationOverlay);
         }
 
         private void InitializeMapView()
         {
             var apiKey = Resources.GetString(Resource.String.google_maps_api_key);
-            map = new MapView(Activity, apiKey)
-                      {
-                          Clickable = true
-                      };
+            _map = new MapView(Activity, apiKey)
+                       {
+                           Clickable = true
+                       };
 
-            var point = GetPoint( 53.54270, -113.49332);
-            map.Controller.SetCenter(point);
-            map.Controller.SetZoom(17);
-            map.SetBuiltInZoomControls(true);
+            _map.Controller.SetZoom(17);
+            _map.SetBuiltInZoomControls(true);
+        }
 
-            var marker = Resources.GetDrawable(Resource.Drawable.building_medium);
-            marker.SetBounds(0, 0, marker.IntrinsicWidth, marker.IntrinsicHeight);
+        private void InitializeBuildingMarker()
+        {
+            _buildingMarker = Resources.GetDrawable(Resource.Drawable.building_medium);
+            _buildingMarker.SetBounds(0, 0, _buildingMarker.IntrinsicWidth, _buildingMarker.IntrinsicHeight);
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -39,9 +62,16 @@ namespace net.opgenorth.yegbuildings.m4a
             return new FrameLayout(Activity);
         }
 
-        private GeoPoint GetPoint(double lat, double lon)
+        public override void OnResume()
         {
-            return (new GeoPoint((int) (lat*1000000.0), (int) (lon*1000000.0)));
+            base.OnResume();
+            _myLocationOverlay.EnableMyLocation();
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            _myLocationOverlay.DisableMyLocation();
         }
     }
 }

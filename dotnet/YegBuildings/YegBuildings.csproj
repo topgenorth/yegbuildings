@@ -51,13 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Building.cs" />
+    <Compile Include="LoadBuildingsFromAssets.cs" />
     <Compile Include="MapFragment.cs" />
     <Compile Include="YegBuildingsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\AboutAssets.txt" />
+    <Compile Include="YegBuildingsOverlayItems.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml">
@@ -72,6 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\building_medium.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AndroidAsset Include="Assets\buildings.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
