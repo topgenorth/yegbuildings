@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
+    <Compile Include="BuildingListFragment.cs" />
+    <Compile Include="BuildingsHelper.cs" />
     <Compile Include="LoadBuildingsFromAssets.cs" />
     <Compile Include="MapFragment.cs" />
     <Compile Include="YegBuildingsActivity.cs" />
