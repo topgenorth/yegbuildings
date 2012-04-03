@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using Android.App;
-using Android.Content.Res;
+using System.Linq;
 
 namespace net.opgenorth.yegbuildings.m4a
 {
     public class LoadBuildingsFromAssets
     {
-        private Activity _activity;
+        private readonly Activity _activity;
+
         public LoadBuildingsFromAssets(Activity activity)
         {
             _activity = activity;
@@ -24,7 +25,7 @@ namespace net.opgenorth.yegbuildings.m4a
                 while ((line = sr.ReadLine()) != null)
                 {
                     var parts = line.Split(',');
-                    var building = new Building()
+                    var building = new Building
                                        {
                                            Name = parts[1],
                                            Address = parts[2],
@@ -35,7 +36,11 @@ namespace net.opgenorth.yegbuildings.m4a
                     list.Add(building);
                 }
             }
-            return list;
-        } 
+
+            var sortedList = from building in list
+                             orderby building.Name
+                             select building;
+            return sortedList.ToList();
+        }
     }
 }
