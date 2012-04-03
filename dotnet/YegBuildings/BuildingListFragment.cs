@@ -21,7 +21,7 @@ namespace net.opgenorth.yegbuildings.m4a
 
             if (savedInstanceState != null)
             {
-                _selectedBuildingIndex = savedInstanceState.GetInt("selected_building_index", -1);
+                _selectedBuildingIndex = savedInstanceState.GetSelectedBuildingIndex();
             }
             ListView.ChoiceMode = ChoiceMode.Single;
             ShowBuilding(_selectedBuildingIndex);
@@ -36,7 +36,7 @@ namespace net.opgenorth.yegbuildings.m4a
         public override void OnSaveInstanceState(Bundle outState)
         {
             base.OnSaveInstanceState(outState);
-            outState.PutInt("selected_building_index", _selectedBuildingIndex);
+            outState.SetSelectedBuildingIndex(_selectedBuildingIndex);
         }
 
         private void ShowBuilding(int position)
