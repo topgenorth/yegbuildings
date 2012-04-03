@@ -48,6 +48,10 @@ namespace net.opgenorth.yegbuildings.m4a
                 return;
             } 
             ListView.SetItemChecked(position, true);
+            var building = Activity.GetBuilding(position);
+
+            var mapFrag = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map_fragment);
+            mapFrag.AnimateTo(building);
         }
     }
 }

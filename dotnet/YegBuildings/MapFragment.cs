@@ -12,6 +12,7 @@ namespace net.opgenorth.yegbuildings.m4a
         private MapView _map;
         private MyLocationOverlay _myLocationOverlay;
         private Drawable _buildingMarker;
+        private YegBuildingsOverlayItems _buildingsOverlay;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -27,8 +28,8 @@ namespace net.opgenorth.yegbuildings.m4a
 
         private void AddHistoricalBuildingsOverlay()
         {
-            var overlay = new YegBuildingsOverlayItems(_buildingMarker, Activity.Buildings() );
-            _map.Overlays.Add(overlay);
+            _buildingsOverlay = new YegBuildingsOverlayItems(_buildingMarker, Activity.Buildings());
+            _map.Overlays.Add(_buildingsOverlay);
         }
 
         private void AddMyLocationOverlay()
@@ -48,6 +49,7 @@ namespace net.opgenorth.yegbuildings.m4a
 
             _map.Controller.SetZoom(17);
             _map.SetBuiltInZoomControls(true);
+            _map.DisplayZoomControls(true);
         }
 
         private void InitializeBuildingMarker()
@@ -71,6 +73,19 @@ namespace net.opgenorth.yegbuildings.m4a
         {
             base.OnPause();
             _myLocationOverlay.DisableMyLocation();
+        }
+
+        public void AnimateTo(Building building)
+        {
+            if (_map == null)
+            {
+                return;
+            }
+            if (building == null)
+            {
+                return;
+            }
+            _map.Controller.AnimateTo(building.GetPoint());
         }
     }
 }
