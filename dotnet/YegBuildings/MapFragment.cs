@@ -27,8 +27,7 @@ namespace net.opgenorth.yegbuildings.m4a
 
         private void AddHistoricalBuildingsOverlay()
         {
-            var loader = new LoadBuildingsFromAssets(Activity);
-            var overlay = new YegBuildingsOverlayItems(_buildingMarker, loader.GetBuildings());
+            var overlay = new YegBuildingsOverlayItems(_buildingMarker, Activity.Buildings() );
             _map.Overlays.Add(overlay);
         }
 
