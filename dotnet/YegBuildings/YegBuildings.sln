@@ -14,6 +14,7 @@ Global
 		{7E93830E-C538-4F94-8BBA-55060AF72E24}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{7E93830E-C538-4F94-8BBA-55060AF72E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E93830E-C538-4F94-8BBA-55060AF72E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E93830E-C538-4F94-8BBA-55060AF72E24}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
