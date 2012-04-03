@@ -27,6 +27,7 @@ namespace net.opgenorth.yegbuildings.m4a
                     var parts = line.Split(',');
                     var building = new Building
                                        {
+                                           EntityId = Guid.Parse(parts[0]),
                                            Name = parts[1],
                                            Address = parts[2],
                                            ConstructionDate = parts[3],
