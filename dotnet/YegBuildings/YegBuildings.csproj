@@ -88,7 +88,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\balloon_overlay_close.png" />
     <AndroidResource Include="Resources\drawable-hdpi\balloon_overlay_focused.9.png" />
     <AndroidResource Include="Resources\drawable-hdpi\balloon_overlay_unfocused.9.png" />
-    <AndroidResource Include="Resources\Layout\balloon_overlay_bg_selector.xml" />
+    <AndroidResource Include="Resources\Drawable\balloon_overlay_bg_selector.xml" />
+    <AndroidResource Include="Resources\Layout\balloon_overlay.xml" />
+    <AndroidResource Include="Resources\Values\ids.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\buildings.csv" />
