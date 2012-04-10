@@ -1,8 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="2.0.0.0" package="net.opgenorth.yeg.buildings" android:versionCode="21">
-  <application android:label="YEG Buildings">
-  </application>
-  <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="12" />
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          android:installLocation="auto"
+          android:versionName="2.0.0.0"
+          package="net.opgenorth.yeg.buildings"
+          android:versionCode="21">
+  <application android:label="YEG Buildings"></application>
+  <supports-screens android:smallScreens="false"
+                    android:normalScreens="false"
+                    android:largeScreens="true"
+                    android:xlargeScreens="true" />
+  <uses-sdk android:minSdkVersion="4"
+            android:targetSdkVersion="12" />
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>
