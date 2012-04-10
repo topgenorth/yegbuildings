@@ -59,6 +59,7 @@
     <Compile Include="BuildingsHelper.cs" />
     <Compile Include="LoadBuildingsFromAssets.cs" />
     <Compile Include="MapFragment.cs" />
+    <Compile Include="TapControlledMapView.cs" />
     <Compile Include="YegBuildingsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
