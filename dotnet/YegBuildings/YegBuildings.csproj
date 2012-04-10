@@ -57,6 +57,7 @@
     <Compile Include="Building.cs" />
     <Compile Include="BuildingListFragment.cs" />
     <Compile Include="BuildingsHelper.cs" />
+    <Compile Include="IOnSingleTapListener.cs" />
     <Compile Include="LoadBuildingsFromAssets.cs" />
     <Compile Include="MapFragment.cs" />
     <Compile Include="TapControlledMapView.cs" />
