@@ -83,6 +83,11 @@
     <Content Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </Content>
+    <AndroidResource Include="Resources\drawable-hdpi\balloon_disclosure.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\balloon_overlay_close.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\balloon_overlay_focused.9.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\balloon_overlay_unfocused.9.png" />
+    <AndroidResource Include="Resources\Layout\balloon_overlay_bg_selector.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\buildings.csv" />
