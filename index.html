@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>YEG Buildings by topgenorth</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>YEG Buildings</h1>
+        <h2>A little Android application using the Open Data catalogue from the City of Edmonton</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/topgenorth/yegbuildings/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/topgenorth/yegbuildings/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/topgenorth/yegbuildings" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>YEG Buildings</h1>
+
+<h2>About</h2>
+
+<p>This is just a simple little Android application to show the various historical buildings in the city of Edmonton, Alberta, Canada. This app utilizes the City of <a href="http://data.edmonton.ca">Edmonton's Open Data</a> feed for <a href="http://data.edmonton.ca/Facilities-and-Structures/Historical-Buildings/prfy-5m97">historical buildings</a> as the underlying source for the buildings.  Hopefully in the future other sources of information can be utilized.</p>
+
+<h2>Google maps</h2>
+
+<p>The default.keystore I use for development is in the util directory.</p>
+
+<pre><code>keytool -list -alias androiddebugkey -keystore debug.keystore -storepass android -keypass android
+androiddebugkey, Nov 3, 2011, PrivateKeyEntry, 
+Certificate fingerprint (MD5): 1F:98:26:DF:F3:A5:B9:AD:0E:92:28:9B:00:82:D7:11
+</code></pre>
+
+<p>Here is the Android Maps API key for this development / debugging keystore: </p>
+
+<pre><code>0U7qxP9sDmYSOxxQFKVQjWOn9XDSARAhf5Ouy3A
+</code></pre>
+
+<p><a href="http://www.opgenorth.net">Tom Opgenorth</a></p>
+
+<p>Twitter: <a href="http://www.twitter.com/topgenorth">@topgenorth</a></p>
+
+<h2>Locations for Testing</h2>
+
+<p>If you want to set the emulator to a given location (for testing), here are some points around Edmonton:</p>
+
+<ul>
+<li>Intersection of 100 Ave &amp; 105 Street: 53.538860 -113.501118</li>
+<li>109 Street &amp; Jasper Ave 53.541111 -113.508838</li>
+<li>Jasper ave &amp; 101 Street : 53.54270 -113.49332</li>
+<li>The Cenotaph in front of City Hall: 53.544643 -113.49006</li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
