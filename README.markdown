@@ -15,10 +15,13 @@ Here is the Android Maps API key for this development / debugging keystore:
   
     0U7qxP9sDmYSOxxQFKVQjWOn9XDSARAhf5Ouy3A
 
+## Credits
 
+Ported some code Java code from [android-mapballoonviews](https://github.com/jgilfelt/android-mapviewballoons) (to get the balloons for the buildings)
 
+# Contact Me
 
-[Tom Opgenorth](http://www.opgenorth.net)
+Website: [Tom Opgenorth](http://www.opgenorth.net)
 
 Twitter: [@topgenorth](http://www.twitter.com/topgenorth)
 
