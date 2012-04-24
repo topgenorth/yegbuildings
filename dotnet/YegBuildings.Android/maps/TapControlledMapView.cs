@@ -3,7 +3,7 @@ using Android.GoogleMaps;
 using Android.Util;
 using Android.Views;
 
-namespace net.opgenorth.yegbuildings.m4a
+namespace net.opgenorth.yegbuildings.m4a.maps
 {
     public class TapControlledMapView : MapView, GestureDetector.IOnGestureListener, GestureDetector.IOnDoubleTapListener
     {

@@ -39,6 +39,11 @@ namespace net.opgenorth.yegbuildings.m4a
             _map.Overlays.Add(_myLocationOverlay);
         }
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            SetHasOptionsMenu(true);
+        }
+
         private void InitializeMapView()
         {
             var apiKey = Resources.GetString(Resource.String.google_maps_api_key);

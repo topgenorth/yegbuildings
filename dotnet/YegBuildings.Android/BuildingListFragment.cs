@@ -10,12 +10,12 @@ namespace net.opgenorth.yegbuildings.m4a
     {
         private int _selectedBuildingIndex;
 
+
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
             var buildingNames = from building in Activity.Buildings() 
                                 select building.Name;
-
             var adapter = new ArrayAdapter(Activity, Android.Resource.Layout.SimpleListItemChecked, buildingNames.ToList());
             ListAdapter = adapter;
 
