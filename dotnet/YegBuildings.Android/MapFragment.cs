@@ -14,6 +14,10 @@ namespace net.opgenorth.yegbuildings.m4a
         private Drawable _buildingMarker;
         private YegBuildingsOverlayItems _buildingsOverlay;
 
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            return new FrameLayout(Activity);
+        }
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
@@ -23,7 +27,17 @@ namespace net.opgenorth.yegbuildings.m4a
             AddHistoricalBuildingsOverlay();
             AddMyLocationOverlay();
 
-            ((ViewGroup) View).AddView(_map);
+            ((ViewGroup)View).AddView(_map);
+        }
+        public override void OnResume()
+        {
+            base.OnResume();
+            _myLocationOverlay.EnableMyLocation();
+        }
+        public override void OnPause()
+        {
+            base.OnPause();
+            _myLocationOverlay.DisableMyLocation();
         }
 
         private void AddHistoricalBuildingsOverlay()
@@ -37,11 +51,6 @@ namespace net.opgenorth.yegbuildings.m4a
             _myLocationOverlay = new MyLocationOverlay(Activity, _map);
             _myLocationOverlay.RunOnFirstFix(() => _map.Controller.AnimateTo(_myLocationOverlay.MyLocation));
             _map.Overlays.Add(_myLocationOverlay);
-        }
-
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            SetHasOptionsMenu(true);
         }
 
         private void InitializeMapView()
@@ -63,22 +72,8 @@ namespace net.opgenorth.yegbuildings.m4a
             _buildingMarker.SetBounds(0, 0, _buildingMarker.IntrinsicWidth, _buildingMarker.IntrinsicHeight);
         }
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            return new FrameLayout(Activity);
-        }
 
-        public override void OnResume()
-        {
-            base.OnResume();
-            _myLocationOverlay.EnableMyLocation();
-        }
 
-        public override void OnPause()
-        {
-            base.OnPause();
-            _myLocationOverlay.DisableMyLocation();
-        }
 
         public void AnimateTo(Building building)
         {
