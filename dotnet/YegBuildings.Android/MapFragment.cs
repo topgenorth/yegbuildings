@@ -72,9 +72,6 @@ namespace net.opgenorth.yegbuildings.m4a
             _buildingMarker.SetBounds(0, 0, _buildingMarker.IntrinsicWidth, _buildingMarker.IntrinsicHeight);
         }
 
-
-
-
         public void AnimateTo(Building building)
         {
             if (_map == null)

@@ -3,7 +3,6 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-
   <fragment class="net.opgenorth.yegbuildings.m4a.BuildingListFragment"
             android:id="@+id/building_list_fragment"
             android:layout_width="0px"
