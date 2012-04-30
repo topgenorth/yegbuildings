@@ -57,8 +57,10 @@
     <Compile Include="LoadBuildingsFromAssets.cs" />
     <Compile Include="model\Building.cs" />
     <Compile Include="model\BuildingHelper.cs" />
+    <Compile Include="views\BuildingArrayAdapter.cs" />
     <Compile Include="views\BuildingListFragment.cs" />
     <Compile Include="views\MapFragment.cs" />
+    <Compile Include="views\RestaurantHolder.cs" />
     <Compile Include="YegBuildingsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +87,7 @@
     <AndroidResource Include="Resources\Layout\buildingrow.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Values\color.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\buildings.csv" />
