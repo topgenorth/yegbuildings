@@ -82,6 +82,9 @@
     <Content Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </Content>
+    <AndroidResource Include="Resources\Layout\buildingrow.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\buildings.csv" />
