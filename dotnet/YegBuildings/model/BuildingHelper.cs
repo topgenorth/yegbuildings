@@ -3,9 +3,9 @@ using Android.App;
 using Android.GoogleMaps;
 using Android.OS;
 
-namespace net.opgenorth.yegbuildings.m4a
+namespace net.opgenorth.yegbuildings.m4a.model
 {
-    public static class BuildingsHelper
+    public static class BuildingHelper
     {
         public static GeoPoint GetPoint(this Building building)
         {

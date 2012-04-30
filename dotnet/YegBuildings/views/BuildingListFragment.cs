@@ -3,6 +3,7 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using net.opgenorth.yegbuildings.m4a.model;
 
 namespace net.opgenorth.yegbuildings.m4a.views
 {

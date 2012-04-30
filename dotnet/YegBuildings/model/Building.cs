@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace net.opgenorth.yegbuildings.m4a
+namespace net.opgenorth.yegbuildings.m4a.model
 {
     public class Building
     {

@@ -2,6 +2,7 @@
 using Android.App;
 using Android.GoogleMaps;
 using Android.OS;
+using net.opgenorth.yegbuildings.m4a.model;
 
 namespace net.opgenorth.yegbuildings.m4a
 {

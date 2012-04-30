@@ -54,9 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Building.cs" />
-    <Compile Include="BuildingsHelper.cs" />
     <Compile Include="LoadBuildingsFromAssets.cs" />
+    <Compile Include="model\Building.cs" />
+    <Compile Include="model\BuildingHelper.cs" />
     <Compile Include="views\BuildingListFragment.cs" />
     <Compile Include="views\MapFragment.cs" />
     <Compile Include="YegBuildingsActivity.cs" />

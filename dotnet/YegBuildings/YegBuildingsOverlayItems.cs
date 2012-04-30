@@ -3,6 +3,7 @@ using System.Linq;
 using Android.GoogleMaps;
 using Android.Graphics.Drawables;
 using Java.Lang;
+using net.opgenorth.yegbuildings.m4a.model;
 
 namespace net.opgenorth.yegbuildings.m4a
 {
