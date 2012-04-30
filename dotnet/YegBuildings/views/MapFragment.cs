@@ -5,7 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-namespace net.opgenorth.yegbuildings.m4a
+namespace net.opgenorth.yegbuildings.m4a.views
 {
     public class MapFragment : Fragment
     {

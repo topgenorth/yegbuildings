@@ -55,10 +55,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building.cs" />
-    <Compile Include="BuildingListFragment.cs" />
     <Compile Include="BuildingsHelper.cs" />
     <Compile Include="LoadBuildingsFromAssets.cs" />
-    <Compile Include="MapFragment.cs" />
+    <Compile Include="views\BuildingListFragment.cs" />
+    <Compile Include="views\MapFragment.cs" />
     <Compile Include="YegBuildingsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
