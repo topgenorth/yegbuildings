@@ -7,11 +7,11 @@ using net.opgenorth.yegbuildings.m4a.model;
 
 namespace net.opgenorth.yegbuildings.m4a
 {
-    public class YegBuildingsOverlayItems : ItemizedOverlay
+    public class ItemizedYegBuildingOverlay : ItemizedOverlay
     {
         private readonly List<OverlayItem> _buildings;
 
-        public YegBuildingsOverlayItems(Drawable defaultMarker, List<Building> buildings) : base(defaultMarker)
+        public ItemizedYegBuildingOverlay(Drawable defaultMarker, IEnumerable<Building> buildings) : base(defaultMarker)
         {
             _buildings = new List<OverlayItem>();
             foreach (var overlay in 

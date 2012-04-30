@@ -13,7 +13,7 @@ namespace net.opgenorth.yegbuildings.m4a.views
         private MapView _map;
         private MyLocationOverlay _myLocationOverlay;
         private Drawable _buildingMarker;
-        private YegBuildingsOverlayItems _buildingsOverlay;
+        private ItemizedYegBuildingOverlay _buildingOverlay;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
@@ -29,8 +29,8 @@ namespace net.opgenorth.yegbuildings.m4a.views
 
         private void AddHistoricalBuildingsOverlay()
         {
-            _buildingsOverlay = new YegBuildingsOverlayItems(_buildingMarker, Activity.Buildings());
-            _map.Overlays.Add(_buildingsOverlay);
+            _buildingOverlay = new ItemizedYegBuildingOverlay(_buildingMarker, Activity.Buildings());
+            _map.Overlays.Add(_buildingOverlay);
         }
 
         private void AddMyLocationOverlay()

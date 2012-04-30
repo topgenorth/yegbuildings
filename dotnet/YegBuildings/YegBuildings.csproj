@@ -62,7 +62,7 @@
     <Compile Include="YegBuildingsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YegBuildingsOverlayItems.cs" />
+    <Compile Include="ItemizedYegBuildingOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml">
