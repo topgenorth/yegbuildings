@@ -1,5 +1,6 @@
-using System.Linq;
+using System.Collections.Generic;
 using Android.App;
+using Android.Locations;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -10,11 +11,16 @@ namespace net.opgenorth.yegbuildings.m4a.views
     public class BuildingListFragment : ListFragment
     {
         private int _selectedBuildingIndex;
+        private List<Building> _buildings;
+        private BuildingArrayAdapter _listAdapter;
 
         public override void OnActivityCreated(Bundle savedInstanceState)
         {
             base.OnActivityCreated(savedInstanceState);
-            ListAdapter = new BuildingArrayAdapter(Activity, Activity.Buildings()); ;
+            _buildings = Activity.Buildings();
+            _listAdapter = new BuildingArrayAdapter(Activity, _buildings);
+            ;
+            ListAdapter = _listAdapter;
 
             if (savedInstanceState != null)
             {
@@ -38,17 +44,20 @@ namespace net.opgenorth.yegbuildings.m4a.views
 
         private void ShowBuilding(int position)
         {
-            _selectedBuildingIndex = position;
-            if (position < 0)
+            if ((position < 0) || (position >= _buildings.Count))
             {
-                // todo zoom to the current location of device.
                 return;
             }
+            _selectedBuildingIndex = position;
             ListView.SetItemChecked(position, true);
-            var building = Activity.GetBuilding(position);
-
+            var building = _buildings[position];
             var mapFrag = FragmentManager.FindFragmentById<MapFragment>(Resource.Id.map_fragment);
             mapFrag.AnimateTo(building);
+        }
+
+        public void UpdateWithLocation(Location location)
+        {
+            _listAdapter.UpdateLocation(location);
         }
     }
 }
