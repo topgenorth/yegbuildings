@@ -46,17 +46,18 @@ namespace net.opgenorth.yegbuildings.m4a.model
         }
 
         /// <summary>
-        /// Returns the distance in metres to the specified location.
+        ///   Returns the distance in metres to the specified location.
         /// </summary>
-        /// <param name="location"></param>
-        /// <returns></returns>
+        /// <param name="location"> </param>
+        /// <returns> </returns>
         public static int GetDistanceTo(this Building building, Location location)
         {
-            if (building == null)
+            if ((building == null) || (location == null))
+            {
                 return 0;
+            }
             var buildingLocation = new Location("me") {Latitude = building.Latitude, Longitude = building.Longitude};
             return (int) buildingLocation.DistanceTo(location);
-
         }
     }
 }

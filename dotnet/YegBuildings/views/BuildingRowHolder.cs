@@ -37,6 +37,7 @@ namespace net.opgenorth.yegbuildings.m4a.views
             if (location == null)
             {
                 _distanceView.Visibility = ViewStates.Gone;
+                return;
             }
 
             _distanceView.Text = building.GetDistanceTo(location) + " metres.";
