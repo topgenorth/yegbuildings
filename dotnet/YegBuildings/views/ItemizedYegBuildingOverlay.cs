@@ -5,7 +5,7 @@ using Android.Graphics.Drawables;
 using Java.Lang;
 using net.opgenorth.yegbuildings.m4a.model;
 
-namespace net.opgenorth.yegbuildings.m4a
+namespace net.opgenorth.yegbuildings.m4a.views
 {
     public class ItemizedYegBuildingOverlay : ItemizedOverlay
     {
