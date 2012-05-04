@@ -1,9 +1,12 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using Android;
+using Android.App;
 
 [assembly: AssemblyTitle("YegBuildings")]
 [assembly: AssemblyDescription("Historical Buildings in the Edmonton Area.")]
 #if DEBUG
+
 [assembly: AssemblyConfiguration("DEBUG")]
 #endif
 
@@ -21,3 +24,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("a557ce8c-9dbe-4b93-8fc4-95ffc126cf14")]
 [assembly: AssemblyVersion("2.0.0.0")]
 [assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: UsesPermission(Manifest.Permission.AccessCoarseLocation)]
+[assembly: UsesPermission(Manifest.Permission.AccessFineLocation)]

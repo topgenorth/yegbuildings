@@ -88,5 +88,11 @@ namespace net.opgenorth.yegbuildings.m4a.views
             }
             _map.Controller.AnimateTo(building.GetPoint());
         }
+
+        public void HighlightBuilding(Building building)
+        {
+            
+        }
+
     }
 }

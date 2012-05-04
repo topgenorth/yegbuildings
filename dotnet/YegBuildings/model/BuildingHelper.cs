@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Android.App;
 using Android.GoogleMaps;
+using Android.Locations;
 using Android.OS;
 
 namespace net.opgenorth.yegbuildings.m4a.model
@@ -42,6 +43,21 @@ namespace net.opgenorth.yegbuildings.m4a.model
                 index = -1;
             }
             bundle.PutInt("selected_building_index", index);
+        }
+
+        /// <summary>
+        ///   Returns the distance in metres to the specified location.
+        /// </summary>
+        /// <param name="location"> </param>
+        /// <returns> </returns>
+        public static int GetDistanceTo(this Building building, Location location)
+        {
+            if ((building == null) || (location == null))
+            {
+                return 0;
+            }
+            var buildingLocation = new Location("me") {Latitude = building.Latitude, Longitude = building.Longitude};
+            return (int) buildingLocation.DistanceTo(location);
         }
     }
 }

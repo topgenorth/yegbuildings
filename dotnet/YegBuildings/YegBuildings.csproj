@@ -59,12 +59,13 @@
     <Compile Include="model\BuildingHelper.cs" />
     <Compile Include="views\BuildingArrayAdapter.cs" />
     <Compile Include="views\BuildingListFragment.cs" />
+    <Compile Include="model\DistanceOfBuildingsToLocation.cs" />
     <Compile Include="views\MapFragment.cs" />
-    <Compile Include="views\RestaurantHolder.cs" />
+    <Compile Include="views\BuildingRowHolder.cs" />
     <Compile Include="YegBuildingsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ItemizedYegBuildingOverlay.cs" />
+    <Compile Include="views\ItemizedYegBuildingOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Layout\Main.axml">
@@ -88,10 +89,17 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Values\color.xml" />
+    <AndroidResource Include="Resources\Drawable\marker.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\buildings.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Layout\map_layout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
