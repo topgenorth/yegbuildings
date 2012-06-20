@@ -7,7 +7,7 @@ using net.opgenorth.yegbuildings.m4a.model;
 
 namespace net.opgenorth.yegbuildings.m4a
 {
-    public class LoadBuildingsFromAssets
+    public class LoadBuildingsFromAssets : IBuildingList
     {
         private readonly Activity _activity;
 
@@ -15,8 +15,6 @@ namespace net.opgenorth.yegbuildings.m4a
         {
             _activity = activity;
         }
-
-
         public List<Building> GetBuildings()
         {
             var list = new List<Building>();

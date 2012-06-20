@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Locations;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Java.Util;
 using net.opgenorth.yegbuildings.m4a.model;
-using Object = Java.Lang.Object;
 
 namespace net.opgenorth.yegbuildings.m4a.views
 {
+    /// <summary>
+    /// Used to display a list of buildings.
+    /// </summary>
     public class BuildingArrayAdapter : ArrayAdapter<Building>
     {
         private Context _context;
@@ -45,8 +45,6 @@ namespace net.opgenorth.yegbuildings.m4a.views
             }
 
             holder.PopulateFrom(_buildings[position], _location);
-//            row.SetBackgroundResource(position%2 == 0 ? Resource.Color.roweven : Resource.Color.rowodd);
-
             return row;
         }
 

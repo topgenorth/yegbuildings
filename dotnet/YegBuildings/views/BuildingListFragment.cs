@@ -8,6 +8,9 @@ using net.opgenorth.yegbuildings.m4a.model;
 
 namespace net.opgenorth.yegbuildings.m4a.views
 {
+    /// <summary>
+    /// Displays a list of buidings
+    /// </summary>
     public class BuildingListFragment : ListFragment
     {
         private int _selectedBuildingIndex;
