@@ -91,6 +91,10 @@
     </AndroidResource>
     <AndroidResource Include="Resources\Values\color.xml" />
     <AndroidResource Include="Resources\Drawable\marker.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\buildings.csv" />
