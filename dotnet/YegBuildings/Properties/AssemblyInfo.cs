@@ -5,13 +5,14 @@ using Android.App;
 
 [assembly: AssemblyTitle("YegBuildings")]
 [assembly: AssemblyDescription("Historical Buildings in the Edmonton Area.")]
-#if DEBUG
 
+#if DEBUG
+[assembly: Application(Debuggable = false)]
 [assembly: AssemblyConfiguration("DEBUG")]
 #endif
 
 #if RELEASE
-
+[assembly: Application(Debuggable = true)]
 [assembly: AssemblyConfiguration("RELEASE")]
 #endif
 
