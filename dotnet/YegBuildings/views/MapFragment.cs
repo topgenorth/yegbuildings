@@ -42,7 +42,7 @@ namespace net.opgenorth.yegbuildings.m4a.views
 
         private void InitializeMapView()
         {
-            var apiKey = Resources.GetString(Resource.String.google_maps_api_key);
+            var apiKey = this.GetGoogleMapsApiKey();
             _map = new MapView(Activity, apiKey)
                        {
                            Clickable = true

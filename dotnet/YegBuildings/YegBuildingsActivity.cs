@@ -13,23 +13,13 @@ namespace net.opgenorth.yegbuildings.m4a
     [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon")]
     public class YegBuildingsActivity : MapActivity, ILocationListener 
     {
-        /// <summary>
-        /// We as for a GPS update every 5 seconds.
-        /// </summary>
-        public  static readonly int GPS_MIN_TIME = 5000;
-        /// <summary>
-        /// We as for a GPS update every 50 metres
-        /// </summary>
-        private static readonly int GPS_DISTANCE_INTERVAL = 50;
         private List<Building> _buildings;
         private LocationManager _locationManager;
-        private static readonly string TAG = "YegBuildingActivity";
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
-
             var loader = new LoadBuildingsFromAssets(this);
             _buildings = loader.GetBuildings();
 
@@ -60,7 +50,7 @@ namespace net.opgenorth.yegbuildings.m4a
         protected override void OnResume()
         {
             base.OnResume();
-            _locationManager.RequestLocationUpdates(LocationManager.GpsProvider, GPS_MIN_TIME, GPS_DISTANCE_INTERVAL, this);
+            _locationManager.RequestLocationUpdates(LocationManager.GpsProvider, Globals.GpsUpdateTimeInterval, Globals.GpsUpdateDistanceInterval, this);
         }
 
         protected override void OnPause()
@@ -73,14 +63,14 @@ namespace net.opgenorth.yegbuildings.m4a
         {
             if (location == null)
             {
-                Log.Warn(TAG, "We don't have a location, can't do much!");
+                Log.Warn(Globals.LogTag, "We don't have a location, can't do much!");
                 return;
             }
 
-            Log.Debug(TAG, "New Location at " + location.Longitude + " , " + location.Latitude);
+            Log.Debug(Globals.LogTag, "New Location at " + location.Longitude + " , " + location.Latitude);
             if (!location.HasAccuracy )
             {
-                Log.Debug(TAG, "Seems there is no accuracy to this location.");
+                Log.Debug(Globals.LogTag, "Seems there is no accuracy to this location.");
                 return;
             }
 
@@ -90,17 +80,17 @@ namespace net.opgenorth.yegbuildings.m4a
 
         public void OnProviderDisabled(string provider)
         {
-            Log.Verbose(TAG, "Location provider disabled.");
+            Log.Verbose(Globals.LogTag, "Location provider disabled.");
         }
 
         public void OnProviderEnabled(string provider)
         {
-            Log.Verbose(TAG, "Location provider enabled.");
+            Log.Verbose(Globals.LogTag, "Location provider enabled.");
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
         {
-            Log.Verbose(TAG, "Status changed.");
+            Log.Verbose(Globals.LogTag, "Status changed.");
         }
     }
 }
