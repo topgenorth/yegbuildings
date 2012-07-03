@@ -19,24 +19,21 @@ namespace net.opgenorth.yegbuildings.m4a
             if (context.IsDebuggable())
             {
                 resourceIdForGoogleMapsApiKey = Resource.String.google_maps_api_key_debug;
-                Log.Debug(Globals.LogTag, "Using the debug API key for Google Maps.");
             }
             else
             {
                 resourceIdForGoogleMapsApiKey = Resource.String.google_maps_api_key_release;
-                Log.Debug(Globals.LogTag, "Using the release API key for Google Maps.");
             }
             return context.Resources.GetString(resourceIdForGoogleMapsApiKey);
         }
 
+        /// <summary>
+        ///   A helper method that will determine if the application is debuggable or not.
+        /// </summary>
+        /// <param name="context"> </param>
+        /// <returns> The valid of the android:debuggable attribute in AndroidManifest.XML </returns>
         public static bool IsDebuggable(this Context context)
         {
-            var flags = (int) context.ApplicationInfo.Flags;
-            var df = (int) ApplicationInfoFlags.Debuggable;
-            var x = flags & df;
-
-            Log.Debug(Globals.LogTag, "ApplicationInfoFlags = {0}, {1} {2}", flags, df, x);
-
             var isDebuggable = (context.ApplicationInfo.Flags & ApplicationInfoFlags.Debuggable) != 0;
             return isDebuggable;
         }
