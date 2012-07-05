@@ -50,6 +50,7 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.GoogleMaps" />
+    <Reference Include="Mono.Data.Sqlite" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,11 +59,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationHelper.cs" />
+    <Compile Include="data\BackupDatabaseToFileSystem.cs" />
+    <Compile Include="data\BuildingDatabase.cs" />
+    <Compile Include="data\IBackupDatabase.cs" />
+    <Compile Include="data\IBuildingDatabase.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="IBuildingList.cs" />
     <Compile Include="LoadBuildingsFromAssets.cs" />
     <Compile Include="model\Building.cs" />
     <Compile Include="model\BuildingHelper.cs" />
+    <Compile Include="model\ISqliteIdentifiable.cs" />
+    <Compile Include="SQLite.cs" />
+    <Compile Include="SQLiteAsync.cs" />
     <Compile Include="views\BuildingArrayAdapter.cs" />
     <Compile Include="views\BuildingListFragment.cs" />
     <Compile Include="model\DistanceOfBuildingsToLocation.cs" />
@@ -109,7 +117,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

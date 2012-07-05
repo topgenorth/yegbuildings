@@ -5,6 +5,7 @@ using Android.GoogleMaps;
 using Android.Locations;
 using Android.OS;
 using Android.Util;
+using net.opgenorth.yegbuildings.m4a.data;
 using net.opgenorth.yegbuildings.m4a.model;
 using net.opgenorth.yegbuildings.m4a.views;
 
@@ -19,7 +20,20 @@ namespace net.opgenorth.yegbuildings.m4a
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            Globals.Initialize(ApplicationContext.PackageName);
+
+
+
             SetContentView(Resource.Layout.Main);
+
+            var database = new BuildingDatabase(Globals.DatabaseName);
+            database.CreateDatabase();
+
+            var backup = new BackupDatabaseToFileSystem();
+            backup.Backup();
+
+
             var loader = new LoadBuildingsFromAssets(this);
             _buildings = loader.GetBuildings();
 

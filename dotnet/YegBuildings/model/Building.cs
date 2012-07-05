@@ -7,7 +7,7 @@ namespace net.opgenorth.yegbuildings.m4a.model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public Guid EntityId { get; set; }
+        public String EntityId { get; set; }
         [Indexed]
         public String Name { get; set;  }
         public String Address { get; set;  }

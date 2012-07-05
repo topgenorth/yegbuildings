@@ -40,3 +40,4 @@ using Android.App;
 // Android Permissions
 [assembly: UsesPermission(Manifest.Permission.AccessCoarseLocation)]
 [assembly: UsesPermission(Manifest.Permission.AccessFineLocation)]
+[assembly: UsesPermission(Manifest.Permission.WriteExternalStorage)]
