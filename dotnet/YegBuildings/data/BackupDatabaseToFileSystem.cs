@@ -1,27 +1,20 @@
 using System;
 using System.IO;
+
 using Android.Util;
-using Environment = Android.OS.Environment;
+
+using AndroidEnvironment = Android.OS.Environment;
 
 namespace net.opgenorth.yegbuildings.m4a.data
 {
     public class BackupDatabaseToFileSystem
     {
-        public virtual string GetBackupFile()
-        {
-            var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-            var nameParts = Globals.DatabaseFileName.Split('.');
-            var backupName = String.Concat(nameParts[0], "_", timestamp, "." + nameParts[1]);
-            var path = Path.Combine(Environment.ExternalStorageDirectory.AbsolutePath, "backup", Globals.PackageName, backupName);
-            return path;
-        }
-
         public void Backup()
         {
-            var externalStorageDirectory = Environment.ExternalStorageDirectory;
+            var externalStorageDirectory = AndroidEnvironment.ExternalStorageDirectory;
             if (!externalStorageDirectory.CanWrite())
             {
-                Log.Error(Globals.LogTag, "Cannot write to the external storage at  " + Environment.ExternalStorageDirectory);
+                Log.Error(Globals.LogTag, "Cannot write to the external storage at  " + AndroidEnvironment.ExternalStorageDirectory);
                 return;
             }
             var dbFile = new FileInfo(Globals.DatabaseName);
@@ -43,6 +36,17 @@ namespace net.opgenorth.yegbuildings.m4a.data
             {
                 Log.Error(Globals.LogTag, "Could not copy the database from {0} to {1}.", dbFile.FullName, backupFileName, e);
             }
+        }
+
+        public virtual string GetBackupFile()
+        {
+            var timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+            var nameParts = Globals.DatabaseFileName.Split('.');
+            var backupName = String.Concat(nameParts[0], "_", timestamp, "." + nameParts[1]);
+
+
+            var path = Path.Combine(AndroidEnvironment.ExternalStorageDirectory.AbsolutePath, "backups", "apps", Globals.PackageName, backupName);
+            return path;
         }
 
         private static void EnsureBackupDirectoryExists(string backupFileName)

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+
 using Android.App;
-using Android.Content;
 using Android.GoogleMaps;
 using Android.Locations;
 using Android.OS;
 using Android.Util;
+
 using net.opgenorth.yegbuildings.m4a.data;
 using net.opgenorth.yegbuildings.m4a.model;
 using net.opgenorth.yegbuildings.m4a.views;
@@ -12,65 +13,18 @@ using net.opgenorth.yegbuildings.m4a.views;
 namespace net.opgenorth.yegbuildings.m4a
 {
     [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon")]
-    public class YegBuildingsActivity : MapActivity, ILocationListener 
+    public class YegBuildingsActivity : MapActivity, ILocationListener
     {
-        private List<Building> _buildings;
         private LocationManager _locationManager;
 
-        protected override void OnCreate(Bundle bundle)
-        {
-            base.OnCreate(bundle);
-
-            Globals.Initialize(ApplicationContext.PackageName);
-
-
-
-            SetContentView(Resource.Layout.Main);
-
-            var database = new BuildingDatabase(Globals.DatabaseName);
-            database.CreateDatabase();
-
-            var backup = new BackupDatabaseToFileSystem();
-            backup.Backup();
-
-
-            var loader = new LoadBuildingsFromAssets(this);
-            _buildings = loader.GetBuildings();
-
-            InitializeLocationManager();
-        }
-
-        private void InitializeLocationManager()
-        {
-//            var locationCriteria = new Criteria();
-//            locationCriteria.Accuracy = Accuracy.Medium;
-//            locationCriteria.PowerRequirement = Power.Medium;
-//
-//            var locationProvider = _locationManager.GetBestProvider(locationCriteria, false);
-
-            _locationManager = GetSystemService(Context.LocationService) as LocationManager;
-            
-        }
-
-        internal List<Building> Buildings
-        {
-            get { return _buildings; }
-        }
+        internal List<Building> Buildings { get; private set; }
 
         protected override bool IsRouteDisplayed
         {
-            get { return false; }
-        }
-        protected override void OnResume()
-        {
-            base.OnResume();
-            _locationManager.RequestLocationUpdates(LocationManager.GpsProvider, Globals.GpsUpdateTimeInterval, Globals.GpsUpdateDistanceInterval, this);
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-            _locationManager.RemoveUpdates(this);
+            get
+            {
+                return false;
+            }
         }
 
         public void OnLocationChanged(Location location)
@@ -82,7 +36,7 @@ namespace net.opgenorth.yegbuildings.m4a
             }
 
             Log.Debug(Globals.LogTag, "New Location at " + location.Longitude + " , " + location.Latitude);
-            if (!location.HasAccuracy )
+            if (!location.HasAccuracy)
             {
                 Log.Debug(Globals.LogTag, "Seems there is no accuracy to this location.");
                 return;
@@ -105,6 +59,44 @@ namespace net.opgenorth.yegbuildings.m4a
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
         {
             Log.Verbose(Globals.LogTag, "Status changed.");
+        }
+
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            Globals.Initialize(ApplicationContext.PackageName);
+            SetContentView(Resource.Layout.Main);
+
+            var database = new BuildingDatabase(Globals.DatabaseName);
+            database.CreateDatabase();
+
+            var loader = new LoadBuildingsFromAssets(this);
+            Buildings = loader.GetBuildings();
+
+            InitializeLocationManager();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            _locationManager.RemoveUpdates(this);
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            _locationManager.RequestLocationUpdates(LocationManager.GpsProvider, Globals.GpsUpdateTimeInterval, Globals.GpsUpdateDistanceInterval, this);
+        }
+
+        private void InitializeLocationManager()
+        {
+            //            var locationCriteria = new Criteria();
+            //            locationCriteria.Accuracy = Accuracy.Medium;
+            //            locationCriteria.PowerRequirement = Power.Medium;
+            //
+            //            var locationProvider = _locationManager.GetBestProvider(locationCriteria, false);
+
+            _locationManager = (LocationManager)GetSystemService(LocationService);
         }
     }
 }

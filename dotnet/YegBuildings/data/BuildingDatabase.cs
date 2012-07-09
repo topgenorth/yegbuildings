@@ -1,3 +1,5 @@
+using Android.Util;
+
 using SQLite;
 using net.opgenorth.yegbuildings.m4a.model;
 
@@ -17,6 +19,7 @@ namespace net.opgenorth.yegbuildings.m4a.data
         public void CreateDatabase()
         {
             CreateTable<Building>();
+            Log.Debug(Globals.LogTag, "Created database at {0}.", DatabasePath);
         }
 
  
